@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
+import '../controller/date_controller.dart';
 
 void main() {
-  runApp(const HomePage());
+  runApp(HomePage());
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
+  final dateController = Get.put(DateController());
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,9 +28,10 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Expanded(
+                      flex: 2,
                       child: Container(
-                        padding: EdgeInsets.only(bottom: 9),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
@@ -35,29 +39,41 @@ class HomePage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                  //mainAxisAlignment:
+                                  //MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(
                                       'Hi, User Name',
                                       style: kWhiteHeadingSize,
                                     ),
-                                    Text(
-                                      '6 Jun, 2023',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0xFFE4E4E4)),
-                                    )
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Obx(() => Text(
+                                          DateFormat('dd-MMM-yyyy').format(
+                                              Get.find<DateController>()
+                                                  .currentDate
+                                                  .value),
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color(0xFFE4E4E4)),
+                                        )),
                                   ],
                                 )),
                             Expanded(
-                              child: CircleAvatar(
-                                radius: 50,
-                                backgroundColor: kGreenMainTheme,
-                                backgroundImage: Image.network(
-                                        'https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
-                                    .image,
+                              child: Container(
+                                height: 55,
+                                padding: EdgeInsets.only(
+                                    left: 30, bottom: 5, top: 5),
+                                child: CircleAvatar(
+                                  maxRadius: 50,
+                                  minRadius: 30,
+                                  backgroundColor: kGreenMainTheme,
+                                  backgroundImage: Image.network(
+                                          'https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
+                                      .image,
+                                ),
                               ),
                             )
                           ],
