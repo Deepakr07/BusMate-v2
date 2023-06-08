@@ -80,9 +80,6 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 30,
-                    ),
                     Expanded(
                       child: Container(
                         width: double.infinity,
@@ -93,12 +90,12 @@ class HomePage extends StatelessWidget {
                               Icon(
                                 Icons.location_on,
                                 color: Colors.white,
-                                size: 30,
+                                size: 25,
                               ),
                               Text(
                                 'Kochi Today',
                                 style: TextStyle(
-                                    fontSize: 25,
+                                    fontSize: 22,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w400),
                               ),
@@ -106,6 +103,9 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 20,
                     ),
                     Expanded(
                         flex: 4,
