@@ -23,7 +23,7 @@ class SignUp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                //color: Colors.red,
+                color: Colors.red,
                 width: double.infinity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,6 +46,7 @@ class SignUp extends StatelessWidget {
                 height: 32,
               ),
               Container(
+                color: Colors.yellow,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -59,10 +60,36 @@ class SignUp extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 22),
                       child: CommonInputFieldContainer(),
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
+              SizedBox(
+                height: 29,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 22),
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: kGreenMainTheme,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Center(
+                    child: Text(
+                      "Continue",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Inter'),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 38,
+              ),
+              HorizontalLineWithOr(),
             ],
           ),
         ),

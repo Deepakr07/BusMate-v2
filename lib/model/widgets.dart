@@ -19,3 +19,43 @@ class CommonInputFieldContainer extends StatelessWidget {
     );
   }
 }
+
+//horizontal line with OR
+
+class HorizontalLineWithOr extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 22),
+            child: Divider(
+              color: Colors.black,
+              height: 1,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          child: Text(
+            'OR',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 22),
+            child: Divider(
+              color: Colors.black,
+              height: 1,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
