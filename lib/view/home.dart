@@ -113,7 +113,7 @@ class HomePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image(
-                              image: AssetImage('./assets/rainy-icon.png'),
+                              image: weatherController.weatherIcon.value,
                             ),
                             const SizedBox(
                               height: 10,
