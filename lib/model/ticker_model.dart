@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 class Ticket {
   late final int ticketId;
   late final String route;
+  late final String status;
   String college = 'SOE';
   late final String destination;
   late final DateTime issueDate;

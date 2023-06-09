@@ -136,7 +136,6 @@ class HomePage extends StatelessWidget {
                               ],
                             );
                           }
-                          ;
                         },
                       ),
                     )
@@ -153,6 +152,89 @@ class HomePage extends StatelessWidget {
                         topLeft: Radius.circular(35))),
                 height: double.infinity,
                 width: double.infinity,
+                child: Column(
+                  children: [
+                    const Expanded(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          'Active Tickets',
+                          style: kBlackHeadingSize,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                        flex: 4,
+                        child: SizedBox(
+                          height: double.infinity,
+                          width: double.infinity,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 200,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey,
+                                                blurRadius: 5.0,
+                                              ),
+                                            ]),
+                                        child: Center(
+                                          child: Text('Ticket 1'),
+                                        ),
+                                        width: 330,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey,
+                                                blurRadius: 5.0,
+                                              ),
+                                            ]),
+                                        child: Center(
+                                          child: Text('Ticket 2'),
+                                        ),
+                                        width: 330,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey,
+                                                blurRadius: 5.0,
+                                              ),
+                                            ]),
+                                        child: Center(
+                                          child: Text('Ticket 3'),
+                                        ),
+                                        width: 330,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(child: Text('three dots package'))
+                            ],
+                          ),
+                        ))
+                  ],
+                ),
               ))
             ],
           ),
