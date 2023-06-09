@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
+import '../controller/weatherController.dart';
 import '../controller/date_controller.dart';
 
 void main() {
@@ -11,6 +11,7 @@ void main() {
 
 class HomePage extends StatelessWidget {
   final dateController = Get.put(DateController());
+  final WeatherController weatherController = Get.put(WeatherController());
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,59 +30,56 @@ class HomePage extends StatelessWidget {
                   children: [
                     Expanded(
                       flex: 2,
-                      child: Container(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                                flex: 3,
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  //mainAxisAlignment:
-                                  //MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      'Hi, User Name',
-                                      style: kWhiteHeadingSize,
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Obx(() => Text(
-                                          DateFormat('dd-MMM-yyyy').format(
-                                              Get.find<DateController>()
-                                                  .currentDate
-                                                  .value),
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xFFE4E4E4)),
-                                        )),
-                                  ],
-                                )),
-                            Expanded(
-                              child: Container(
-                                height: 55,
-                                padding: EdgeInsets.only(
-                                    left: 30, bottom: 5, top: 5),
-                                child: CircleAvatar(
-                                  maxRadius: 50,
-                                  minRadius: 30,
-                                  backgroundColor: kGreenMainTheme,
-                                  backgroundImage: Image.network(
-                                          'https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
-                                      .image,
-                                ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                //mainAxisAlignment:
+                                //MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    'Hi, User Name',
+                                    style: kWhiteHeadingSize,
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Obx(() => Text(
+                                        DateFormat('dd-MMM-yyyy').format(
+                                            Get.find<DateController>()
+                                                .currentDate
+                                                .value),
+                                        style: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Color(0xFFE4E4E4)),
+                                      )),
+                                ],
+                              )),
+                          Expanded(
+                            child: Container(
+                              height: 55,
+                              padding: const EdgeInsets.only(
+                                  left: 30, bottom: 5, top: 5),
+                              child: CircleAvatar(
+                                maxRadius: 50,
+                                minRadius: 30,
+                                backgroundColor: kGreenMainTheme,
+                                backgroundImage: Image.network(
+                                        'https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
+                                    .image,
                               ),
-                            )
-                          ],
-                        ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                     Expanded(
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         child: Center(
                           child: Row(
@@ -109,26 +107,28 @@ class HomePage extends StatelessWidget {
                       height: 20,
                     ),
                     Expanded(
-                        flex: 4,
-                        child: Container(
-                            child: Column(
+                      flex: 4,
+                      child: Obx(
+                        () => Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image(
                               image: AssetImage('./assets/rainy-icon.png'),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
-                              'Rainy',
-                              style: TextStyle(
+                              weatherController.currentWeatherDescription.value,
+                              style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFFE4E4E4)),
                             )
                           ],
-                        )))
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )),
