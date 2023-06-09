@@ -7,14 +7,47 @@ class CommonInputFieldContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: kGreenMainTheme,
-          width: 1,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 22),
+      child: Container(
+        height: 40,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: kGreenMainTheme,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(20),
         ),
-        borderRadius: BorderRadius.circular(20),
+      ),
+    );
+  }
+}
+
+//Common ContinueButton
+class ContinueButton extends StatelessWidget {
+  const ContinueButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 22),
+      child: Container(
+        height: 40,
+        decoration: BoxDecoration(
+          color: kGreenMainTheme,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Center(
+          child: Text(
+            "Continue",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Inter',
+            ),
+          ),
+        ),
       ),
     );
   }
