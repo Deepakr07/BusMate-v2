@@ -60,38 +60,14 @@ class SignUp extends StatelessWidget {
                             SizedBox(
                               height: 18,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 22),
-                              child: CommonInputFieldContainer(),
-                            ),
+                            CommonInputFieldContainer(),
                           ],
                         ),
                       ),
                       SizedBox(
                         height: 29,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 22),
-                        child: Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: kGreenMainTheme,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Continue",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Inter',
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      ContinueButton(),
                       SizedBox(
                         height: 38,
                       ),
@@ -127,7 +103,6 @@ class SignUp extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.all(16),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             "already have an account",
