@@ -10,3 +10,9 @@ const TextStyle kWhiteHeadingSize = TextStyle(
     fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold); //white
 const TextStyle kBlackHeadingSize = TextStyle(
     fontSize: 25, color: Colors.black, fontWeight: FontWeight.w700); //black
+
+const TextStyle kGreyTextStyle = TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.w500,
+  color: Color(0xff878080),
+);

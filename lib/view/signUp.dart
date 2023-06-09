@@ -22,6 +22,7 @@ class SignUp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
+                //color: Colors.red,
                 width: double.infinity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -37,6 +38,36 @@ class SignUp extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: Color(0xff878080)),
                     ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 32,
+              ),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Enter Phone Number",
+                      style: kGreyTextStyle,
+                    ),
+                    SizedBox(
+                      height: 18,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 22),
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: kGreenMainTheme,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )
