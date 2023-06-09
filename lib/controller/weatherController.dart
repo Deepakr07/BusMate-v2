@@ -3,23 +3,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class WeatherController extends GetxController {
+  var isloading = true.obs;
   var currentWeatherDescription = ''.obs;
   var currentWeather = ''.obs;
   var weatherId = 100.obs;
-  Rx<AssetImage> weatherIcon = const AssetImage('/assets/sun-icon.png').obs;
+  Rx<AssetImage> weatherIcon = AssetImage('/assets/sun-icon.png').obs;
   @override
   void onInit() {
     fetchWeather();
+    weatherIcon.obs;
     super.onInit();
   }
 
   void fetchWeather() async {
-    var weather = await WeatherServices.fetchWeather();
-    if (weather != null) {
-      currentWeatherDescription.value = weather.weather[0].description;
-      currentWeather.value = weather.weather[0].main;
-      weatherId.value = weather.weather[0].id;
-      weatherIcon.value = getWeatherIcon();
+    try {
+      isloading(true);
+      var weather = await WeatherServices.fetchWeather();
+      if (weather != null) {
+        currentWeatherDescription.value = weather.weather[0].description;
+        currentWeather.value = weather.weather[0].main;
+        weatherId.value = weather.weather[0].id;
+        weatherIcon.value = getWeatherIcon();
+      }
+    } finally {
+      isloading(false);
     }
   }
 

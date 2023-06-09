@@ -85,7 +85,7 @@ class HomePage extends StatelessWidget {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.location_on,
                                 color: Colors.white,
@@ -103,30 +103,41 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
+                    const SizedBox(
+                      height: 10,
                     ),
                     Expanded(
                       flex: 4,
                       child: Obx(
-                        () => Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image(
-                              image: weatherController.weatherIcon.value,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              weatherController.currentWeatherDescription.value,
-                              style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xFFE4E4E4)),
-                            )
-                          ],
-                        ),
+                        () {
+                          if (weatherController.isloading.value) {
+                            return const Center(
+                                child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white)));
+                          } else {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image(
+                                  image: weatherController.weatherIcon.value,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  weatherController
+                                      .currentWeatherDescription.value,
+                                  style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xFFE4E4E4)),
+                                )
+                              ],
+                            );
+                          }
+                          ;
+                        },
                       ),
                     )
                   ],
