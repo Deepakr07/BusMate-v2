@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Color kGreenMainTheme = Color(0xff37c976);
+const Color kGreyTextColor = Color(0xff878080);
 
 //Text style constants
 
