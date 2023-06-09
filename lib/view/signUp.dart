@@ -1,4 +1,5 @@
 import 'package:busmate/Constants/constants.dart';
+import 'package:busmate/model/widgets.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -57,16 +58,7 @@ class SignUp extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 22),
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: kGreenMainTheme,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
+                      child: CommonInputFieldContainer(),
                     )
                   ],
                 ),
