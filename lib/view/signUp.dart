@@ -23,7 +23,7 @@ class SignUp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                color: Colors.red,
+                //color: Colors.red,
                 width: double.infinity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,7 +46,7 @@ class SignUp extends StatelessWidget {
                 height: 32,
               ),
               Container(
-                color: Colors.yellow,
+                //color: Colors.yellow,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -90,6 +90,44 @@ class SignUp extends StatelessWidget {
                 height: 38,
               ),
               HorizontalLineWithOr(),
+              SizedBox(
+                height: 19,
+              ),
+              Text(
+                "Sign Up with your Google Account",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: kGreyTextColor,
+                ),
+              ),
+              SizedBox(
+                height: 18,
+              ),
+              GestureDetector(
+                  onTap: () {}, child: Image.asset('./assets/google-icon.png')),
+              Container(
+                //padding: EdgeInsets.only(top: 97),
+                //margin: EdgeInsets.only(top: 97),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "already have an account",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
+                    ),
+                    Text(
+                      "login",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff434343)),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),
