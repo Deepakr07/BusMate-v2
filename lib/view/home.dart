@@ -85,12 +85,13 @@ class HomePage extends StatelessWidget {
                         width: double.infinity,
                         child: Center(
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
                                 Icons.location_on,
                                 color: Colors.white,
-                                size: 25,
+                                size: 30,
                               ),
                               Text(
                                 'Kochi Today',
@@ -113,7 +114,9 @@ class HomePage extends StatelessWidget {
                             child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset('./assets/rainy-icon.png'),
+                            Image(
+                              image: AssetImage('./assets/rainy-icon.png'),
+                            ),
                             SizedBox(
                               height: 10,
                             ),
