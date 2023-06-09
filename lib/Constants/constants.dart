@@ -8,5 +8,5 @@ const Color kGreenMainTheme = Color(0xff37c976);
 
 const TextStyle kWhiteHeadingSize = TextStyle(
     fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold); //white
-const TextStyle kBlackHeadingSize =
-    TextStyle(fontSize: 25, color: Colors.black); //black
+const TextStyle kBlackHeadingSize = TextStyle(
+    fontSize: 25, color: Colors.black, fontWeight: FontWeight.w700); //black
