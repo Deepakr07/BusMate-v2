@@ -36,6 +36,14 @@ class ContinueButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: kGreenMainTheme,
           borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.6),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(0, 5),
+            )
+          ],
         ),
         child: Center(
           child: Text(
