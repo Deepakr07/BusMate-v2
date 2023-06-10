@@ -17,5 +17,15 @@ const TextStyle kGreyTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
   color: Color(0xff878080),
 );
+//ticket styles
+
+const TextStyle kSmallGrey = TextStyle(color: kGreyTextColor, fontSize: 12);
+const TextStyle kLargeGrey =
+    TextStyle(fontWeight: FontWeight.w500, color: kGreyTextColor);
+
+const TextStyle kSOEStyle =
+    TextStyle(fontWeight: FontWeight.bold, fontSize: 20);
+const TextStyle kDestinationStyle =
+    TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
 
 //Common container for input fields (with green border)
