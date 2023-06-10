@@ -4,6 +4,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../controller/weatherController.dart';
 import '../controller/date_controller.dart';
+import '../model/ActiveTicket_List.dart';
+import '../model/widgets.dart';
+import '../controller/dotIndicator_Controller.dart';
 
 void main() {
   runApp(HomePage());
@@ -12,6 +15,9 @@ void main() {
 class HomePage extends StatelessWidget {
   final dateController = Get.put(DateController());
   final WeatherController weatherController = Get.put(WeatherController());
+  final DotIndicatorController dotController =
+      Get.put(DotIndicatorController());
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -166,150 +172,41 @@ class HomePage extends StatelessWidget {
                     Expanded(
                         flex: 4,
                         child: SizedBox(
-                          height: double.infinity,
-                          width: double.infinity,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 200,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    activeTicket(),
-                                    activeTicket(),
-                                    activeTicket()
-                                  ],
+                            height: double.infinity,
+                            width: double.infinity,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 200,
+                                  child: PageView.builder(
+                                    itemCount: activeTickets.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      final activeTicket = activeTickets[index];
+                                      return SizedBox(
+                                        width: 330,
+                                        child: activeTicket,
+                                      );
+                                    },
+                                    onPageChanged: (int index) {
+                                      dotController.updateIndex(index);
+                                    },
+                                  ),
                                 ),
-                              ),
-                              Expanded(child: Text('three dots package'))
-                            ],
-                          ),
-                        ))
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                DotIndicator(
+                                  itemCount: activeTickets.length,
+                                  controller: dotController,
+                                ),
+                              ],
+                            )))
                   ],
                 ),
               ))
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Padding activeTicket() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: const BoxDecoration(color: Colors.white, boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 5.0,
-          ),
-        ]),
-        width: 330,
-        child: Column(
-          children: [
-            Expanded(
-                flex: 4,
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  height: double.infinity,
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Expanded(
-                          flex: 2,
-                          child: SizedBox(
-                            height: double.infinity,
-                            width: double.infinity,
-                            //color: Colors.blue,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 3,
-                                  child: SizedBox(
-                                      height: double.infinity,
-                                      width: double.infinity,
-                                      //color: Colors.red,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'SOE',
-                                            style: kSOEStyle,
-                                          ),
-                                          Image.asset(
-                                              './assets/doubleArrow.png'),
-                                          Text(
-                                            'Pathadipalam',
-                                            style: kDestinationStyle,
-                                          )
-                                        ],
-                                      )),
-                                ),
-                                Expanded(
-                                    flex: 2,
-                                    child: SizedBox(
-                                      height: double.infinity,
-                                      width: double.infinity,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Issue date',
-                                                  style: kSmallGrey),
-                                              Text(
-                                                '10 jan,23',
-                                                style: kLargeGrey,
-                                              )
-                                            ],
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Route', style: kSmallGrey),
-                                              Text('Vytilla', style: kLargeGrey)
-                                            ],
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Expiry date',
-                                                  style: kSmallGrey),
-                                              Text('9 Feb, 23',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: kGreyTextColor))
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ))
-                              ],
-                            ),
-                          )),
-                      Expanded(
-                          child:
-                              Image(image: AssetImage('./assets/qrcode.png')))
-                    ],
-                  ),
-                )),
-            Text(
-              '#Ticket ID',
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
-            )
-          ],
         ),
       ),
     );
