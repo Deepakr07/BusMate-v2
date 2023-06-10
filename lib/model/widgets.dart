@@ -7,17 +7,14 @@ class CommonInputFieldContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 22),
-      child: Container(
-        height: 40,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: kGreenMainTheme,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(20),
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: kGreenMainTheme,
+          width: 1,
         ),
+        borderRadius: BorderRadius.circular(20),
       ),
     );
   }
@@ -29,31 +26,28 @@ class ContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 22),
-      child: Container(
-        height: 40,
-        decoration: BoxDecoration(
-          color: kGreenMainTheme,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.6),
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: Offset(0, 5),
-            )
-          ],
-        ),
-        child: Center(
-          child: Text(
-            "Continue",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Inter',
-            ),
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+        color: kGreenMainTheme,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.6),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(0, 5),
+          )
+        ],
+      ),
+      child: Center(
+        child: Text(
+          "Continue",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Inter',
           ),
         ),
       ),

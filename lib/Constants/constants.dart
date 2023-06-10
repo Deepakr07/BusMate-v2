@@ -18,4 +18,10 @@ const TextStyle kGreyTextStyle = TextStyle(
   color: Color(0xff878080),
 );
 
+const TextStyle kGreyFormTextStyle = TextStyle(
+  color: kGreyTextColor,
+  fontWeight: FontWeight.w500,
+  fontSize: 16,
+);
+
 //Common container for input fields (with green border)
