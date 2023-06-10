@@ -18,6 +18,7 @@ class Login extends StatelessWidget {
           return Stack(
             children: [
               Container(
+                padding: EdgeInsets.all(24),
                 height: double.infinity,
                 width: double.infinity,
                 child: Column(

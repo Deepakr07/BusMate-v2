@@ -28,4 +28,10 @@ const TextStyle kSOEStyle =
 const TextStyle kDestinationStyle =
     TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
 
+const TextStyle kGreyFormTextStyle = TextStyle(
+  color: kGreyTextColor,
+  fontWeight: FontWeight.w500,
+  fontSize: 16,
+);
+
 //Common container for input fields (with green border)
