@@ -52,7 +52,7 @@ class Login extends StatelessWidget {
                     ),
                     CommonInputFieldContainer(),
                     SizedBox(height: 29),
-                    ContinueButton(),
+                    GestureDetector(onTap: () {}, child: ContinueButton()),
                     SizedBox(
                       height: 36,
                     ),
