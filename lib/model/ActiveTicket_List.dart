@@ -1,4 +1,4 @@
-import '../model/widgets.dart';
+import '../model/ActiveTicket_model.dart';
 
 final List<activeTicket> activeTickets = [
   activeTicket(),
