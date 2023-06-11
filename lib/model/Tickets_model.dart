@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import '../Constants/constants.dart';
 
-//this ticket model is displayed in the active tickets
+//this ticket model is shown in ticket history
 
-class activeTicket extends StatelessWidget {
+class Tickets extends StatelessWidget {
   late final int ticketId;
   late final String route;
-  //late final String status;  not displayed in active tickets
+  late final String status;
   String college = 'SOE';
   late final String destination;
   late final DateTime issueDate;
-  late final DateTime expiryDate;
+  //late final DateTime expiryDate; not shown in ticket history
   late final ImageProvider qrImage;
   late final String ticketType; // not displayed in active tickets
 
@@ -94,8 +94,8 @@ class activeTicket extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text('Route', style: kSmallGrey),
-                                        Text('Vytilla', style: kLargeGrey),
+                                        Text('Status', style: kSmallGrey),
+                                        Text('Active', style: kLargeGrey),
                                       ],
                                     ),
                                     Column(
