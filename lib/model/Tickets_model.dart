@@ -95,7 +95,11 @@ class Tickets extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text('Status', style: kSmallGrey),
-                                        Text('Active', style: kLargeGrey),
+                                        Text('Active',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.green,
+                                            )),
                                       ],
                                     ),
                                     Column(
