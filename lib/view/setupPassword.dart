@@ -15,6 +15,7 @@ class SetupPassword extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
+          padding: EdgeInsets.all(24),
           height: double.infinity,
           width: double.infinity,
           child: Column(
@@ -32,7 +33,13 @@ class SetupPassword extends StatelessWidget {
               SizedBox(
                 height: 21,
               ),
-              CommonInputFieldContainer(),
+              TextField(
+                obscureText: true,
+                textAlign: TextAlign.center,
+                cursorColor: Colors.black,
+                onChanged: (value) {},
+                decoration: kTextFieldDecoration,
+              ),
               SizedBox(
                 height: 32,
               ),
@@ -40,7 +47,13 @@ class SetupPassword extends StatelessWidget {
               SizedBox(
                 height: 21,
               ),
-              CommonInputFieldContainer(),
+              TextField(
+                obscureText: true,
+                textAlign: TextAlign.center,
+                cursorColor: Colors.black,
+                onChanged: (value) {},
+                decoration: kTextFieldDecoration,
+              ),
               SizedBox(
                 height: 46,
               ),

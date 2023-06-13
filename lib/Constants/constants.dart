@@ -5,6 +5,28 @@ const Color kGreyTextColor = Color(0xff878080);
 
 //Text style constants
 
+//Input Text Field Decoration
+const InputDecoration kTextFieldDecoration = InputDecoration(
+  contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(20),
+    ),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kGreenMainTheme, width: 1),
+    borderRadius: BorderRadius.all(
+      Radius.circular(20),
+    ),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kGreenMainTheme, width: 2),
+    borderRadius: BorderRadius.all(
+      Radius.circular(20),
+    ),
+  ),
+);
+
 //page heading Font-Size
 
 const TextStyle kWhiteHeadingSize = TextStyle(
