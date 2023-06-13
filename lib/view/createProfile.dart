@@ -63,7 +63,11 @@ class CreateProfile extends StatelessWidget {
                     SizedBox(
                       height: 14,
                     ),
-                    CommonInputFieldContainer(),
+                    TextField(
+                      cursorColor: Colors.black,
+                      onChanged: (value) {},
+                      decoration: kTextFieldDecoration,
+                    ),
                     SizedBox(
                       height: 23,
                     ),
@@ -74,7 +78,11 @@ class CreateProfile extends StatelessWidget {
                     SizedBox(
                       height: 14,
                     ),
-                    CommonInputFieldContainer(),
+                    TextField(
+                      cursorColor: Colors.black,
+                      onChanged: (value) {},
+                      decoration: kTextFieldDecoration,
+                    ),
                     SizedBox(
                       height: 23,
                     ),
@@ -85,7 +93,11 @@ class CreateProfile extends StatelessWidget {
                     SizedBox(
                       height: 14,
                     ),
-                    CommonInputFieldContainer(),
+                    TextField(
+                      cursorColor: Colors.black,
+                      onChanged: (value) {},
+                      decoration: kTextFieldDecoration,
+                    ),
                     SizedBox(
                       height: 23,
                     ),
@@ -96,7 +108,11 @@ class CreateProfile extends StatelessWidget {
                     SizedBox(
                       height: 14,
                     ),
-                    CommonInputFieldContainer(),
+                    TextField(
+                      cursorColor: Colors.black,
+                      onChanged: (value) {},
+                      decoration: kTextFieldDecoration,
+                    ),
                     SizedBox(
                       height: 23,
                     ),
@@ -107,11 +123,15 @@ class CreateProfile extends StatelessWidget {
                     SizedBox(
                       height: 14,
                     ),
-                    CommonInputFieldContainer(),
+                    TextField(
+                      cursorColor: Colors.black,
+                      onChanged: (value) {},
+                      decoration: kTextFieldDecoration,
+                    ),
                     SizedBox(
                       height: 40,
                     ),
-                    ContinueButton(),
+                    ContinueButton()
                   ],
                 ),
               ),

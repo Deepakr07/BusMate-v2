@@ -14,6 +14,7 @@ class SignUp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: LayoutBuilder(
           builder: (context, constraints) {
@@ -61,7 +62,13 @@ class SignUp extends StatelessWidget {
                             SizedBox(
                               height: 18,
                             ),
-                            CommonInputFieldContainer(),
+                            TextField(
+                              onChanged: (value) {},
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.center,
+                              cursorColor: Colors.black,
+                              decoration: kTextFieldDecoration,
+                            ),
                           ],
                         ),
                       ),
