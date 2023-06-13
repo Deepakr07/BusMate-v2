@@ -14,7 +14,6 @@ class EditProfile extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Container(
             padding: EdgeInsets.all(24),

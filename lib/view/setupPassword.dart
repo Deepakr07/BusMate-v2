@@ -14,7 +14,6 @@ class SetupPassword extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        resizeToAvoidBottomInset: false,
         body: Container(
           padding: EdgeInsets.all(24),
           height: double.infinity,
