@@ -3,11 +3,11 @@ import 'package:busmate/model/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
 
 void main() {
-  runApp(EditProfile());
+  runApp(CreateProfile());
 }
 
-class EditProfile extends StatelessWidget {
-  const EditProfile({Key? key}) : super(key: key);
+class CreateProfile extends StatelessWidget {
+  const CreateProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,29 +17,27 @@ class EditProfile extends StatelessWidget {
         body: SafeArea(
           child: Container(
             padding: EdgeInsets.all(24),
-            width: double.infinity,
-            height: double.infinity,
             child: FractionallySizedBox(
-              widthFactor: 1,
-              heightFactor: 1,
+              widthFactor: 1.0,
+              heightFactor: 1.0,
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Edit Profile",
+                      "Create Profile",
                       style: kBlackHeadingSize,
                     ),
                     SizedBox(
-                      height: 29,
+                      height: 25,
                     ),
                     Row(
                       children: [
                         CircleAvatar(
                           backgroundImage: Image.network(
-                                  "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")
-                              .image,
+                            "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                          ).image,
                           radius: 40,
                         ),
                         SizedBox(
@@ -48,17 +46,18 @@ class EditProfile extends StatelessWidget {
                         Text(
                           "User Name",
                           style: TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black),
+                            fontSize: 23,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: 34,
+                      height: 29,
                     ),
                     Text(
-                      "Change Name",
+                      "Full Name",
                       style: kGreyFormTextStyle,
                     ),
                     SizedBox(
@@ -73,7 +72,7 @@ class EditProfile extends StatelessWidget {
                       height: 23,
                     ),
                     Text(
-                      "Change Department",
+                      "Department",
                       style: kGreyFormTextStyle,
                     ),
                     SizedBox(
@@ -85,23 +84,52 @@ class EditProfile extends StatelessWidget {
                       decoration: kTextFieldDecoration,
                     ),
                     SizedBox(
-                      height: 22,
+                      height: 23,
                     ),
                     Text(
-                      "Change Student ID",
+                      "Student ID",
                       style: kGreyFormTextStyle,
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 14,
                     ),
                     TextField(
-                      keyboardType: TextInputType.number,
                       cursorColor: Colors.black,
                       onChanged: (value) {},
                       decoration: kTextFieldDecoration,
                     ),
                     SizedBox(
-                      height: 51,
+                      height: 23,
+                    ),
+                    Text(
+                      "Mobile Number",
+                      style: kGreyFormTextStyle,
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    TextField(
+                      cursorColor: Colors.black,
+                      onChanged: (value) {},
+                      decoration: kTextFieldDecoration,
+                    ),
+                    SizedBox(
+                      height: 23,
+                    ),
+                    Text(
+                      "E-mail",
+                      style: kGreyFormTextStyle,
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    TextField(
+                      cursorColor: Colors.black,
+                      onChanged: (value) {},
+                      decoration: kTextFieldDecoration,
+                    ),
+                    SizedBox(
+                      height: 40,
                     ),
                     ContinueButton()
                   ],
