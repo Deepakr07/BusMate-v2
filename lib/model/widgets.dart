@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
+import 'package:flutter/services.dart';
 import '../controller/dotIndicator_Controller.dart';
 import 'package:get/get.dart';
 
@@ -197,6 +198,42 @@ class ElevatedGreenButton extends StatelessWidget {
       child: Text(
         text,
         style: const TextStyle(color: Colors.white, fontSize: 16),
+      ),
+    );
+  }
+}
+
+//otp text box
+class otpTextBox extends StatelessWidget {
+  const otpTextBox({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 55,
+      width: 55,
+      child: Builder(
+        builder: (BuildContext context) {
+          return TextFormField(
+              onChanged: (value) {
+                if (value.length == 1) {
+                  FocusScope.of(context).nextFocus();
+                }
+              },
+              onSaved: (pin) {},
+              style: Theme.of(context).textTheme.titleLarge,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(1),
+                FilteringTextInputFormatter.digitsOnly
+              ],
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.number,
+              cursorColor: Colors.black,
+              decoration: kOtpText //.copyWith(hintText: '0'
+              );
+        },
       ),
     );
   }
