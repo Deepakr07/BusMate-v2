@@ -59,8 +59,8 @@ class TicketConfirmation extends StatelessWidget {
                           elevation: MaterialStateProperty.all<double>(8),
                           backgroundColor:
                               MaterialStateProperty.all<Color>(Colors.white),
-                          minimumSize:
-                              MaterialStateProperty.all<Size>(Size(200, 40)),
+                          minimumSize: MaterialStateProperty.all<Size>(
+                              Size(double.infinity, 45)),
                           shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -95,8 +95,8 @@ class TicketConfirmation extends StatelessWidget {
                                 color: kGreenMainTheme, width: 2),
                           ),
                         ),
-                        minimumSize:
-                            MaterialStateProperty.all<Size>(Size(200, 40)),
+                        minimumSize: MaterialStateProperty.all<Size>(
+                            Size(double.infinity, 45)),
                         backgroundColor:
                             MaterialStateProperty.all<Color>(kGreenMainTheme),
                       ),
