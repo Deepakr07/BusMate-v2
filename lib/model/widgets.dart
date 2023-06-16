@@ -152,7 +152,7 @@ class borderbutton extends StatelessWidget {
         elevation: MaterialStateProperty.all<double>(8),
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         minimumSize:
-            MaterialStateProperty.all<Size>(const Size(double.infinity, 45)),
+            MaterialStateProperty.all<Size>(const Size(double.infinity, 40)),
         shape: MaterialStateProperty.all<OutlinedBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
@@ -191,7 +191,7 @@ class ElevatedGreenButton extends StatelessWidget {
           ),
         ),
         minimumSize:
-            MaterialStateProperty.all<Size>(const Size(double.infinity, 45)),
+            MaterialStateProperty.all<Size>(const Size(double.infinity, 40)),
         backgroundColor: MaterialStateProperty.all<Color>(kGreenMainTheme),
       ),
       child: Text(
