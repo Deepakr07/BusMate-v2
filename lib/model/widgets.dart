@@ -23,8 +23,8 @@ import 'package:get/get.dart';
 // }
 
 //Common ContinueButton
-class ContinueButton extends StatelessWidget {
-  const ContinueButton({Key? key}) : super(key: key);
+class GreenButton extends StatelessWidget {
+  const GreenButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

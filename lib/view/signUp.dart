@@ -75,7 +75,7 @@ class SignUp extends StatelessWidget {
                       SizedBox(
                         height: 29,
                       ),
-                      GestureDetector(onTap: () {}, child: ContinueButton()),
+                      GestureDetector(onTap: () {}, child: GreenButton()),
                       SizedBox(
                         height: 38,
                       ),

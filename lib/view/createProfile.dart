@@ -131,7 +131,7 @@ class CreateProfile extends StatelessWidget {
                     SizedBox(
                       height: 40,
                     ),
-                    ContinueButton()
+                    GreenButton()
                   ],
                 ),
               ),

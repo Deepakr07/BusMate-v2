@@ -103,7 +103,7 @@ class EditProfile extends StatelessWidget {
                     SizedBox(
                       height: 51,
                     ),
-                    ContinueButton()
+                    GreenButton()
                   ],
                 ),
               ),

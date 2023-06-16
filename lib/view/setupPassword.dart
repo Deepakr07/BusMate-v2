@@ -57,7 +57,7 @@ class SetupPassword extends StatelessWidget {
               SizedBox(
                 height: 46,
               ),
-              ContinueButton()
+              GreenButton()
             ],
           ),
         ),

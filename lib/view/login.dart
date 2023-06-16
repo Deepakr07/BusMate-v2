@@ -66,7 +66,7 @@ class Login extends StatelessWidget {
                       decoration: kTextFieldDecoration,
                     ),
                     SizedBox(height: 29),
-                    GestureDetector(onTap: () {}, child: ContinueButton()),
+                    GestureDetector(onTap: () {}, child: GreenButton()),
                     SizedBox(
                       height: 36,
                     ),

@@ -20,7 +20,7 @@ class ErrorPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset('./assets/payment error.png'),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Center(
@@ -32,7 +32,7 @@ class ErrorPage extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20)),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Get Started",
                           style: TextStyle(
