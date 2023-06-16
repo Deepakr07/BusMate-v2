@@ -1,5 +1,4 @@
 import 'package:busmate/Constants/constants.dart';
-import 'package:busmate/model/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
