@@ -27,6 +27,29 @@ const InputDecoration kTextFieldDecoration = InputDecoration(
   ),
 );
 
+// otp input textbox
+
+const InputDecoration kOtpText = InputDecoration(
+  contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(5),
+    ),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kGreenMainTheme, width: 1),
+    borderRadius: BorderRadius.all(
+      Radius.circular(5),
+    ),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kGreenMainTheme, width: 2),
+    borderRadius: BorderRadius.all(
+      Radius.circular(5),
+    ),
+  ),
+);
+
 //page heading Font-Size
 
 const TextStyle kWhiteHeadingSize = TextStyle(
