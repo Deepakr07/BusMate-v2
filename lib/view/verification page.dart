@@ -1,3 +1,4 @@
+import 'package:busmate/model/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
@@ -34,6 +35,13 @@ class Verification extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 30,
+                ),
+                Text(
+                  'Enter your OTP code here',
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,7 +113,24 @@ class Verification extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
+                ),
+                SizedBox(
+                  height: 35,
+                ),
+                GreenButton(),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'didn’t recieved the code',
+                  style: kGreyFormTextStyle,
+                ),
+                Text('Resend',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff434343),
+                    ))
               ],
             ),
           ),
