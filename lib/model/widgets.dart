@@ -136,3 +136,68 @@ class DotIndicator extends StatelessWidget {
     );
   }
 }
+
+//border Button
+
+class borderbutton extends StatelessWidget {
+  String text;
+  borderbutton({required this.text});
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () {
+        // Handle button press
+      },
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all<double>(8),
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        minimumSize:
+            MaterialStateProperty.all<Size>(const Size(double.infinity, 45)),
+        shape: MaterialStateProperty.all<OutlinedBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: const BorderSide(color: kGreenMainTheme, width: 2),
+          ),
+        ),
+        side: MaterialStateProperty.all<BorderSide>(
+          const BorderSide(
+            color: kGreenMainTheme,
+          ), // Change outline color
+        ),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(color: kGreyTextColor, fontSize: 16),
+      ),
+    );
+  }
+}
+
+//elevated button
+class ElevatedGreenButton extends StatelessWidget {
+  late String text;
+  ElevatedGreenButton({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all<double>(8),
+        shape: MaterialStateProperty.all<OutlinedBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: const BorderSide(color: kGreenMainTheme, width: 2),
+          ),
+        ),
+        minimumSize:
+            MaterialStateProperty.all<Size>(const Size(double.infinity, 45)),
+        backgroundColor: MaterialStateProperty.all<Color>(kGreenMainTheme),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(color: Colors.white, fontSize: 16),
+      ),
+    );
+  }
+}
