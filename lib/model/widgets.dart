@@ -238,3 +238,29 @@ class otpTextBox extends StatelessWidget {
     );
   }
 }
+
+class ConfirmSelectionContainer extends StatelessWidget {
+  const ConfirmSelectionContainer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 49,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(width: 1, color: kGreenMainTheme)),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 21, top: 15, bottom: 15),
+        child: Text(
+          "",
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
+}
