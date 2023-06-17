@@ -4,6 +4,7 @@ import 'package:busmate/Constants/constants.dart';
 import 'package:get/get.dart';
 import 'package:busmate/controller/dropDownController.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
+import 'package:busmate/model/widgets.dart';
 
 void main() {
   runApp(BookingPage());
@@ -120,6 +121,10 @@ class BookingPage extends GetView<BookingController> {
                     textColor: Colors.black,
                     hintColor: Colors.black,
                   )),
+              SizedBox(
+                height: 75,
+              ),
+              GreenButton(),
             ],
           ),
         ),
