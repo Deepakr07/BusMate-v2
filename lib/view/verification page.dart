@@ -80,38 +80,3 @@ class Verification extends StatelessWidget {
     );
   }
 }
-
-class otpTextBox extends StatelessWidget {
-  const otpTextBox({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 55,
-      width: 55,
-      child: Builder(
-        builder: (BuildContext context) {
-          return TextFormField(
-              onChanged: (value) {
-                if (value.length == 1) {
-                  FocusScope.of(context).nextFocus();
-                }
-              },
-              onSaved: (pin) {},
-              style: Theme.of(context).textTheme.titleLarge,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(1),
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.number,
-              cursorColor: Colors.black,
-              decoration: kOtpText //.copyWith(hintText: '0'
-              );
-        },
-      ),
-    );
-  }
-}
