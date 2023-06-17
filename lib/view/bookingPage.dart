@@ -33,7 +33,7 @@ class BookingPage extends GetView<BookingController> {
               ),
               Obx(() => FormHelper.dropDownWidgetWithLabel(
                     context,
-                    "Route",
+                    "Select Route",
                     "Select Your Route",
                     controller.routeId.value,
                     controller.routes,
@@ -91,7 +91,7 @@ class BookingPage extends GetView<BookingController> {
                     textColor: Colors.black,
                     hintColor: kGreyTextColor,
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 39,
               ),
               Obx(() => FormHelper.dropDownWidgetWithLabel(
@@ -121,10 +121,10 @@ class BookingPage extends GetView<BookingController> {
                     textColor: Colors.black,
                     hintColor: Colors.black,
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 75,
               ),
-              GreenButton(),
+              const GreenButton(),
             ],
           ),
         ),
