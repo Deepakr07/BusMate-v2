@@ -46,7 +46,7 @@ class TicketConfirmation extends StatelessWidget {
                   style: const TextStyle(color: kGreyTextColor, fontSize: 16),
                 ),
                 const SizedBox(
-                  height: 100,
+                  height: 65,
                 ),
                 Row(
                   children: [

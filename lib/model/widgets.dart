@@ -174,7 +174,7 @@ class borderbutton extends StatelessWidget {
   }
 }
 
-//elevated button
+//elevated green  button with increased shadow
 class ElevatedGreenButton extends StatelessWidget {
   late String text;
   ElevatedGreenButton({required this.text});
@@ -231,8 +231,7 @@ class otpTextBox extends StatelessWidget {
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
               cursorColor: Colors.black,
-              decoration: kOtpText //.copyWith(hintText: '0'
-              );
+              decoration: kOtpText);
         },
       ),
     );
