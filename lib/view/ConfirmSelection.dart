@@ -31,23 +31,23 @@ class ConfirmSelection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Confirm Selection",
                   style: kBlackHeadingSize,
                 ),
                 SizedBox(
                   height: 75,
                 ),
-                Text(
+                const Text(
                   "Selected Route",
                   style: kGreyFormTextStyle,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 ConfirmSelectionContainer(),
                 SizedBox(
-                  height: 33,
+                  height: 39,
                 ),
                 Text(
                   "Selected Stop",
@@ -92,10 +92,10 @@ class ConfirmSelection extends StatelessWidget {
                     ))
                   ],
                 ),
-                SizedBox(
-                  height: 10,
+                const SizedBox(
+                  height: 39,
                 ),
-                Text(
+                const Text(
                   "* You will be directed to payment page after confirmation",
                   style: TextStyle(
                     fontSize: 16,

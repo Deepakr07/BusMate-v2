@@ -9,10 +9,17 @@ class Tickets extends StatelessWidget {
   late final String status;
   String college = 'SOE';
   late final String destination;
-  late final DateTime issueDate;
+  late final issueDate;
   //late final DateTime expiryDate; not shown in ticket history
   late final ImageProvider qrImage;
-  late final String ticketType; // not displayed in active tickets
+  late final String ticketType;
+  Tickets({
+    required this.route,
+    required this.issueDate,
+    required this.destination,
+    required this.ticketId,
+    required this.status,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +69,7 @@ class Tickets extends StatelessWidget {
                                     ),
                                     Image.asset('./assets/doubleArrow.png'),
                                     Text(
-                                      'Pathadipalam',
+                                      destination,
                                       style: kDestinationStyle,
                                     ),
                                   ],
@@ -85,7 +92,7 @@ class Tickets extends StatelessWidget {
                                       children: [
                                         Text('Issue date', style: kSmallGrey),
                                         Text(
-                                          '10 jan,23',
+                                          issueDate,
                                           style: kLargeGrey,
                                         ),
                                       ],
@@ -95,10 +102,12 @@ class Tickets extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text('Status', style: kSmallGrey),
-                                        Text('Active',
+                                        Text(status,
                                             style: TextStyle(
                                               fontWeight: FontWeight.w500,
-                                              color: Colors.green,
+                                              color: (status == 'Active')
+                                                  ? Colors.green
+                                                  : Colors.red,
                                             )),
                                       ],
                                     ),
