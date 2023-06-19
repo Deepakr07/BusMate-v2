@@ -142,13 +142,12 @@ class DotIndicator extends StatelessWidget {
 
 class borderbutton extends StatelessWidget {
   String text;
-  borderbutton({required this.text});
+  final VoidCallback onTap;
+  borderbutton({required this.text, required this.onTap});
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {
-        // Handle button press
-      },
+      onPressed: onTap,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(8),
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -177,12 +176,13 @@ class borderbutton extends StatelessWidget {
 //elevated green  button with increased shadow
 class ElevatedGreenButton extends StatelessWidget {
   late String text;
-  ElevatedGreenButton({required this.text});
+  final VoidCallback onTap;
+  ElevatedGreenButton({required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onTap,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(8),
         shape: MaterialStateProperty.all<OutlinedBorder>(

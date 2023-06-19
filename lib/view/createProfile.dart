@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:busmate/model/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
+import 'package:get/get.dart';
+import 'package:busmate/view/home.dart';
 
 void main() {
   runApp(CreateProfile());
@@ -131,7 +133,14 @@ class CreateProfile extends StatelessWidget {
                     SizedBox(
                       height: 40,
                     ),
-                    GreenButton()
+                    GestureDetector(
+                        onTap: () {
+                          Get.off(() => HomePage());
+                        },
+                        child: GreenButton()),
+                    SizedBox(
+                      height: 20,
+                    )
                   ],
                 ),
               ),

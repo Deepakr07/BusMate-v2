@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:busmate/model/ActiveTicket_model.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import 'package:busmate/view/home.dart';
 
 void main() {
   runApp(const TicketConfirmation());
@@ -10,6 +12,9 @@ void main() {
 
 class TicketConfirmation extends StatelessWidget {
   const TicketConfirmation({Key? key}) : super(key: key);
+  void navigateToHome() {
+    Get.off(HomePage());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +58,7 @@ class TicketConfirmation extends StatelessWidget {
                     Expanded(
                       child: borderbutton(
                         text: 'Home',
+                        onTap: navigateToHome,
                       ),
                     ),
                     const SizedBox(
@@ -61,6 +67,7 @@ class TicketConfirmation extends StatelessWidget {
                     Expanded(
                         child: ElevatedGreenButton(
                       text: 'Download',
+                      onTap: () => {},
                     ))
                   ],
                 )

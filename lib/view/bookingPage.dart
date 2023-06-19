@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:busmate/controller/dropDownController.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:busmate/model/widgets.dart';
+import 'package:busmate/view/ConfirmSelection.dart';
 
 void main() {
   runApp(BookingPage());
@@ -14,7 +15,7 @@ class BookingPage extends GetView<BookingController> {
   final bookingController = Get.put(BookingController());
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       home: SafeArea(
           child: Scaffold(
         body: Container(
@@ -122,9 +123,14 @@ class BookingPage extends GetView<BookingController> {
                     hintColor: Colors.black,
                   )),
               const SizedBox(
-                height: 75,
+                height: 65,
               ),
-              const GreenButton(),
+              GestureDetector(
+                  onTap: () => {
+                        Get.to(() => ConfirmSelection(),
+                            transition: Transition.rightToLeft)
+                      },
+                  child: const GreenButton()),
             ],
           ),
         ),

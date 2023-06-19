@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:busmate/model/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
+import 'package:get/get.dart';
+import 'package:busmate/view/bookingPage.dart';
 
 void main() {
   runApp(ConfirmSelection());
@@ -8,10 +10,17 @@ void main() {
 
 class ConfirmSelection extends StatelessWidget {
   const ConfirmSelection({Key? key}) : super(key: key);
+  void navigateToBooking() {
+    Get.off(() => BookingPage());
+  }
+
+  void navigateToPayment() {
+    Get.off(() => BookingPage());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
@@ -63,13 +72,14 @@ class ConfirmSelection extends StatelessWidget {
                   height: 39,
                 ),
                 SizedBox(
-                  height: 75,
+                  height: 65,
                 ),
                 Row(
                   children: [
                     Expanded(
                       child: borderbutton(
-                        text: 'Home',
+                        text: 'Go Back',
+                        onTap: navigateToBooking,
                       ),
                     ),
                     const SizedBox(
@@ -77,12 +87,13 @@ class ConfirmSelection extends StatelessWidget {
                     ),
                     Expanded(
                         child: ElevatedGreenButton(
-                      text: 'Download',
+                      text: 'Confirm',
+                      onTap: navigateToPayment,
                     ))
                   ],
                 ),
                 SizedBox(
-                  height: 32,
+                  height: 10,
                 ),
                 Text(
                   "* You will be directed to payment page after confirmation",
