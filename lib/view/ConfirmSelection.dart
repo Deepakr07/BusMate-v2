@@ -47,7 +47,7 @@ class ConfirmSelection extends StatelessWidget {
                 ),
                 ConfirmSelectionContainer(),
                 SizedBox(
-                  height: 33,
+                  height: 39,
                 ),
                 Text(
                   "Selected Stop",
@@ -93,7 +93,7 @@ class ConfirmSelection extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 39,
                 ),
                 Text(
                   "* You will be directed to payment page after confirmation",
