@@ -7,7 +7,8 @@ void main() {
 }
 
 class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+  final loginFormKey = GlobalKey<FormState>();
+  Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,75 +19,62 @@ class Login extends StatelessWidget {
         body: LayoutBuilder(builder: (context, constraints) {
           return Stack(
             children: [
-              Container(
-                padding: EdgeInsets.all(24),
-                height: double.infinity,
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          Text(
-                            "Login",
-                            style: kBlackHeadingSize,
-                          ),
-                          Text(
-                            "Phone Number",
-                            style: kGreyTextStyle,
-                          ),
-                        ],
+              Form(
+                key: loginFormKey,
+                child: Container(
+                  padding: EdgeInsets.all(24),
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Column(
+                          children: [
+                            Text(
+                              "Login",
+                              style: kBlackHeadingSize,
+                            ),
+                            Text(
+                              "Phone Number",
+                              style: kGreyTextStyle,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 17),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      cursorColor: Colors.black,
-                      onChanged: (value) {},
-                      decoration: kTextFieldDecoration,
-                    ),
-                    SizedBox(
-                      height: 19,
-                    ),
-                    Text(
-                      "Password",
-                      style: kGreyTextStyle,
-                    ),
-                    SizedBox(
-                      height: 17,
-                    ),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      obscureText: true,
-                      cursorColor: Colors.black,
-                      onChanged: (value) {},
-                      decoration: kTextFieldDecoration,
-                    ),
-                    SizedBox(height: 29),
-                    GestureDetector(onTap: () {}, child: GreenButton()),
-                    SizedBox(
-                      height: 36,
-                    ),
-                    HorizontalLineWithOr(),
-                    SizedBox(
-                      height: 19,
-                    ),
-                    Text(
-                      "Continue with your Google account",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: kGreyTextColor,
+                      SizedBox(height: 17),
+                      TextFormField(
+                        validator: (String? value) {},
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        cursorColor: Colors.black,
+                        onChanged: (value) {},
+                        decoration: kTextFieldDecoration,
                       ),
-                    ),
-                    SizedBox(
-                      height: 17,
-                    ),
-                    Image.asset('./assets/google-icon.png')
-                  ],
+                      SizedBox(height: 29),
+                      GestureDetector(onTap: () {}, child: GreenButton()),
+                      SizedBox(
+                        height: 36,
+                      ),
+                      HorizontalLineWithOr(),
+                      SizedBox(
+                        height: 19,
+                      ),
+                      Text(
+                        "Continue with your Google account",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: kGreyTextColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 17,
+                      ),
+                      Image.asset('./assets/google-icon.png')
+                    ],
+                  ),
                 ),
               ),
               Positioned(

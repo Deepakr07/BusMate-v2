@@ -217,6 +217,7 @@ class otpTextBox extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) {
           return TextFormField(
+              validator: (String? val) {},
               onChanged: (value) {
                 if (value.length == 1) {
                   FocusScope.of(context).nextFocus();
