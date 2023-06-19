@@ -9,7 +9,8 @@ void main() {
 }
 
 class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+  final loginFormKey = GlobalKey<FormState>();
+  Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +45,12 @@ class Login extends StatelessWidget {
                     ),
                     SizedBox(height: 17),
                     TextFormField(
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      cursorColor: Colors.black,
-                      onChanged: (value) {},
-                      decoration: kTextFieldDecoration,
+                      validator: (String? value) {},
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        cursorColor: Colors.black,
+                        onChanged: (value) {},
+                        decoration: kTextFieldDecoration,
                     ),
                     SizedBox(
                       height: 19,
@@ -61,11 +63,12 @@ class Login extends StatelessWidget {
                       height: 17,
                     ),
                     TextFormField(
-                      textAlign: TextAlign.center,
-                      obscureText: true,
-                      cursorColor: Colors.black,
-                      onChanged: (value) {},
-                      decoration: kTextFieldDecoration,
+                      validator: (String? value) {},
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        cursorColor: Colors.black,
+                        onChanged: (value) {},
+                        decoration: kTextFieldDecoration,
                     ),
                     SizedBox(height: 29),
                     GestureDetector(onTap: () {}, child: GreenButton()),
@@ -82,13 +85,15 @@ class Login extends StatelessWidget {
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: kGreyTextColor,
+
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 17,
-                    ),
-                    Image.asset('./assets/google-icon.png')
-                  ],
+                      SizedBox(
+                        height: 17,
+                      ),
+                      Image.asset('./assets/google-icon.png')
+                    ],
+                  ),
                 ),
               ),
             ),

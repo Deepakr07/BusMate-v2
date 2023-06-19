@@ -7,7 +7,8 @@ void main() {
 }
 
 class EditProfile extends StatelessWidget {
-  const EditProfile({Key? key}) : super(key: key);
+  final editProfileFormKey = GlobalKey<FormState>();
+  EditProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class EditProfile extends StatelessWidget {
       home: Scaffold(
         body: SafeArea(
           child: Form(
+            key: editProfileFormKey,
             child: Container(
               padding: EdgeInsets.all(24),
               width: double.infinity,
@@ -66,6 +68,7 @@ class EditProfile extends StatelessWidget {
                         height: 14,
                       ),
                       TextFormField(
+
                         cursorColor: Colors.black,
                         onChanged: (value) {},
                         decoration: kTextFieldDecoration,

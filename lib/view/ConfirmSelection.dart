@@ -4,12 +4,14 @@ import 'package:busmate/Constants/constants.dart';
 import 'package:get/get.dart';
 import 'package:busmate/view/bookingPage.dart';
 
+
 void main() {
   runApp(ConfirmSelection());
 }
 
 class ConfirmSelection extends StatelessWidget {
   const ConfirmSelection({Key? key}) : super(key: key);
+
   void navigateToBooking() {
     Get.off(() => BookingPage());
   }
@@ -21,6 +23,10 @@ class ConfirmSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
@@ -43,6 +49,7 @@ class ConfirmSelection extends StatelessWidget {
                   style: kGreyFormTextStyle,
                 ),
                 const SizedBox(
+
                   height: 10,
                 ),
                 ConfirmSelectionContainer(),
@@ -80,6 +87,7 @@ class ConfirmSelection extends StatelessWidget {
                       child: borderbutton(
                         text: 'Go Back',
                         onTap: navigateToBooking,
+
                       ),
                     ),
                     const SizedBox(

@@ -10,7 +10,8 @@ void main() {
 }
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+  final signUpFormKey = GlobalKey<FormState>();
+  SignUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +46,10 @@ class SignUp extends StatelessWidget {
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff878080),
+
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -67,8 +69,8 @@ class SignUp extends StatelessWidget {
                                 height: 18,
                               ),
                               TextFormField(
+                               validator: (String? val) {},
                                 onChanged: (value) {},
-                                //validator: () {},
                                 keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 cursorColor: Colors.black,
@@ -101,16 +103,17 @@ class SignUp extends StatelessWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: kGreyTextColor,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Image.asset('./assets/google-icon.png'),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 18,
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Image.asset('./assets/google-icon.png'),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -9,7 +9,8 @@ void main() {
 }
 
 class CreateProfile extends StatelessWidget {
-  const CreateProfile({Key? key}) : super(key: key);
+  final createProfileFormKey = GlobalKey<FormState>();
+  CreateProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class CreateProfile extends StatelessWidget {
       home: Scaffold(
         body: SafeArea(
           child: Form(
+            key: createProfileFormKey,
             child: Container(
               padding: EdgeInsets.all(24),
               child: FractionallySizedBox(
@@ -67,6 +69,7 @@ class CreateProfile extends StatelessWidget {
                         height: 14,
                       ),
                       TextFormField(
+                        validator: (String? val) {},
                         cursorColor: Colors.black,
                         onChanged: (value) {},
                         decoration: kTextFieldDecoration,
@@ -82,6 +85,7 @@ class CreateProfile extends StatelessWidget {
                         height: 14,
                       ),
                       TextFormField(
+                        validator: (String? val) {},
                         cursorColor: Colors.black,
                         onChanged: (value) {},
                         decoration: kTextFieldDecoration,
@@ -97,6 +101,8 @@ class CreateProfile extends StatelessWidget {
                         height: 14,
                       ),
                       TextFormField(
+
+                        validator: (String? val) {},
                         cursorColor: Colors.black,
                         onChanged: (value) {},
                         decoration: kTextFieldDecoration,
@@ -112,6 +118,9 @@ class CreateProfile extends StatelessWidget {
                         height: 14,
                       ),
                       TextFormField(
+
+                        validator: (String? val) {},
+
                         cursorColor: Colors.black,
                         onChanged: (value) {},
                         decoration: kTextFieldDecoration,
@@ -126,7 +135,10 @@ class CreateProfile extends StatelessWidget {
                       SizedBox(
                         height: 14,
                       ),
-                      TextField(
+
+                      TextFormField(
+                        validator: (String? val) {},
+
                         cursorColor: Colors.black,
                         onChanged: (value) {},
                         decoration: kTextFieldDecoration,
@@ -142,6 +154,7 @@ class CreateProfile extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       )
+
                     ],
                   ),
                 ),

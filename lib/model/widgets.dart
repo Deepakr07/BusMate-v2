@@ -212,11 +212,12 @@ class otpTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 55,
-      width: 55,
+      height: 50,
+      width: 50,
       child: Builder(
         builder: (BuildContext context) {
           return TextFormField(
+              validator: (String? val) {},
               onChanged: (value) {
                 if (value.length == 1) {
                   FocusScope.of(context).nextFocus();

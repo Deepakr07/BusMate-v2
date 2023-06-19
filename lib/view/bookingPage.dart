@@ -12,6 +12,7 @@ void main() {
 }
 
 class BookingPage extends GetView<BookingController> {
+  final bookingPageFormKey = GlobalKey<FormState>();
   final bookingController = Get.put(BookingController());
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class BookingPage extends GetView<BookingController> {
       home: SafeArea(
           child: Scaffold(
         body: Form(
+          key: bookingPageFormKey,
           child: Container(
             width: double.infinity,
             height: double.infinity,
@@ -132,6 +134,7 @@ class BookingPage extends GetView<BookingController> {
                               transition: Transition.rightToLeft)
                         },
                     child: const GreenButton()),
+
               ],
             ),
           ),
