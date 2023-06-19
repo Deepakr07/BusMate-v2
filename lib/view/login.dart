@@ -1,3 +1,4 @@
+import 'package:busmate/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:busmate/model/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
@@ -91,7 +92,11 @@ class Login extends StatelessWidget {
                     SizedBox(
                       height: 17,
                     ),
-                    Image.asset('./assets/google-icon.png')
+                    GestureDetector(
+                        onTap: () {
+                          AuthService().signInWithGoogle();
+                        },
+                        child: Image.asset('./assets/google-icon.png'))
                   ],
                 ),
               ),

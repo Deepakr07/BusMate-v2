@@ -4,6 +4,7 @@ import 'package:busmate/model/widgets.dart';
 import 'package:get/get.dart';
 import 'package:busmate/view/login.dart';
 import 'package:busmate/view/verification page.dart';
+import 'package:busmate/services/auth_service.dart';
 
 void main() {
   runApp(SignUp());
@@ -106,9 +107,10 @@ class SignUp extends StatelessWidget {
                         height: 18,
                       ),
                       GestureDetector(
-                        onTap: () {},
-                        child: Image.asset('./assets/google-icon.png'),
-                      ),
+                          onTap: () {
+                            AuthService().signInWithGoogle();
+                          },
+                          child: Image.asset('./assets/google-icon.png'))
                     ],
                   ),
                 ),
