@@ -9,10 +9,18 @@ class activeTicket extends StatelessWidget {
   //late final String status;  not displayed in active tickets
   String college = 'SOE';
   late final String destination;
-  late final DateTime issueDate;
-  late final DateTime expiryDate;
+  late final String issueDate;
+  late final String expiryDate;
   late final ImageProvider qrImage;
-  late final String ticketType; // not displayed in active tickets
+  late final String ticketType;
+
+  activeTicket(
+      {required this.ticketId,
+      required this.route,
+      required this.destination,
+      required this.issueDate,
+      required this.expiryDate,
+      required this.ticketType});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +70,7 @@ class activeTicket extends StatelessWidget {
                                     ),
                                     Image.asset('./assets/doubleArrow.png'),
                                     Text(
-                                      'Pathadipalam',
+                                      destination,
                                       style: kDestinationStyle,
                                     ),
                                   ],
@@ -85,7 +93,7 @@ class activeTicket extends StatelessWidget {
                                       children: [
                                         Text('Issue date', style: kSmallGrey),
                                         Text(
-                                          '10 jan,23',
+                                          issueDate,
                                           style: kLargeGrey,
                                         ),
                                       ],
@@ -95,7 +103,7 @@ class activeTicket extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text('Route', style: kSmallGrey),
-                                        Text('Vytilla', style: kLargeGrey),
+                                        Text(route, style: kLargeGrey),
                                       ],
                                     ),
                                     Column(
@@ -104,7 +112,7 @@ class activeTicket extends StatelessWidget {
                                       children: [
                                         Text('Expiry date', style: kSmallGrey),
                                         Text(
-                                          '9 Feb, 23',
+                                          expiryDate,
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             color: kGreyTextColor,

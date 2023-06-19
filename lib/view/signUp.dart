@@ -10,7 +10,8 @@ void main() {
 }
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+  SignUp({Key? key}) : super(key: key);
+  final _signUpKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,40 +22,40 @@ class SignUp extends StatelessWidget {
         builder: (context, constraints) {
           return Stack(
             children: [
-              Container(
-                padding: EdgeInsets.all(24),
-                height: double.infinity,
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            "Sign up",
-                            style: kBlackHeadingSize,
-                          ),
-                          Text(
-                            "Sign up with your mobile number",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xff878080),
+              Form(
+                key: _signUpKey,
+                child: Container(
+                  padding: EdgeInsets.all(24),
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "Sign up",
+                              style: kBlackHeadingSize,
                             ),
-                          ),
-                        ],
+                            Text(
+                              "Sign up with your mobile number",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xff878080),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Form(
-                      //key: _formkey,
-                      child: Container(
+                      SizedBox(
+                        height: 32,
+                      ),
+                      Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -67,7 +68,7 @@ class SignUp extends StatelessWidget {
                             ),
                             TextFormField(
                               onChanged: (value) {},
-                              //validator: () {},
+                              validator: (String? value) {},
                               keyboardType: TextInputType.number,
                               textAlign: TextAlign.center,
                               cursorColor: Colors.black,
@@ -76,40 +77,40 @@ class SignUp extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 29,
-                    ),
-                    GestureDetector(
-                        onTap: () {
-                          Get.off(() => Verification(),
-                              transition: Transition.rightToLeftWithFade,
-                              duration: const Duration(milliseconds: 500));
-                        },
-                        child: GreenButton()),
-                    SizedBox(
-                      height: 38,
-                    ),
-                    HorizontalLineWithOr(),
-                    SizedBox(
-                      height: 19,
-                    ),
-                    Text(
-                      "Sign Up with your Google Account",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: kGreyTextColor,
+                      SizedBox(
+                        height: 29,
                       ),
-                    ),
-                    SizedBox(
-                      height: 18,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Image.asset('./assets/google-icon.png'),
-                    ),
-                  ],
+                      GestureDetector(
+                          onTap: () {
+                            Get.off(() => Verification(),
+                                transition: Transition.rightToLeftWithFade,
+                                duration: const Duration(milliseconds: 500));
+                          },
+                          child: GreenButton()),
+                      SizedBox(
+                        height: 38,
+                      ),
+                      HorizontalLineWithOr(),
+                      SizedBox(
+                        height: 19,
+                      ),
+                      Text(
+                        "Sign Up with your Google Account",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: kGreyTextColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 18,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Image.asset('./assets/google-icon.png'),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Positioned(

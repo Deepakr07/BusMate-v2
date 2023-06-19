@@ -42,7 +42,17 @@ class TicketConfirmation extends StatelessWidget {
                 ),
                 Align(
                     alignment: Alignment.center,
-                    child: SizedBox(height: 200, child: activeTicket())),
+                    child: SizedBox(
+                      height: 200,
+                      child: activeTicket(
+                        destination: 'Pathadipalam',
+                        route: 'Vytilla',
+                        expiryDate: '19 Feb, 23',
+                        issueDate: '19 Feb, 23',
+                        ticketId: 55544654654,
+                        ticketType: 'Daily',
+                      ),
+                    )),
                 const SizedBox(
                   height: 10,
                 ),
