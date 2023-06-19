@@ -15,73 +15,71 @@ class Verification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            padding: EdgeInsets.all(24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Verification",
-                  style: kBlackHeadingSize,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'You will recieve a code to verify your mobile number ',
-                  style: kGreyTextStyle,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  'Enter your OTP code here',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    otpTextBox(),
-                    otpTextBox(),
-                    otpTextBox(),
-                    otpTextBox(),
-                    otpTextBox(),
-                    otpTextBox(),
-                  ],
-                ),
-                SizedBox(
-                  height: 35,
-                ),
-                GestureDetector(
-                    onTap: () => {
-                          Get.off(() => CreateProfile(),
-                              transition: Transition.rightToLeft,
-                              duration: Duration(milliseconds: 300))
-                        },
-                    child: GreenButton()),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'didn’t recieved the code',
-                  style: kGreyFormTextStyle,
-                ),
-                Text('Resend',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xff434343),
-                    ))
-              ],
-            ),
+    return Scaffold(
+      body: Form(
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          padding: EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Verification",
+                style: kBlackHeadingSize,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'You will recieve a code to verify your mobile number ',
+                style: kGreyTextStyle,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text(
+                'Enter your OTP code here',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  otpTextBox(),
+                  otpTextBox(),
+                  otpTextBox(),
+                  otpTextBox(),
+                  otpTextBox(),
+                  otpTextBox(),
+                ],
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              GestureDetector(
+                  onTap: () => {
+                        Get.off(() => CreateProfile(),
+                            transition: Transition.rightToLeft,
+                            duration: Duration(milliseconds: 300))
+                      },
+                  child: GreenButton()),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'didn’t recieved the code',
+                style: kGreyFormTextStyle,
+              ),
+              Text('Resend',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff434343),
+                  ))
+            ],
           ),
         ),
       ),
