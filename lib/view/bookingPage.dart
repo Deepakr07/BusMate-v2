@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:busmate/controller/dropDownController.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:busmate/model/widgets.dart';
-import 'package:busmate/view/ConfirmSelection.dart';
+import 'package:busmate/routes/routes.dart';
 import 'package:busmate/model/Bottomnav_model4.dart';
 
 void main() {
@@ -129,10 +129,7 @@ class BookingPage extends GetView<BookingController> {
                   height: 65,
                 ),
                 GestureDetector(
-                    onTap: () => {
-                          Get.to(() => ConfirmSelection(),
-                              transition: Transition.rightToLeft)
-                        },
+                    onTap: () => {Get.toNamed(AppRoutes.confirmTicket)},
                     child: const GreenButton()),
               ],
             ),
