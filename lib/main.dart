@@ -3,16 +3,17 @@ import 'package:get/get.dart';
 import 'package:busmate/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:busmate/services/auth_service.dart';
+import 'package:busmate/controller/bottomnabarcontroller.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(const BusMate());
+  runApp(BusMate());
 }
 
 class BusMate extends StatelessWidget {
-  const BusMate({Key? key}) : super(key: key);
+  final BottomNavBarController _controller = Get.put(BottomNavBarController());
 
   @override
   Widget build(BuildContext context) {

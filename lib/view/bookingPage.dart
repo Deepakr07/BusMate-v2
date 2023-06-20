@@ -6,6 +6,7 @@ import 'package:busmate/controller/dropDownController.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:busmate/model/widgets.dart';
 import 'package:busmate/view/ConfirmSelection.dart';
+import 'package:busmate/model/Bottomnav_model4.dart';
 
 void main() {
   runApp(BookingPage());
@@ -15,9 +16,10 @@ class BookingPage extends GetView<BookingController> {
   final bookingController = Get.put(BookingController());
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      home: SafeArea(
-          child: Scaffold(
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        bottomNavigationBar: BottomNavBar(),
         body: Form(
           child: Container(
             width: double.infinity,
@@ -136,7 +138,7 @@ class BookingPage extends GetView<BookingController> {
             ),
           ),
         ),
-      )),
+      ),
     );
   }
 }

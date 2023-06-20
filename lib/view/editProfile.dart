@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:busmate/model/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
+import 'package:busmate/model/Bottomnav_model4.dart';
 
 void main() {
   runApp(EditProfile());
@@ -15,6 +16,8 @@ class EditProfile extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.white,
+        bottomNavigationBar: BottomNavBar(),
         body: SafeArea(
           child: Form(
             key: _editProfileKey,

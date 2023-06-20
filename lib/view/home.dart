@@ -7,6 +7,7 @@ import '../controller/date_controller.dart';
 import '../model/ActiveTicket_List.dart';
 import '../model/widgets.dart';
 import '../controller/dotIndicator_Controller.dart';
+import 'package:busmate/model/Bottomnav_model4.dart';
 
 void main() {
   runApp(HomePage());
@@ -23,6 +24,7 @@ class HomePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kGreenMainTheme,
+        bottomNavigationBar: BottomNavBar(),
         body: Column(
           children: [
             Expanded(
@@ -176,7 +178,7 @@ class HomePage extends StatelessWidget {
                           child: Column(
                             children: [
                               SizedBox(
-                                height: 200,
+                                height: 180,
                                 child: PageView.builder(
                                   itemCount: activeTickets.length,
                                   itemBuilder:

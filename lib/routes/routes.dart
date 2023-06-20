@@ -34,9 +34,10 @@ class AppRoutes {
       page: () => HomePage(),
     ),
     GetPage(
-      name: booking,
-      page: () => BookingPage(),
-    ),
+        name: booking,
+        page: () => BookingPage(),
+        transition: Transition.downToUp,
+        transitionDuration: Duration(microseconds: 0)),
     GetPage(
       name: starting,
       page: () => GetStarted(),
@@ -54,9 +55,10 @@ class AppRoutes {
       page: () => SignUp(),
     ),
     GetPage(
-      name: editProfile,
-      page: () => EditProfile(),
-    ),
+        name: editProfile,
+        page: () => EditProfile(),
+        transition: Transition.downToUp,
+        transitionDuration: Duration(microseconds: 0)),
     GetPage(
       name: confirmDetails,
       page: () => ConfirmSelection(),
@@ -74,13 +76,15 @@ class AppRoutes {
       page: () => CreateProfile(),
     ),
     GetPage(
-      name: history,
-      page: () => History(),
-    ),
+        name: history,
+        page: () => History(),
+        transition: Transition.downToUp,
+        transitionDuration: Duration(microseconds: 0)),
     GetPage(
-      name: verification,
-      page: () => Verification(),
-    ),
+        name: verification,
+        page: () => Verification(),
+        transition: Transition.downToUp,
+        transitionDuration: Duration(microseconds: 0)),
     // Add other routes
   ];
 }

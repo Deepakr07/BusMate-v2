@@ -18,7 +18,7 @@ class TicketConfirmation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       home: SafeArea(
         child: Scaffold(
           body: Container(

@@ -1,8 +1,9 @@
 import 'package:busmate/model/Tickets_model.dart';
-
+import 'package:busmate/model/Bottomnav_model4.dart';
 import '../model/Tickets_list.dart';
 import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const History());
@@ -16,6 +17,7 @@ class History extends StatelessWidget {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
+          bottomNavigationBar: BottomNavBar(),
           backgroundColor: Colors.white,
           body: Container(
             width: double.infinity,
@@ -40,7 +42,7 @@ class History extends StatelessWidget {
                       final ticket = tickets[index];
                       return SizedBox(
                         width: 300,
-                        height: 200,
+                        height: 180,
                         child: ticket,
                       );
                     },
