@@ -1,3 +1,4 @@
+import 'package:busmate/view/editProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,6 +10,7 @@ import '../controller/bottomNavBarController.dart';
 
 class AuthService {
   final BottomNavBarController _controller = Get.find();
+
   HandleAuthState() {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
@@ -48,8 +50,18 @@ class AuthService {
   }
 
   void signOut() async {
-    await FirebaseAuth.instance.signOut();
-    Get.offAll(() => Login());
-    _controller.currentIndex.value = 0;
+    try {
+      await FirebaseAuth.instance.signOut();
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user == null) {
+          Get.offAll(() => Login());
+          _controller.currentIndex.value = 0;
+          print('SignOut Successful');
+        }
+      });
+    } catch (e) {
+      print('Error signing out: $e');
+      Get.offAll(() => EditProfile());
+    }
   }
 }
