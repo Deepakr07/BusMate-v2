@@ -18,9 +18,10 @@ class BusMate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        //initialRoute: AppRoutes.starting, // Set the initial route
-        getPages: AppRoutes.routes,
-        home: AuthService().HandleAuthState());
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.starting, // Set the initial route
+      getPages: AppRoutes.routes,
+      home: AuthService().HandleAuthState(),
+    );
   }
 }

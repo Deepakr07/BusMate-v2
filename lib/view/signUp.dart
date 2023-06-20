@@ -108,7 +108,7 @@ class SignUp extends StatelessWidget {
                       ),
                       GestureDetector(
                           onTap: () {
-                            AuthService().signInWithGoogle();
+                            AuthService().signInWithGoogle(context);
                           },
                           child: Image.asset('./assets/google-icon.png'))
                     ],

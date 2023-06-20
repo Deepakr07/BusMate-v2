@@ -1,9 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:busmate/view/home.dart';
 import 'package:busmate/view/getstarted.dart';
+import 'package:get/get.dart';
 
 class AuthService {
   HandleAuthState() {
@@ -19,7 +20,7 @@ class AuthService {
     );
   }
 
-  signInWithGoogle() async {
+  Future<void> signInWithGoogle(BuildContext context) async {
     final GoogleSignInAccount? googleUser =
         await GoogleSignIn(scopes: <String>["email"]).signIn();
 
@@ -31,7 +32,16 @@ class AuthService {
       idToken: googleAuth.idToken,
     );
 
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    try {
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      // User signed in successfully, navigate to the homepage
+      Get.off(() => HomePage());
+    } catch (e) {
+      // Handle sign-in error
+      print('Error signing in with Google: $e');
+    }
   }
 
   signOut() {
