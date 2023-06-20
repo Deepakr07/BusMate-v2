@@ -5,15 +5,17 @@ import 'package:busmate/Constants/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:busmate/view/home.dart';
+import 'package:busmate/controller/bottomNavBarController.dart';
 
 void main() {
-  runApp(const TicketConfirmation());
+  runApp(TicketConfirmation());
 }
 
 class TicketConfirmation extends StatelessWidget {
-  const TicketConfirmation({Key? key}) : super(key: key);
+  final BottomNavBarController _controller = Get.find();
 
   void navigateToHome() {
+    _controller.changePage(0);
     Get.off(() => HomePage());
   }
 
