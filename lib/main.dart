@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:busmate/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:busmate/services/auth_service.dart';
-import 'package:busmate/controller/bottomnabarcontroller.dart';
+import 'package:busmate/controller/bottomNavBarController.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

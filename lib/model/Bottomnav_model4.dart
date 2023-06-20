@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:busmate/routes/routes.dart';
-import 'package:busmate/controller/bottomnabarcontroller.dart';
+import 'package:busmate/controller/bottomNavBarController.dart';
 import 'package:busmate/Constants/constants.dart';
 //bottom navbar
 
