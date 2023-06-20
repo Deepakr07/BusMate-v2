@@ -43,6 +43,7 @@ class AuthService {
     } catch (e) {
       // Handle sign-in error
       print('Error signing in with Google: $e');
+      Get.offAll(() => Login());
     }
   }
 

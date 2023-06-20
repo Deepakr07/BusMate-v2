@@ -70,13 +70,19 @@ class EditProfile extends StatelessWidget {
                           Material(
                             borderRadius: BorderRadius.circular(20),
                             elevation: 6,
-                            child: GestureDetector(
+                            child: InkWell(
                               onTap: () {
                                 AuthService().signOut();
                               },
+                              splashColor: kGreenMainTheme,
                               child: Container(
                                 width: 95,
                                 height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                      color: kGreenMainTheme, width: 1),
+                                ),
                                 child: Center(
                                     child: Text(
                                   "LogOut",
@@ -85,11 +91,6 @@ class EditProfile extends StatelessWidget {
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500),
                                 )),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(
-                                      color: kGreenMainTheme, width: 1),
-                                ),
                               ),
                             ),
                           )
@@ -145,12 +146,16 @@ class EditProfile extends StatelessWidget {
                         decoration: kTextFieldDecoration,
                       ),
                       SizedBox(
-                        height: 51,
+                        height: 50,
                       ),
-                      GestureDetector(
-                        child: GreenButton(),
-                        onTap: () {},
+                      ElevatedGreenButton(text: 'Continue', onTap: () {}),
+                      SizedBox(
+                        height: 10,
                       )
+                      // GestureDetector(
+                      //   child: GreenButton(),
+                      //   onTap: () {},
+                      // )
                     ],
                   ),
                 ),

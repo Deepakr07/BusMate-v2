@@ -65,7 +65,7 @@ class Verification extends StatelessWidget {
                   onTap: () => {
                         Get.off(() => CreateProfile(),
                             transition: Transition.rightToLeft,
-                            duration: Duration(milliseconds: 300))
+                            duration: Duration(milliseconds: 500))
                       },
                   child: GreenButton()),
               SizedBox(
