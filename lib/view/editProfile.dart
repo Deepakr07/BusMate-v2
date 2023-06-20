@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:busmate/model/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:busmate/model/Bottomnav_model4.dart';
+import 'package:busmate/services/auth_service.dart';
 
 void main() {
   runApp(EditProfile());
@@ -41,23 +42,57 @@ class EditProfile extends StatelessWidget {
                         height: 29,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CircleAvatar(
-                            backgroundImage: Image.network(
-                                    "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")
-                                .image,
-                            radius: 40,
+                          Container(
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: Image.network(
+                                            "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")
+                                        .image,
+                                    radius: 40,
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    "User Name",
+                                    style: TextStyle(
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black),
+                                  ),
+                                ]),
                           ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            "User Name",
-                            style: TextStyle(
-                                fontSize: 23,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          ),
+                          Material(
+                            borderRadius: BorderRadius.circular(20),
+                            elevation: 6,
+                            child: GestureDetector(
+                              onTap: () {
+                                AuthService().signOut();
+                              },
+                              child: Container(
+                                width: 95,
+                                height: 40,
+                                child: Center(
+                                    child: Text(
+                                  "LogOut",
+                                  style: TextStyle(
+                                      color: kGreyTextColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                )),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                      color: kGreenMainTheme, width: 1),
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                       SizedBox(

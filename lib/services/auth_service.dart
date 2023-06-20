@@ -1,12 +1,14 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:busmate/view/home.dart';
 import 'package:busmate/view/getstarted.dart';
 import 'package:get/get.dart';
+import 'package:busmate/view/login.dart';
+import '../controller/bottomNavBarController.dart';
 
 class AuthService {
+  final BottomNavBarController _controller = Get.find();
   HandleAuthState() {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
@@ -44,7 +46,9 @@ class AuthService {
     }
   }
 
-  signOut() {
-    FirebaseAuth.instance.signOut();
+  void signOut() async {
+    await FirebaseAuth.instance.signOut();
+    Get.offAll(() => Login());
+    _controller.currentIndex.value = 0;
   }
 }
