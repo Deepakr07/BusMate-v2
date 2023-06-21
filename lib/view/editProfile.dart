@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:busmate/model/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:busmate/model/Bottomnav_model4.dart';
+import 'package:busmate/services/auth_service.dart';
 
 void main() {
   runApp(EditProfile());
@@ -34,87 +35,129 @@ class EditProfile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Edit Profile",
+                        "User Profile",
                         style: kBlackHeadingSize,
                       ),
                       SizedBox(
                         height: 29,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CircleAvatar(
-                            backgroundImage: Image.network(
-                                    "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")
-                                .image,
-                            radius: 40,
+                          Container(
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: Image.network(
+                                            "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")
+                                        .image,
+                                    radius: 40,
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    "User Name",
+                                    style: TextStyle(
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black),
+                                  ),
+                                ]),
                           ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            "User Name",
-                            style: TextStyle(
-                                fontSize: 23,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          ),
+                          Material(
+                            borderRadius: BorderRadius.circular(20),
+                            elevation: 6,
+                            child: InkWell(
+                              onTap: () {
+                                AuthService().signOut();
+                              },
+                              splashColor: kGreenMainTheme,
+                              child: Container(
+                                width: 95,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                      color: kGreenMainTheme, width: 1),
+                                ),
+                                child: Center(
+                                    child: Text(
+                                  "LogOut",
+                                  style: TextStyle(
+                                      color: kGreyTextColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                )),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                       SizedBox(
                         height: 34,
                       ),
                       Text(
-                        "Change Name",
+                        "Name",
                         style: kGreyFormTextStyle,
                       ),
                       SizedBox(
                         height: 14,
                       ),
-                      TextFormField(
-                        validator: (String? value) {},
-                        cursorColor: Colors.black,
-                        onChanged: (value) {},
-                        decoration: kTextFieldDecoration,
-                      ),
+                      ConfirmSelectionContainer(),
                       SizedBox(
                         height: 23,
                       ),
                       Text(
-                        "Change Department",
+                        "Department",
                         style: kGreyFormTextStyle,
                       ),
                       SizedBox(
                         height: 14,
                       ),
-                      TextFormField(
-                        validator: (String? value) {},
-                        cursorColor: Colors.black,
-                        onChanged: (value) {},
-                        decoration: kTextFieldDecoration,
-                      ),
+                      ConfirmSelectionContainer(),
                       SizedBox(
                         height: 22,
                       ),
                       Text(
-                        "Change Student ID",
+                        "Student ID",
                         style: kGreyFormTextStyle,
                       ),
                       SizedBox(
                         height: 15,
                       ),
-                      TextFormField(
-                        validator: (String? value) {},
-                        keyboardType: TextInputType.number,
-                        cursorColor: Colors.black,
-                        onChanged: (value) {},
-                        decoration: kTextFieldDecoration,
+                      ConfirmSelectionContainer(),
+                      SizedBox(
+                        height: 22,
+                      ),
+                      Text(
+                        "Mobile Number",
+                        style: kGreyFormTextStyle,
                       ),
                       SizedBox(
-                        height: 51,
+                        height: 15,
                       ),
-                      GestureDetector(
-                        child: GreenButton(),
-                        onTap: () {},
+                      ConfirmSelectionContainer(),
+                      SizedBox(
+                        height: 22,
+                      ),
+                      Text(
+                        "E-mail ID",
+                        style: kGreyFormTextStyle,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      ConfirmSelectionContainer(),
+                      // SizedBox(
+                      //   height: 50,
+                      // ),
+                      // ElevatedGreenButton(text: 'Continue', onTap: () {}),
+                      SizedBox(
+                        height: 10,
                       )
                     ],
                   ),
