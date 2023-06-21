@@ -26,7 +26,7 @@ class SignUp extends StatelessWidget {
               Form(
                 key: _signUpKey,
                 child: Container(
-                  padding: EdgeInsets.all(24),
+                  padding: const EdgeInsets.all(24),
                   height: double.infinity,
                   width: double.infinity,
                   child: Column(
@@ -35,7 +35,7 @@ class SignUp extends StatelessWidget {
                     children: [
                       Container(
                         width: double.infinity,
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
@@ -53,18 +53,18 @@ class SignUp extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 32,
                       ),
                       Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
+                            const Text(
                               "Enter Phone Number",
                               style: kGreyTextStyle,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 18,
                             ),
                             TextFormField(
@@ -81,21 +81,21 @@ class SignUp extends StatelessWidget {
                       SizedBox(
                         height: 29,
                       ),
-                      GestureDetector(
+                      ElevatedGreenButton(
+                          text: 'Continue',
                           onTap: () {
                             Get.off(() => Verification(),
                                 transition: Transition.rightToLeftWithFade,
                                 duration: const Duration(milliseconds: 500));
-                          },
-                          child: GreenButton()),
-                      SizedBox(
+                          }),
+                      const SizedBox(
                         height: 38,
                       ),
                       HorizontalLineWithOr(),
-                      SizedBox(
+                      const SizedBox(
                         height: 19,
                       ),
-                      Text(
+                      const Text(
                         "Sign Up with your Google Account",
                         style: TextStyle(
                           fontSize: 14,
@@ -103,14 +103,15 @@ class SignUp extends StatelessWidget {
                           color: kGreyTextColor,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 18,
                       ),
-                      GestureDetector(
-                          onTap: () {
-                            AuthService().signInWithGoogle(context);
-                          },
-                          child: Image.asset('./assets/google-icon.png'))
+                      InkWell(
+                        onTap: () {
+                          AuthService().signInWithGoogle(context);
+                        },
+                        child: Image.asset('./assets/google-icon.png'),
+                      ),
                     ],
                   ),
                 ),
@@ -126,7 +127,7 @@ class SignUp extends StatelessWidget {
                     padding: EdgeInsets.all(16),
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           "already have an account",
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -134,11 +135,11 @@ class SignUp extends StatelessWidget {
                           ),
                         ),
                         SizedBox(width: 8),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             Get.off(() => Login());
                           },
-                          child: Text(
+                          child: const Text(
                             "login",
                             style: TextStyle(
                               fontSize: 14,

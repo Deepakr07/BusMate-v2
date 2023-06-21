@@ -35,7 +35,7 @@ class EditProfile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Edit Profile",
+                        "User Profile",
                         style: kBlackHeadingSize,
                       ),
                       SizedBox(
@@ -79,6 +79,7 @@ class EditProfile extends StatelessWidget {
                                 width: 95,
                                 height: 40,
                                 decoration: BoxDecoration(
+                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(20),
                                   border: Border.all(
                                       color: kGreenMainTheme, width: 1),
@@ -100,62 +101,64 @@ class EditProfile extends StatelessWidget {
                         height: 34,
                       ),
                       Text(
-                        "Change Name",
+                        "Name",
                         style: kGreyFormTextStyle,
                       ),
                       SizedBox(
                         height: 14,
                       ),
-                      TextFormField(
-                        validator: (String? value) {},
-                        cursorColor: Colors.black,
-                        onChanged: (value) {},
-                        decoration: kTextFieldDecoration,
-                      ),
+                      ConfirmSelectionContainer(),
                       SizedBox(
                         height: 23,
                       ),
                       Text(
-                        "Change Department",
+                        "Department",
                         style: kGreyFormTextStyle,
                       ),
                       SizedBox(
                         height: 14,
                       ),
-                      TextFormField(
-                        validator: (String? value) {},
-                        cursorColor: Colors.black,
-                        onChanged: (value) {},
-                        decoration: kTextFieldDecoration,
-                      ),
+                      ConfirmSelectionContainer(),
                       SizedBox(
                         height: 22,
                       ),
                       Text(
-                        "Change Student ID",
+                        "Student ID",
                         style: kGreyFormTextStyle,
                       ),
                       SizedBox(
                         height: 15,
                       ),
-                      TextFormField(
-                        validator: (String? value) {},
-                        keyboardType: TextInputType.number,
-                        cursorColor: Colors.black,
-                        onChanged: (value) {},
-                        decoration: kTextFieldDecoration,
+                      ConfirmSelectionContainer(),
+                      SizedBox(
+                        height: 22,
+                      ),
+                      Text(
+                        "Mobile Number",
+                        style: kGreyFormTextStyle,
                       ),
                       SizedBox(
-                        height: 50,
+                        height: 15,
                       ),
-                      ElevatedGreenButton(text: 'Continue', onTap: () {}),
+                      ConfirmSelectionContainer(),
+                      SizedBox(
+                        height: 22,
+                      ),
+                      Text(
+                        "E-mail ID",
+                        style: kGreyFormTextStyle,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      ConfirmSelectionContainer(),
+                      // SizedBox(
+                      //   height: 50,
+                      // ),
+                      // ElevatedGreenButton(text: 'Continue', onTap: () {}),
                       SizedBox(
                         height: 10,
                       )
-                      // GestureDetector(
-                      //   child: GreenButton(),
-                      //   onTap: () {},
-                      // )
                     ],
                   ),
                 ),

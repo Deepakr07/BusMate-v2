@@ -61,13 +61,14 @@ class Verification extends StatelessWidget {
               SizedBox(
                 height: 35,
               ),
-              GestureDetector(
-                  onTap: () => {
-                        Get.off(() => CreateProfile(),
-                            transition: Transition.rightToLeft,
-                            duration: Duration(milliseconds: 500))
-                      },
-                  child: GreenButton()),
+              ElevatedGreenButton(
+                text: 'Continue',
+                onTap: () => {
+                  Get.off(() => CreateProfile(),
+                      transition: Transition.rightToLeft,
+                      duration: Duration(milliseconds: 500))
+                },
+              ),
               SizedBox(
                 height: 10,
               ),

@@ -1,3 +1,5 @@
+import 'package:busmate/view/ConfirmSelection.dart';
+import 'package:busmate/view/ticketConfirmation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
@@ -128,9 +130,13 @@ class BookingPage extends GetView<BookingController> {
                 const SizedBox(
                   height: 65,
                 ),
-                GestureDetector(
-                    onTap: () => {Get.toNamed(AppRoutes.confirmTicket)},
-                    child: const GreenButton()),
+                ElevatedGreenButton(
+                    text: 'Continue',
+                    onTap: () => {
+                          Get.to(ConfirmSelection(),
+                              transition: Transition.rightToLeft,
+                              duration: const Duration(milliseconds: 300))
+                        }),
               ],
             ),
           ),

@@ -39,7 +39,6 @@ class AuthService {
     try {
       final UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
-
       // User signed in successfully, navigate to the homepage
       Get.off(() => HomePage());
     } catch (e) {

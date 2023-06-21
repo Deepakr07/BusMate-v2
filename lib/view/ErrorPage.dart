@@ -34,7 +34,7 @@ class ErrorPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20)),
                       child: const Center(
                         child: Text(
-                          "Get Started",
+                          "Try Again",
                           style: TextStyle(
                               color: kGreenMainTheme,
                               fontSize: 17,

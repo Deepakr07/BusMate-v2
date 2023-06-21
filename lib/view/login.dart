@@ -1,4 +1,5 @@
 import 'package:busmate/services/auth_service.dart';
+import 'package:busmate/view/home.dart';
 import 'package:flutter/material.dart';
 import 'package:busmate/model/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
@@ -73,7 +74,11 @@ class Login extends StatelessWidget {
                       decoration: kTextFieldDecoration,
                     ),
                     SizedBox(height: 29),
-                    GestureDetector(onTap: () {}, child: GreenButton()),
+                    ElevatedGreenButton(
+                        text: 'Continue',
+                        onTap: () {
+                          Get.off(() => HomePage());
+                        }),
                     SizedBox(
                       height: 36,
                     ),
@@ -92,11 +97,12 @@ class Login extends StatelessWidget {
                     SizedBox(
                       height: 17,
                     ),
-                    GestureDetector(
-                        onTap: () {
-                          AuthService().signInWithGoogle(context);
-                        },
-                        child: Image.asset('./assets/google-icon.png'))
+                    InkWell(
+                      onTap: () {
+                        AuthService().signInWithGoogle(context);
+                      },
+                      child: Image.asset('./assets/google-icon.png'),
+                    ),
                   ],
                 ),
               ),
@@ -119,7 +125,7 @@ class Login extends StatelessWidget {
                           fontSize: 13,
                         ),
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           Get.off(() => SignUp());
                         },

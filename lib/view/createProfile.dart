@@ -141,11 +141,12 @@ class CreateProfile extends StatelessWidget {
                       SizedBox(
                         height: 40,
                       ),
-                      GestureDetector(
-                          onTap: () {
-                            Get.off(() => HomePage());
-                          },
-                          child: GreenButton()),
+                      ElevatedGreenButton(
+                        text: 'Continue',
+                        onTap: () {
+                          Get.off(() => HomePage());
+                        },
+                      ),
                       SizedBox(
                         height: 20,
                       )

@@ -15,29 +15,32 @@ class ConfirmSelection extends StatelessWidget {
   }
 
   void navigateToPayment() {
-    Get.off(() => BookingPage());
+    Get.off(() => ConfirmSelection());
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          body: Container(
-            width: double.infinity,
-            height: double.infinity,
-            padding: EdgeInsets.all(24),
-            child: Column(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        padding: EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Expanded(
+              child: Text(
+                "Confirm Selection",
+                style: kBlackHeadingSize,
+              ),
+            ),
+            // SizedBox(
+            //   height: 75,
+            // ),
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Confirm Selection",
-                  style: kBlackHeadingSize,
-                ),
-                SizedBox(
-                  height: 75,
-                ),
                 Text(
                   "Selected Route",
                   style: kGreyFormTextStyle,
@@ -64,47 +67,47 @@ class ConfirmSelection extends StatelessWidget {
                   "Select Ticket Type",
                   style: kGreyFormTextStyle,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                ConfirmSelectionContainer(),
-                SizedBox(
-                  height: 39,
-                ),
-                SizedBox(
-                  height: 65,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: borderbutton(
-                        text: 'Go Back',
-                        onTap: navigateToBooking,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 35,
-                    ),
-                    Expanded(
-                        child: ElevatedGreenButton(
-                      text: 'Confirm',
-                      onTap: navigateToPayment,
-                    ))
-                  ],
-                ),
-                SizedBox(
-                  height: 39,
-                ),
-                Text(
-                  "* You will be directed to payment page after confirmation",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: kGreyTextColor,
-                  ),
-                ),
               ],
             ),
-          ),
+            SizedBox(
+              height: 10,
+            ),
+            ConfirmSelectionContainer(),
+            SizedBox(
+              height: 39,
+            ),
+            SizedBox(
+              height: 65,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: borderbutton(
+                    text: 'Go Back',
+                    onTap: navigateToBooking,
+                  ),
+                ),
+                const SizedBox(
+                  width: 35,
+                ),
+                Expanded(
+                    child: ElevatedGreenButton(
+                  text: 'Confirm',
+                  onTap: navigateToPayment,
+                ))
+              ],
+            ),
+            SizedBox(
+              height: 39,
+            ),
+            Text(
+              "* You will be directed to payment page after confirmation",
+              style: TextStyle(
+                fontSize: 16,
+                color: kGreyTextColor,
+              ),
+            ),
+          ],
         ),
       ),
     );
