@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:busmate/model/widgets.dart';
@@ -11,6 +12,8 @@ void main() {
 }
 
 class SignUp extends StatelessWidget {
+  var phoneNumber = "";
+  static const countryCode = '+91';
   SignUp({Key? key}) : super(key: key);
   final _signUpKey = GlobalKey<FormState>();
 
@@ -68,7 +71,9 @@ class SignUp extends StatelessWidget {
                               height: 18,
                             ),
                             TextFormField(
-                              onChanged: (value) {},
+                              onChanged: (value) {
+                                phoneNumber = value;
+                              },
                               validator: (String? value) {},
                               keyboardType: TextInputType.number,
                               textAlign: TextAlign.center,
@@ -83,7 +88,17 @@ class SignUp extends StatelessWidget {
                       ),
                       ElevatedGreenButton(
                           text: 'Continue',
-                          onTap: () {
+                          onTap: () async {
+                            await FirebaseAuth.instance.verifyPhoneNumber(
+                              phoneNumber: "${countryCode + phoneNumber}",
+                              verificationCompleted:
+                                  (PhoneAuthCredential credential) {},
+                              verificationFailed: (FirebaseAuthException e) {},
+                              codeSent:
+                                  (String verificationId, int? resendToken) {},
+                              codeAutoRetrievalTimeout:
+                                  (String verificationId) {},
+                            );
                             Get.to(() => Verification(),
                                 transition: Transition.rightToLeftWithFade,
                                 duration: const Duration(milliseconds: 500));
