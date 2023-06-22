@@ -35,7 +35,7 @@ class SignUp extends StatelessWidget {
                     children: [
                       Container(
                         width: double.infinity,
-                        child: const Column(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
