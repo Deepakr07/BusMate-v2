@@ -40,7 +40,18 @@ class Login extends StatelessWidget {
                             style: kBlackHeadingSize,
                           ),
                           Text(
-                            "Phone Number",
+                            "Log in with your mobile number",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff878080),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 32,
+                          ),
+                          Text(
+                            "Enter Phone Number",
                             style: kGreyTextStyle,
                           ),
                         ],
@@ -51,24 +62,6 @@ class Login extends StatelessWidget {
                       validator: (String? value) {},
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
-                      cursorColor: Colors.black,
-                      onChanged: (value) {},
-                      decoration: kTextFieldDecoration,
-                    ),
-                    SizedBox(
-                      height: 19,
-                    ),
-                    Text(
-                      "Password",
-                      style: kGreyTextStyle,
-                    ),
-                    SizedBox(
-                      height: 17,
-                    ),
-                    TextFormField(
-                      validator: (String? value) {},
-                      textAlign: TextAlign.center,
-                      obscureText: true,
                       cursorColor: Colors.black,
                       onChanged: (value) {},
                       decoration: kTextFieldDecoration,
@@ -119,7 +112,7 @@ class Login extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "already have an account",
+                        "Create new Account",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 13,

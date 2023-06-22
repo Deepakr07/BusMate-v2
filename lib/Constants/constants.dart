@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 
 const Color kGreenMainTheme = Color(0xff37c976);
 const Color kGreyTextColor = Color(0xff878080);
@@ -79,4 +80,28 @@ const TextStyle kGreyFormTextStyle = TextStyle(
   fontSize: 16,
 );
 
-//Common container for input fields (with green border)
+//otp package themes
+
+final defaultPinTheme = PinTheme(
+  width: 56,
+  height: 56,
+  textStyle: TextStyle(
+      fontSize: 20,
+      color: Color.fromRGBO(30, 60, 87, 1),
+      fontWeight: FontWeight.w600),
+  decoration: BoxDecoration(
+    border: Border.all(color: kGreenMainTheme.withOpacity(0.4)),
+    borderRadius: BorderRadius.circular(8),
+  ),
+);
+
+final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+  border: Border.all(color: kGreenMainTheme),
+  borderRadius: BorderRadius.circular(8),
+);
+
+final submittedPinTheme = defaultPinTheme.copyWith(
+  decoration: defaultPinTheme.decoration?.copyWith(
+    color: kGreenMainTheme.withOpacity(0.4),
+  ),
+);

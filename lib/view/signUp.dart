@@ -84,7 +84,7 @@ class SignUp extends StatelessWidget {
                       ElevatedGreenButton(
                           text: 'Continue',
                           onTap: () {
-                            Get.off(() => Verification(),
+                            Get.to(() => Verification(),
                                 transition: Transition.rightToLeftWithFade,
                                 duration: const Duration(milliseconds: 500));
                           }),

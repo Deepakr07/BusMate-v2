@@ -44,6 +44,7 @@ dependencies:
   snippet_coder_utils: ^1.0.14
   google_sign_in: ^6.1.4
   easy_splash_screen: ^1.0.4
+  pinput: ^2.2.31
 
 
 dev_dependencies:

@@ -203,41 +203,6 @@ class ElevatedGreenButton extends StatelessWidget {
   }
 }
 
-//otp text box
-class otpTextBox extends StatelessWidget {
-  const otpTextBox({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      width: 50,
-      child: Builder(
-        builder: (BuildContext context) {
-          return TextFormField(
-              onChanged: (value) {
-                if (value.length == 1) {
-                  FocusScope.of(context).nextFocus();
-                }
-              },
-              onSaved: (pin) {},
-              style: Theme.of(context).textTheme.titleLarge,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(1),
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.number,
-              cursorColor: Colors.black,
-              decoration: kOtpText);
-        },
-      ),
-    );
-  }
-}
-
 class ConfirmSelectionContainer extends StatelessWidget {
   const ConfirmSelectionContainer({
     super.key,

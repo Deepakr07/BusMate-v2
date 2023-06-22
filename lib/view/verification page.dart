@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:get/get.dart';
 import 'package:busmate/view/createProfile.dart';
+import 'package:pinput/pinput.dart';
 
 void main() {
   runApp(Verification());
@@ -47,16 +48,13 @@ class Verification extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  otpTextBox(),
-                  otpTextBox(),
-                  otpTextBox(),
-                  otpTextBox(),
-                  otpTextBox(),
-                  otpTextBox(),
-                ],
+              Pinput(
+                defaultPinTheme: defaultPinTheme,
+                focusedPinTheme: focusedPinTheme,
+                submittedPinTheme: submittedPinTheme,
+                length: 6,
+                showCursor: true,
+                onCompleted: (pin) => print(pin),
               ),
               SizedBox(
                 height: 35,
@@ -64,7 +62,7 @@ class Verification extends StatelessWidget {
               ElevatedGreenButton(
                 text: 'Continue',
                 onTap: () => {
-                  Get.off(() => CreateProfile(),
+                  Get.offAll(() => CreateProfile(),
                       transition: Transition.rightToLeft,
                       duration: Duration(milliseconds: 500))
                 },
@@ -72,16 +70,17 @@ class Verification extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Text(
-                'didn’t recieved the code',
-                style: kGreyFormTextStyle,
-              ),
-              Text('Resend',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff434343),
-                  ))
+              InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: Text('Edit Phone Number',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff434343),
+                    )),
+              )
             ],
           ),
         ),
