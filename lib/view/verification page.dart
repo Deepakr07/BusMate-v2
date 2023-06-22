@@ -1,4 +1,6 @@
 import 'package:busmate/model/widgets.dart';
+import 'package:busmate/view/signUp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -12,11 +14,13 @@ void main() {
 }
 
 class Verification extends StatelessWidget {
+  final FirebaseAuth auth = FirebaseAuth.instance;
   Verification({Key? key}) : super(key: key);
   final _verificationKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    var code = "";
     return Scaffold(
       body: Form(
         key: _verificationKey,
@@ -54,6 +58,9 @@ class Verification extends StatelessWidget {
                 submittedPinTheme: submittedPinTheme,
                 length: 6,
                 showCursor: true,
+                onChanged: (value) {
+                  code = value;
+                },
                 onCompleted: (pin) => print(pin),
               ),
               SizedBox(
@@ -61,10 +68,22 @@ class Verification extends StatelessWidget {
               ),
               ElevatedGreenButton(
                 text: 'Continue',
-                onTap: () => {
-                  Get.offAll(() => CreateProfile(),
-                      transition: Transition.rightToLeft,
-                      duration: Duration(milliseconds: 500))
+                onTap: () async {
+                  try {
+                    PhoneAuthCredential credential =
+                        PhoneAuthProvider.credential(
+                            verificationId: SignUp.verify, smsCode: code);
+
+                    // Sign the user in (or link) with the credential
+                    await auth.signInWithCredential(credential);
+                    Get.offAll(() => CreateProfile(),
+                        transition: Transition.rightToLeft,
+                        duration: Duration(milliseconds: 500));
+                  } catch (e) {
+                    Get.snackbar("Error",
+                        "Please check whether you have entered the correct OTP");
+                    print("Invalid OTP");
+                  }
                 },
               ),
               SizedBox(

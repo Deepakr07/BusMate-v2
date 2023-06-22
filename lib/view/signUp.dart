@@ -12,6 +12,7 @@ void main() {
 }
 
 class SignUp extends StatelessWidget {
+  static String verify = "";
   var phoneNumber = "";
   static const countryCode = '+91';
   SignUp({Key? key}) : super(key: key);
@@ -95,13 +96,16 @@ class SignUp extends StatelessWidget {
                                   (PhoneAuthCredential credential) {},
                               verificationFailed: (FirebaseAuthException e) {},
                               codeSent:
-                                  (String verificationId, int? resendToken) {},
+                                  (String verificationId, int? resendToken) {
+                                SignUp.verify = verificationId;
+                                Get.to(() => Verification(),
+                                    transition: Transition.rightToLeftWithFade,
+                                    duration:
+                                        const Duration(milliseconds: 500));
+                              },
                               codeAutoRetrievalTimeout:
                                   (String verificationId) {},
                             );
-                            Get.to(() => Verification(),
-                                transition: Transition.rightToLeftWithFade,
-                                duration: const Duration(milliseconds: 500));
                           }),
                       const SizedBox(
                         height: 38,
