@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:busmate/services/auth_service.dart';
 import 'package:busmate/controller/bottomNavBarController.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
+//imports
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
