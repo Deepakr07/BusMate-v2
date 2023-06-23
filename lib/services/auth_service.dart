@@ -68,9 +68,6 @@ class AuthService {
         }
         hasAcc = await checkIfProfileExist(Uid);
         hasAcc ? Get.off(() => HomePage()) : Get.off(() => CreateProfile());
-
-        //TODO: Condition to check weather the user already created profile with the UID, If Already present, the user should be directed to the home page, else to Create Profile Page
-        //TODO:(The condition can be checked by checking if there exist any user profile with same authUID as the Currently signed in account)
       }
     } catch (e) {
       // Handle sign-in error
