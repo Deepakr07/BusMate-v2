@@ -1,6 +1,7 @@
 import 'package:busmate/view/createProfile.dart';
 import 'package:busmate/view/editProfile.dart';
 import 'package:busmate/view/signUp.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +15,8 @@ class AuthService {
   final BottomNavBarController _controller = Get.find();
   final _auth = FirebaseAuth.instance;
   final _GoogleSignIn = GoogleSignIn();
+  var Uid;
+  late bool hasAcc;
 
   HandleAuthState() {
     return StreamBuilder(
@@ -30,6 +33,14 @@ class AuthService {
     );
   }
 
+  Future<bool> checkIfProfileExist(String Uid) async {
+    final CollectionReference usersCollection =
+        FirebaseFirestore.instance.collection('users');
+    final QuerySnapshot snapshot =
+        await usersCollection.where('Uid', isEqualTo: Uid).get();
+    return snapshot.docs.isNotEmpty;
+  }
+
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
       final GoogleSignInAccount? googleSignInAccount =
@@ -41,7 +52,15 @@ class AuthService {
             accessToken: googleSignInAuthentication.accessToken,
             idToken: googleSignInAuthentication.idToken);
         await _auth.signInWithCredential(authCredential);
-        Get.off(() => CreateProfile());
+        //Get.off(() => CreateProfile());
+        User? currentUser = FirebaseAuth.instance.currentUser;
+        if (currentUser != null) {
+          Uid = currentUser.uid;
+          print(Uid);
+        }
+        hasAcc = await checkIfProfileExist(Uid);
+        hasAcc ? Get.off(() => HomePage()) : Get.off(() => CreateProfile());
+
         //TODO: Condition to check weather the user already created profile with the UID, If Already present, the user should be directed to the home page, else to Create Profile Page
         //TODO:(The condition can be checked by checking if there exist any user profile with same authUID as the Currently signed in account)
       }
