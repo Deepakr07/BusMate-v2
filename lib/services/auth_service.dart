@@ -1,3 +1,4 @@
+import 'package:busmate/view/createProfile.dart';
 import 'package:busmate/view/editProfile.dart';
 import 'package:busmate/view/signUp.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class AuthService {
             accessToken: googleSignInAuthentication.accessToken,
             idToken: googleSignInAuthentication.idToken);
         await _auth.signInWithCredential(authCredential);
-        Get.off(() => HomePage());
+        Get.off(() => CreateProfile());
       }
     } catch (e) {
       // Handle sign-in error
