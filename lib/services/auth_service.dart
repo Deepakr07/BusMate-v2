@@ -19,14 +19,21 @@ class AuthService {
   late bool hasAcc;
 
   HandleAuthState() {
-    return StreamBuilder(
+    return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (BuildContext context, snapshot) {
-        checkIfProfileExist(Uid);
+      builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
         if (snapshot.hasData) {
-          //TODO: Condition to check weather the user already created profile with the UID, If Already present, the user should be directed to the home page, else to Create Profile Page
-          //TODO:(The condition can be checked by checking if there exist any user profile with same authUID as the Currently signed in account)
-          return HomePage();
+          return FutureBuilder<bool>(
+            future: checkIfProfileExist(snapshot.data!.uid),
+            builder:
+                (BuildContext context, AsyncSnapshot<bool> profileSnapshot) {
+              if (profileSnapshot.hasData && profileSnapshot.data!) {
+                return HomePage();
+              } else {
+                return CreateProfile();
+              }
+            },
+          );
         } else {
           return const GetStarted();
         }
@@ -106,20 +113,20 @@ class AuthService {
     }
   }
 
-  // void signOut() async {
-  //   try {
-  //     await FirebaseAuth.instance.signOut();
-  //     await _GoogleSignIn.signOut();
-  //     FirebaseAuth.instance.authStateChanges().listen((User? user) {
-  //       if (user == null) {
-  //         Get.offAll(() => Login());
-  //         _controller.currentIndex.value = 0;
-  //         print('SignOut Successful');
-  //       }
-  //     });
-  //   } catch (e) {
-  //     print('Error signing out: $e');
-  //     Get.offAll(() => EditProfile());
-  //   }
-  // }
+// void signOut() async {
+//   try {
+//     await FirebaseAuth.instance.signOut();
+//     await _GoogleSignIn.signOut();
+//     FirebaseAuth.instance.authStateChanges().listen((User? user) {
+//       if (user == null) {
+//         Get.offAll(() => Login());
+//         _controller.currentIndex.value = 0;
+//         print('SignOut Successful');
+//       }
+//     });
+//   } catch (e) {
+//     print('Error signing out: $e');
+//     Get.offAll(() => EditProfile());
+//   }
+// }
 }
