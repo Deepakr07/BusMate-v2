@@ -46,10 +46,10 @@ class AppRoutes {
       name: createProfile,
       page: () => CreateProfile(),
     ),
-    GetPage(
-      name: login,
-      page: () => Login(),
-    ),
+    // GetPage(
+    //   name: login,
+    //   page: () => Login(),
+    // ),
     GetPage(
       name: signup,
       page: () => SignUp(),
