@@ -60,29 +60,27 @@ class SignUp extends StatelessWidget {
                       const SizedBox(
                         height: 32,
                       ),
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Text(
-                              "Enter Phone Number",
-                              style: kGreyTextStyle,
-                            ),
-                            const SizedBox(
-                              height: 18,
-                            ),
-                            TextFormField(
-                              onChanged: (value) {
-                                phoneNumber = value;
-                              },
-                              validator: (String? value) {},
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.center,
-                              cursorColor: Colors.black,
-                              decoration: kTextFieldDecoration,
-                            ),
-                          ],
-                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const Text(
+                            "Enter Phone Number",
+                            style: kGreyTextStyle,
+                          ),
+                          const SizedBox(
+                            height: 18,
+                          ),
+                          TextFormField(
+                            onChanged: (value) {
+                              phoneNumber = value;
+                            },
+                            validator: (String? value) {},
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            cursorColor: Colors.black,
+                            decoration: kTextFieldDecoration,
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: 29,
