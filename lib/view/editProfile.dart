@@ -1,8 +1,10 @@
+import 'package:busmate/view/login.dart';
 import 'package:flutter/material.dart';
 import 'package:busmate/model/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:busmate/model/Bottomnav_model4.dart';
 import 'package:busmate/services/auth_service.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(EditProfile());

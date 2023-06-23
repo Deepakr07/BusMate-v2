@@ -43,11 +43,11 @@ class SignUp extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              "Sign up",
+                              "Welcome",
                               style: kBlackHeadingSize,
                             ),
                             Text(
-                              "Sign up with your mobile number",
+                              "Sign up/Log in with your mobile number",
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -115,7 +115,7 @@ class SignUp extends StatelessWidget {
                         height: 19,
                       ),
                       const Text(
-                        "Sign Up with your Google Account",
+                        "Continue with your Google Account",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -132,43 +132,6 @@ class SignUp extends StatelessWidget {
                         child: Image.asset('./assets/google-icon.png'),
                       ),
                     ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: constraints.maxHeight *
-                    0.05, //places the text 5percent from the bottom of the screen
-                child: FractionallySizedBox(
-                  widthFactor: 1.0,
-                  child: Container(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        const Text(
-                          "already have an account",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 13,
-                          ),
-                        ),
-                        SizedBox(width: 8),
-                        InkWell(
-                          onTap: () {
-                            Get.off(() => Login());
-                          },
-                          child: const Text(
-                            "login",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xff434343),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
               ),
