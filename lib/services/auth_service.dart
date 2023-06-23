@@ -20,9 +20,11 @@ class AuthService {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext context, snapshot) {
         if (snapshot.hasData) {
+          //TODO: Condition to check weather the user already created profile with the UID, If Already present, the user should be directed to the home page, else to Create Profile Page
+          //TODO:(The condition can be checked by checking if there exist any user profile with same authUID as the Currently signed in account)
           return HomePage();
         } else {
-          return GetStarted();
+          return const GetStarted();
         }
       },
     );
@@ -40,6 +42,8 @@ class AuthService {
             idToken: googleSignInAuthentication.idToken);
         await _auth.signInWithCredential(authCredential);
         Get.off(() => CreateProfile());
+        //TODO: Condition to check weather the user already created profile with the UID, If Already present, the user should be directed to the home page, else to Create Profile Page
+        //TODO:(The condition can be checked by checking if there exist any user profile with same authUID as the Currently signed in account)
       }
     } catch (e) {
       // Handle sign-in error

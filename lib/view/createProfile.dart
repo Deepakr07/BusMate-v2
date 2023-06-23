@@ -69,7 +69,14 @@ class CreateProfile extends StatelessWidget {
                         height: 14,
                       ),
                       TextFormField(
-                        validator: (String? value) {},
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
+                            return "Enter Correct Name";
+                          } else {
+                            return null;
+                          }
+                        },
                         cursorColor: Colors.black,
                         onChanged: (value) {},
                         decoration: kTextFieldDecoration,
@@ -85,7 +92,14 @@ class CreateProfile extends StatelessWidget {
                         height: 14,
                       ),
                       TextFormField(
-                        validator: (String? value) {},
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
+                            return "Enter Correct Department";
+                          } else {
+                            return null;
+                          }
+                        },
                         cursorColor: Colors.black,
                         onChanged: (value) {},
                         decoration: kTextFieldDecoration,
@@ -101,7 +115,14 @@ class CreateProfile extends StatelessWidget {
                         height: 14,
                       ),
                       TextFormField(
-                        validator: (String? value) {},
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^[0-9]+$').hasMatch(value!)) {
+                            return "Enter Correct Student ID";
+                          } else {
+                            return null;
+                          }
+                        },
                         cursorColor: Colors.black,
                         onChanged: (value) {},
                         decoration: kTextFieldDecoration,
@@ -117,7 +138,14 @@ class CreateProfile extends StatelessWidget {
                         height: 14,
                       ),
                       TextFormField(
-                        validator: (String? value) {},
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^\d{10,}$').hasMatch(value!)) {
+                            return "Enter Correct Mobile Number";
+                          } else {
+                            return null;
+                          }
+                        },
                         cursorColor: Colors.black,
                         onChanged: (value) {},
                         decoration: kTextFieldDecoration,
@@ -133,7 +161,15 @@ class CreateProfile extends StatelessWidget {
                         height: 14,
                       ),
                       TextFormField(
-                        validator: (String? value) {},
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+                                  .hasMatch(value!)) {
+                            return "Enter Correct E-mail";
+                          } else {
+                            return null;
+                          }
+                        },
                         cursorColor: Colors.black,
                         onChanged: (value) {},
                         decoration: kTextFieldDecoration,
@@ -144,7 +180,9 @@ class CreateProfile extends StatelessWidget {
                       ElevatedGreenButton(
                         text: 'Continue',
                         onTap: () {
-                          Get.off(() => HomePage());
+                          if (_createProfileKey.currentState!.validate()) {
+                            Get.off(HomePage());
+                          }
                         },
                       ),
                       SizedBox(

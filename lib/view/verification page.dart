@@ -77,7 +77,10 @@ class Verification extends StatelessWidget {
 
                     // Sign the user in (or link) with the credential
                     await auth.signInWithCredential(credential);
-                    Get.offAll(() => CreateProfile(),
+                    Get.offAll(
+                        () =>
+                            CreateProfile(), //TODO: Condition to check weather the user already created profile with the UID, If Already present, the user should be directed to the home page, else to Create Profile Page
+                        //TODO:(The condition can be checked by checking if there exist any user profile with same authUID as the Currently signed in account)
                         transition: Transition.rightToLeft,
                         duration: Duration(milliseconds: 500));
                   } catch (e) {

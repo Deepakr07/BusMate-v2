@@ -74,7 +74,14 @@ class SignUp extends StatelessWidget {
                             onChanged: (value) {
                               phoneNumber = value;
                             },
-                            validator: (String? value) {},
+                            validator: (value) {
+                              if (value!.isEmpty ||
+                                  !RegExp(r'^\d{10,}$').hasMatch(value!)) {
+                                return "Enter Correct Mobile Number";
+                              } else {
+                                return null;
+                              }
+                            },
                             keyboardType: TextInputType.number,
                             textAlign: TextAlign.center,
                             cursorColor: Colors.black,
@@ -88,22 +95,26 @@ class SignUp extends StatelessWidget {
                       ElevatedGreenButton(
                           text: 'Continue',
                           onTap: () async {
-                            await FirebaseAuth.instance.verifyPhoneNumber(
-                              phoneNumber: "${countryCode + phoneNumber}",
-                              verificationCompleted:
-                                  (PhoneAuthCredential credential) {},
-                              verificationFailed: (FirebaseAuthException e) {},
-                              codeSent:
-                                  (String verificationId, int? resendToken) {
-                                SignUp.verify = verificationId;
-                                Get.to(() => Verification(),
-                                    transition: Transition.rightToLeftWithFade,
-                                    duration:
-                                        const Duration(milliseconds: 500));
-                              },
-                              codeAutoRetrievalTimeout:
-                                  (String verificationId) {},
-                            );
+                            if (_signUpKey.currentState!.validate()) {
+                              await FirebaseAuth.instance.verifyPhoneNumber(
+                                phoneNumber: "${countryCode + phoneNumber}",
+                                verificationCompleted:
+                                    (PhoneAuthCredential credential) {},
+                                verificationFailed:
+                                    (FirebaseAuthException e) {},
+                                codeSent:
+                                    (String verificationId, int? resendToken) {
+                                  SignUp.verify = verificationId;
+                                  Get.to(() => Verification(),
+                                      transition:
+                                          Transition.rightToLeftWithFade,
+                                      duration:
+                                          const Duration(milliseconds: 500));
+                                },
+                                codeAutoRetrievalTimeout:
+                                    (String verificationId) {},
+                              );
+                            }
                           }),
                       const SizedBox(
                         height: 38,
