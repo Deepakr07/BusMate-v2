@@ -1,4 +1,5 @@
 import 'package:busmate/model/widgets.dart';
+import 'package:busmate/services/auth_service.dart';
 import 'package:busmate/view/signUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ import 'package:get/get.dart';
 import 'package:busmate/view/createProfile.dart';
 import 'package:pinput/pinput.dart';
 
+import 'home.dart';
+
 //verification
 void main() {
   runApp(Verification());
@@ -16,8 +19,9 @@ void main() {
 
 class Verification extends StatelessWidget {
   final FirebaseAuth auth = FirebaseAuth.instance;
-  Verification({Key? key}) : super(key: key);
   final _verificationKey = GlobalKey<FormState>();
+  var Uid;
+  late bool hasAcc;
 
   @override
   Widget build(BuildContext context) {
@@ -77,12 +81,19 @@ class Verification extends StatelessWidget {
 
                     // Sign the user in (or link) with the credential
                     await auth.signInWithCredential(credential);
-                    Get.offAll(
-                        () =>
-                            CreateProfile(), //TODO: Condition to check weather the user already created profile with the UID, If Already present, the user should be directed to the home page, else to Create Profile Page
-                        //TODO:(The condition can be checked by checking if there exist any user profile with same authUID as the Currently signed in account)
-                        transition: Transition.rightToLeft,
-                        duration: Duration(milliseconds: 500));
+                    User? currentUser = FirebaseAuth.instance.currentUser;
+                    if (currentUser != null) {
+                      Uid = currentUser.uid;
+                      print(Uid);
+                    }
+                    hasAcc = await AuthService().checkIfProfileExist(Uid);
+                    hasAcc
+                        ? Get.off(() => HomePage(),
+                            transition: Transition.rightToLeft,
+                            duration: const Duration(milliseconds: 500))
+                        : Get.off(() => CreateProfile(),
+                            transition: Transition.rightToLeft,
+                            duration: const Duration(milliseconds: 500));
                   } catch (e) {
                     Get.snackbar("Error",
                         "Please check whether you have entered the correct OTP");
