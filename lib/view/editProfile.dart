@@ -18,11 +18,11 @@ class EditProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        bottomNavigationBar: BottomNavBar(),
-        body: SafeArea(
-          child: Form(
+      home: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          bottomNavigationBar: BottomNavBar(),
+          body: Form(
             key: _editProfileKey,
             child: Container(
               padding: EdgeInsets.all(24),
