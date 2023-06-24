@@ -45,8 +45,8 @@ class BookingController extends GetxController {
   String getSelectedTicket() {
     int? selectedIndex =
         typeId.value != null ? int.tryParse(typeId.value!) : -1;
-    if (selectedIndex! >= 0 && selectedIndex < ticketType.length) {
-      return ticketType[selectedIndex]['Ticket'];
+    if (selectedIndex! - 1 >= 0 && selectedIndex - 1 < ticketType.length) {
+      return ticketType[selectedIndex - 1]['Ticket'];
     }
     return '';
   }

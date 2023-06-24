@@ -15,12 +15,16 @@ class ConfirmSelection extends StatelessWidget {
     required this.selectedStop,
     required this.selectedTicketType,
   });
-
+  var currentDate = DateTime.now();
+  var issueDate;
+  var ExpiryDate;
+  var Amount;
   void navigateToBooking() {
     Get.off(() => BookingPage());
   }
 
   void navigateToPayment() {
+    final currentDate = DateTime.now();
     // Add the code to navigate to the payment page here
   }
 
@@ -103,7 +107,27 @@ class ConfirmSelection extends StatelessWidget {
                       Expanded(
                         child: ElevatedGreenButton(
                           text: 'Confirm',
-                          onTap: navigateToPayment,
+                          onTap: () {
+                            issueDate = currentDate;
+                            print(issueDate);
+                            if (controller.getSelectedTicket() ==
+                                "Weekly (₹30)") {
+                              ExpiryDate = currentDate.add(Duration(days: 7));
+                              Amount = 30;
+                              print(ExpiryDate);
+                            } else if (controller.getSelectedTicket() ==
+                                "Monthly (₹80)") {
+                              ExpiryDate = currentDate.add(Duration(days: 30));
+                              Amount = 80;
+                              print(ExpiryDate);
+                            } else if (controller.getSelectedTicket() ==
+                                "Daily (₹10)") {
+                              ExpiryDate = currentDate.add(Duration(days: 1));
+                              Amount = 10;
+                              print(ExpiryDate);
+                            }
+                            print(Amount);
+                          },
                         ),
                       ),
                     ],
