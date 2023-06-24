@@ -41,4 +41,36 @@ class BookingController extends GetxController {
       {"ID": 10, "Name": "Panampilly Nagar", "ParentId": 2}
     ]);
   }
+
+  String getSelectedTicket() {
+    int? selectedIndex =
+        typeId.value != null ? int.tryParse(typeId.value!) : -1;
+    if (selectedIndex! >= 0 && selectedIndex < ticketType.length) {
+      return ticketType[selectedIndex]['Ticket'];
+    }
+    return '';
+  }
+
+  String getSelectedRouteName() {
+    int selectedIndex =
+        routeId.value != null ? int.tryParse(routeId.value!) ?? -1 : -1;
+    if (selectedIndex - 1 >= 0 && selectedIndex - 1 < routes.length) {
+      return routes[selectedIndex - 1]['label'];
+    }
+    return '';
+  }
+
+  String getSelectedStopName() {
+    if (stopId.value != null) {
+      int? selectedStopId = int.tryParse(stopId.value!);
+      var selectedStop = stopMaster.firstWhere(
+        (stop) => stop['ID'] == selectedStopId,
+        orElse: () => null,
+      );
+      if (selectedStop != null) {
+        return selectedStop['Name'];
+      }
+    }
+    return '';
+  }
 }

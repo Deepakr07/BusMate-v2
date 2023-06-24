@@ -46,10 +46,6 @@ class AppRoutes {
       name: createProfile,
       page: () => CreateProfile(),
     ),
-    // GetPage(
-    //   name: login,
-    //   page: () => Login(),
-    // ),
     GetPage(
       name: signup,
       page: () => SignUp(),
@@ -58,11 +54,7 @@ class AppRoutes {
         name: editProfile,
         page: () => EditProfile(),
         transition: Transition.downToUp,
-        transitionDuration: Duration(microseconds: 0)),
-    GetPage(
-      name: confirmDetails,
-      page: () => ConfirmSelection(),
-    ),
+        transitionDuration: const Duration(microseconds: 0)),
     GetPage(
       name: confirmTicket,
       page: () => TicketConfirmation(),
