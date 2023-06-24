@@ -1,5 +1,4 @@
 import 'package:busmate/view/ConfirmSelection.dart';
-import 'package:busmate/view/ticketConfirmation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
@@ -7,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:busmate/controller/dropDownController.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:busmate/model/widgets.dart';
-import 'package:busmate/routes/routes.dart';
 import 'package:busmate/model/Bottomnav_model4.dart';
 
 void main() {
@@ -15,7 +13,8 @@ void main() {
 }
 
 class BookingPage extends GetView<BookingController> {
-  final bookingController = Get.put(BookingController());
+  final _BookingKey = GlobalKey<FormState>();
+  final controller = Get.put(BookingController());
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,6 +23,7 @@ class BookingPage extends GetView<BookingController> {
           backgroundColor: Colors.white,
           bottomNavigationBar: BottomNavBar(),
           body: Form(
+            key: _BookingKey,
             child: Container(
               padding: EdgeInsets.all(24),
               child: FractionallySizedBox(
@@ -58,7 +58,7 @@ class BookingPage extends GetView<BookingController> {
                             },
                             (onValidateVal) {
                               if (onValidateVal == null) {
-                                return "Please Select a route";
+                                return "Please Select a Ticket";
                               }
                               return null;
                             },
@@ -86,7 +86,10 @@ class BookingPage extends GetView<BookingController> {
                               controller.stopId.value = onChangedVal;
                               print("Selected Stop : $onChangedVal");
                             },
-                            (onValidate) {
+                            (onValidateVal) {
+                              if (onValidateVal == null) {
+                                return "Please Select a Ticket";
+                              }
                               return null;
                             },
                             borderColor: kGreenMainTheme,
@@ -134,12 +137,18 @@ class BookingPage extends GetView<BookingController> {
                         height: 65,
                       ),
                       ElevatedGreenButton(
-                          text: 'Continue',
-                          onTap: () => {
-                                Get.to(ConfirmSelection(),
-                                    transition: Transition.rightToLeft,
-                                    duration: const Duration(milliseconds: 300))
-                              }),
+                        text: 'Continue',
+                        onTap: () {
+                          if (_BookingKey.currentState!.validate()) {
+                            Get.to(() => ConfirmSelection(
+                                  selectedRoute: controller.routeId.value ?? "",
+                                  selectedStop: controller.stopId.value ?? "",
+                                  selectedTicketType:
+                                      controller.typeId.value ?? "",
+                                ));
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ),

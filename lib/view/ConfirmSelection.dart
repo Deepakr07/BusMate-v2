@@ -3,28 +3,35 @@ import 'package:busmate/model/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:get/get.dart';
 import 'package:busmate/view/bookingPage.dart';
-
-void main() {
-  runApp(ConfirmSelection());
-}
+import 'package:busmate/controller/dropDownController.dart';
 
 class ConfirmSelection extends StatelessWidget {
-  const ConfirmSelection({Key? key}) : super(key: key);
+  final String selectedRoute;
+  final String selectedStop;
+  final String selectedTicketType;
+
+  ConfirmSelection({
+    required this.selectedRoute,
+    required this.selectedStop,
+    required this.selectedTicketType,
+  });
+  var currentDate = DateTime.now();
+  var issueDate;
+  var ExpiryDate;
+  var Amount;
   void navigateToBooking() {
     Get.off(() => BookingPage());
   }
 
-  void navigateToPayment() {
-    Get.off(() => ConfirmSelection());
-  }
-
   @override
   Widget build(BuildContext context) {
+    final BookingController controller = Get.find<BookingController>();
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           child: FractionallySizedBox(
             widthFactor: 1,
             heightFactor: 1,
@@ -32,53 +39,53 @@ class ConfirmSelection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Confirm Selection",
                     style: kBlackHeadingSize,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 75,
                   ),
-                  Text(
+                  const Text(
                     "Selected Route",
                     style: kGreyFormTextStyle,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ConfirmSelectionContainer(
-                    data: "hey",
+                    data: controller.getSelectedRouteName() ?? "NA",
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 33,
                   ),
-                  Text(
+                  const Text(
                     "Selected Stop",
                     style: kGreyFormTextStyle,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ConfirmSelectionContainer(
-                    data: "hey",
+                    data: controller.getSelectedStopName() ?? "NA",
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 33,
                   ),
-                  Text(
+                  const Text(
                     "Selected Ticket Type",
                     style: kGreyFormTextStyle,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ConfirmSelectionContainer(
-                    data: "hey",
+                    data: controller.getSelectedTicket() ?? "NA",
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 33,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 65,
                   ),
                   Row(
@@ -93,17 +100,38 @@ class ConfirmSelection extends StatelessWidget {
                         width: 35,
                       ),
                       Expanded(
-                          child: ElevatedGreenButton(
-                        text: 'Confirm',
-                        onTap: navigateToPayment,
-                      ))
+                        child: ElevatedGreenButton(
+                          text: 'Confirm',
+                          onTap: () {
+                            issueDate = currentDate;
+                            print(issueDate);
+                            if (controller.getSelectedTicket() ==
+                                "Weekly (₹30)") {
+                              ExpiryDate = currentDate.add(Duration(days: 7));
+                              Amount = 30;
+                              print(ExpiryDate);
+                            } else if (controller.getSelectedTicket() ==
+                                "Monthly (₹80)") {
+                              ExpiryDate = currentDate.add(Duration(days: 30));
+                              Amount = 80;
+                              print(ExpiryDate);
+                            } else if (controller.getSelectedTicket() ==
+                                "Daily (₹10)") {
+                              ExpiryDate = currentDate.add(Duration(days: 1));
+                              Amount = 10;
+                              print(ExpiryDate);
+                            }
+                            print(Amount);
+                          },
+                        ),
+                      ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 39,
                   ),
-                  Text(
-                    "* You will be directed to payment page after confirmation",
+                  const Text(
+                    "* You will be directed to the payment page after confirmation",
                     style: TextStyle(
                       fontSize: 16,
                       color: kGreyTextColor,
