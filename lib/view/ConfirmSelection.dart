@@ -46,7 +46,9 @@ class ConfirmSelection extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  ConfirmSelectionContainer(),
+                  ConfirmSelectionContainer(
+                    data: "hey",
+                  ),
                   SizedBox(
                     height: 33,
                   ),
@@ -57,7 +59,9 @@ class ConfirmSelection extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  ConfirmSelectionContainer(),
+                  ConfirmSelectionContainer(
+                    data: "hey",
+                  ),
                   SizedBox(
                     height: 33,
                   ),
@@ -68,7 +72,9 @@ class ConfirmSelection extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  ConfirmSelectionContainer(),
+                  ConfirmSelectionContainer(
+                    data: "hey",
+                  ),
                   SizedBox(
                     height: 33,
                   ),
