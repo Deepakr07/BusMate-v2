@@ -178,10 +178,9 @@ class HomePage extends StatelessWidget {
                           child: Column(
                             children: [
                               SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height < 1200
-                                        ? 180
-                                        : 200,
+                                height: MediaQuery.of(context).size.height < 700
+                                    ? 174
+                                    : 200,
                                 child: PageView.builder(
                                   itemCount: activeTickets.length,
                                   itemBuilder:
@@ -198,7 +197,7 @@ class HomePage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
                               DotIndicator(
                                 itemCount: activeTickets.length,
