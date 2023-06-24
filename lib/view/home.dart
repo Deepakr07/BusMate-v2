@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../controller/profileController.dart';
 import '../controller/weatherController.dart';
 import '../controller/date_controller.dart';
 import '../model/ActiveTicket_List.dart';
 import '../model/widgets.dart';
 import '../controller/dotIndicator_Controller.dart';
 import 'package:busmate/model/Bottomnav_model4.dart';
+import 'package:busmate/model/userModel.dart';
 
 void main() {
   runApp(HomePage());
@@ -21,6 +23,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(profileController());
     return SafeArea(
       child: Scaffold(
         backgroundColor: kGreenMainTheme,
@@ -48,10 +51,33 @@ class HomePage extends StatelessWidget {
                               //mainAxisAlignment:
                               //MainAxisAlignment.spaceAround,
                               children: [
-                                Text(
-                                  'Hi, User Name',
-                                  style: kWhiteHeadingSize,
-                                ),
+                                FutureBuilder(
+                                    future: controller.getUserData(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        if (snapshot.hasData) {
+                                          UserModel userData =
+                                              snapshot.data as UserModel;
+                                          return Text(
+                                            'Hi, ${userData.name}',
+                                            style: kWhiteHeadingSize,
+                                          );
+                                        } else if (snapshot.hasError) {
+                                          return Center(
+                                              child: Text(
+                                                  snapshot.error.toString()));
+                                        } else {
+                                          return const Center(
+                                            child: Text("Somthing went wrong"),
+                                          );
+                                        }
+                                      } else {
+                                        return const Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }
+                                    }),
                                 const SizedBox(
                                   height: 5,
                                 ),
