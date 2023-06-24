@@ -204,9 +204,9 @@ class ElevatedGreenButton extends StatelessWidget {
 }
 
 class ConfirmSelectionContainer extends StatelessWidget {
-  const ConfirmSelectionContainer({
-    super.key,
-  });
+  late final String data;
+
+  ConfirmSelectionContainer({required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -219,7 +219,7 @@ class ConfirmSelectionContainer extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 21, top: 15, bottom: 15),
         child: Text(
-          "",
+          data,
           style: TextStyle(
             fontSize: 16,
           ),

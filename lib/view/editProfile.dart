@@ -1,3 +1,5 @@
+import 'package:busmate/controller/profileController.dart';
+import 'package:busmate/model/userModel.dart';
 import 'package:busmate/view/login.dart';
 import 'package:flutter/material.dart';
 import 'package:busmate/model/widgets.dart';
@@ -16,6 +18,7 @@ class EditProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(profileController());
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
@@ -32,136 +35,168 @@ class EditProfile extends StatelessWidget {
                 widthFactor: 1,
                 heightFactor: 1,
                 child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "User Profile",
-                        style: kBlackHeadingSize,
-                      ),
-                      SizedBox(
-                        height: 29,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            child: Row(
+                  child: FutureBuilder(
+                    future: controller.getUserData(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasData) {
+                          UserModel userData = snapshot.data as UserModel;
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "User Profile",
+                                style: kBlackHeadingSize,
+                              ),
+                              SizedBox(
+                                height: 29,
+                              ),
+                              Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  CircleAvatar(
-                                    backgroundImage: Image.network(
-                                            "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")
-                                        .image,
-                                    radius: 40,
+                                  Container(
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundImage: Image.network(
+                                                    "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")
+                                                .image,
+                                            radius: 40,
+                                          ),
+                                          SizedBox(
+                                            width: 8,
+                                          ),
+                                          Text(
+                                            "User Name",
+                                            style: TextStyle(
+                                                fontSize: 23,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.black),
+                                          ),
+                                        ]),
                                   ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    "User Name",
-                                    style: TextStyle(
-                                        fontSize: 23,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black),
-                                  ),
-                                ]),
-                          ),
-                          Material(
-                            borderRadius: BorderRadius.circular(20),
-                            elevation: 6,
-                            child: InkWell(
-                              onTap: () {
-                                AuthService().signOut();
-                              },
-                              splashColor: kGreenMainTheme,
-                              child: Container(
-                                width: 95,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(
-                                      color: kGreenMainTheme, width: 1),
-                                ),
-                                child: Center(
-                                    child: Text(
-                                  "LogOut",
-                                  style: TextStyle(
-                                      color: kGreyTextColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500),
-                                )),
+                                  Material(
+                                    borderRadius: BorderRadius.circular(20),
+                                    elevation: 6,
+                                    child: InkWell(
+                                      onTap: () {
+                                        AuthService().signOut();
+                                      },
+                                      splashColor: kGreenMainTheme,
+                                      child: Container(
+                                        width: 95,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          border: Border.all(
+                                              color: kGreenMainTheme, width: 1),
+                                        ),
+                                        child: Center(
+                                            child: Text(
+                                          "LogOut",
+                                          style: TextStyle(
+                                              color: kGreyTextColor,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500),
+                                        )),
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 34,
-                      ),
-                      Text(
-                        "Name",
-                        style: kGreyFormTextStyle,
-                      ),
-                      SizedBox(
-                        height: 14,
-                      ),
-                      ConfirmSelectionContainer(),
-                      SizedBox(
-                        height: 23,
-                      ),
-                      Text(
-                        "Department",
-                        style: kGreyFormTextStyle,
-                      ),
-                      SizedBox(
-                        height: 14,
-                      ),
-                      ConfirmSelectionContainer(),
-                      SizedBox(
-                        height: 22,
-                      ),
-                      Text(
-                        "Student ID",
-                        style: kGreyFormTextStyle,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      ConfirmSelectionContainer(),
-                      SizedBox(
-                        height: 22,
-                      ),
-                      Text(
-                        "Mobile Number",
-                        style: kGreyFormTextStyle,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      ConfirmSelectionContainer(),
-                      SizedBox(
-                        height: 22,
-                      ),
-                      Text(
-                        "E-mail ID",
-                        style: kGreyFormTextStyle,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      ConfirmSelectionContainer(),
-                      // SizedBox(
-                      //   height: 50,
-                      // ),
-                      // ElevatedGreenButton(text: 'Continue', onTap: () {}),
-                      SizedBox(
-                        height: 10,
-                      )
-                    ],
+                              SizedBox(
+                                height: 34,
+                              ),
+                              Text(
+                                "Name",
+                                style: kGreyFormTextStyle,
+                              ),
+                              SizedBox(
+                                height: 14,
+                              ),
+                              ConfirmSelectionContainer(
+                                data: userData.name,
+                              ),
+                              SizedBox(
+                                height: 23,
+                              ),
+                              Text(
+                                "Department",
+                                style: kGreyFormTextStyle,
+                              ),
+                              SizedBox(
+                                height: 14,
+                              ),
+                              ConfirmSelectionContainer(
+                                data: userData.department,
+                              ),
+                              SizedBox(
+                                height: 22,
+                              ),
+                              Text(
+                                "Student ID",
+                                style: kGreyFormTextStyle,
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              ConfirmSelectionContainer(
+                                data: userData.studentId,
+                              ),
+                              SizedBox(
+                                height: 22,
+                              ),
+                              Text(
+                                "Mobile Number",
+                                style: kGreyFormTextStyle,
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              ConfirmSelectionContainer(
+                                data: userData.mobileNo,
+                              ),
+                              SizedBox(
+                                height: 22,
+                              ),
+                              Text(
+                                "E-mail ID",
+                                style: kGreyFormTextStyle,
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              ConfirmSelectionContainer(
+                                data: userData.Email,
+                              ),
+                              // SizedBox(
+                              //   height: 50,
+                              // ),
+                              // ElevatedGreenButton(text: 'Continue', onTap: () {}),
+                              SizedBox(
+                                height: 10,
+                              )
+                            ],
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(child: Text(snapshot.error.toString()));
+                        } else {
+                          return const Center(
+                            child: Text("Somthing went wrong"),
+                          );
+                        }
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
                   ),
                 ),
               ),
