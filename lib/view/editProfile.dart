@@ -71,7 +71,7 @@ class EditProfile extends StatelessWidget {
                                             width: 8,
                                           ),
                                           Text(
-                                            "User Name",
+                                            userData.name,
                                             style: TextStyle(
                                                 fontSize: 23,
                                                 fontWeight: FontWeight.w500,
