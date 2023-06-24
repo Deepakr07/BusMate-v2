@@ -42,7 +42,7 @@ class History extends StatelessWidget {
                       final ticket = tickets[index];
                       return SizedBox(
                         width: 300,
-                        height: 180,
+                        height: 200,
                         child: ticket,
                       );
                     },
