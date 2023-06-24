@@ -23,11 +23,6 @@ class ConfirmSelection extends StatelessWidget {
     Get.off(() => BookingPage());
   }
 
-  void navigateToPayment() {
-    final currentDate = DateTime.now();
-    // Add the code to navigate to the payment page here
-  }
-
   @override
   Widget build(BuildContext context) {
     final BookingController controller = Get.find<BookingController>();
