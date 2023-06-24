@@ -3,17 +3,31 @@ import 'package:busmate/model/widgets.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:get/get.dart';
 import 'package:busmate/view/home.dart';
+import 'package:busmate/model/userModel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:busmate/controller/UserProfileController.dart';
 
 void main() {
   runApp(CreateProfile());
 }
 
 class CreateProfile extends StatelessWidget {
-  CreateProfile({Key? key}) : super(key: key);
+  final UserRepo = Get.put(UserProfileController());
   final _createProfileKey = GlobalKey<FormState>();
+  var Name, Department, StudentID, MobileNo, Email, Uid;
+
+  Future<void> CreateUser(UserModel user) async {
+    await UserRepo.createUser(user);
+    Get.off(HomePage());
+  }
 
   @override
   Widget build(BuildContext context) {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      Uid = currentUser.uid;
+      print(Uid);
+    }
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -78,7 +92,9 @@ class CreateProfile extends StatelessWidget {
                           }
                         },
                         cursorColor: Colors.black,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          Name = value;
+                        },
                         decoration: kTextFieldDecoration,
                       ),
                       SizedBox(
@@ -101,7 +117,9 @@ class CreateProfile extends StatelessWidget {
                           }
                         },
                         cursorColor: Colors.black,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          Department = value;
+                        },
                         decoration: kTextFieldDecoration,
                       ),
                       SizedBox(
@@ -124,7 +142,9 @@ class CreateProfile extends StatelessWidget {
                           }
                         },
                         cursorColor: Colors.black,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          StudentID = value;
+                        },
                         decoration: kTextFieldDecoration,
                       ),
                       SizedBox(
@@ -147,7 +167,9 @@ class CreateProfile extends StatelessWidget {
                           }
                         },
                         cursorColor: Colors.black,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          MobileNo = value;
+                        },
                         decoration: kTextFieldDecoration,
                       ),
                       SizedBox(
@@ -171,7 +193,9 @@ class CreateProfile extends StatelessWidget {
                           }
                         },
                         cursorColor: Colors.black,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          Email = value;
+                        },
                         decoration: kTextFieldDecoration,
                       ),
                       SizedBox(
@@ -181,7 +205,14 @@ class CreateProfile extends StatelessWidget {
                         text: 'Continue',
                         onTap: () {
                           if (_createProfileKey.currentState!.validate()) {
-                            Get.off(HomePage());
+                            final user = UserModel(
+                                name: Name,
+                                department: Department,
+                                Email: Email,
+                                mobileNo: MobileNo,
+                                studentId: StudentID,
+                                uid: Uid);
+                            CreateUser(user);
                           }
                         },
                       ),
