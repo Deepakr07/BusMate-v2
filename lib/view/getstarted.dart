@@ -16,8 +16,8 @@ class GetStarted extends StatelessWidget {
     return Scaffold(
       backgroundColor: kGreenMainTheme,
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        // width: double.infinity,
+        // height: double.infinity,
         color: kGreenMainTheme,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,6 +56,5 @@ class GetStarted extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
