@@ -1,4 +1,5 @@
 import 'package:busmate/model/ActiveTicket_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:get/get.dart';
@@ -20,14 +21,18 @@ class HomePage extends StatelessWidget {
   final DotIndicatorController dotController =
       Get.put(DotIndicatorController());
 
-  // void getActiveTickets() async {
-  //   QuerySnapshot querySnapshot = await _firestore.collection('Tickets').get();
-  //   List<DocumentSnapshot> activeTickets = querySnapshot.docs;
-  //
-  //   for (var activeTicket in activeTickets) {
-  //     print(activeTicket);
-  //   }
-  // }
+  String? userUid;
+  void getUserUid() {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      userUid = user.uid;
+    } else {
+      // Handle the case when the user is not logged in
+      // You can set userUid to null or handle the situation accordingly
+      userUid = null;
+    }
+  }
+
   Future<void> activeTicketStream() async {
     Stream<QuerySnapshot> snapshotStream =
         _firestore.collection('Tickets').snapshots();
@@ -222,71 +227,76 @@ class HomePage extends StatelessWidget {
                           width: double.infinity,
                           child: Column(
                             children: [
-                              StreamBuilder(
-                                stream: _firestore
-                                    .collection('Tickets')
-                                    .snapshots(),
-                                builder: (context, snapshot) {
-                                  if (!snapshot.hasData) {
-                                    return CircularProgressIndicator(
-                                      backgroundColor: kGreenMainTheme,
+                              Expanded(
+                                child: StreamBuilder(
+                                  stream: _firestore
+                                      .collection('Tickets')
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: CircularProgressIndicator(
+                                          backgroundColor: kGreenMainTheme,
+                                        ),
+                                      );
+                                    }
+                                    final QuerySnapshot<Map<String, dynamic>>
+                                        querySnapshot = snapshot.data!;
+                                    final List<
+                                            QueryDocumentSnapshot<
+                                                Map<String, dynamic>>> tickets =
+                                        querySnapshot.docs;
+                                    activeTickets = [];
+                                    for (var ticket in tickets) {
+                                      final destination =
+                                          ticket.data()['Destination'];
+                                      final expiryDate =
+                                          ticket.data()['ExpiryDate'];
+                                      final issueDate =
+                                          ticket.data()['IssueDate'];
+                                      final count = ticket.data()['count'];
+                                      final route = ticket.data()['Route'];
+                                      final ticketType =
+                                          ticket.data()['TicketType'];
+                                      final id = ticket.data()['id'];
+                                      final image = ticket.data()['ImageUrl'];
+                                      final uid = ticket.data()['Uid'];
+
+                                      activeTickets.add(activeTicket(
+                                          ticketId: id,
+                                          route: route,
+                                          destination: destination,
+                                          issueDate: issueDate,
+                                          expiryDate: expiryDate,
+                                          ticketType: ticketType));
+                                      // print(destination);
+                                    }
+                                    return SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height <
+                                                  700
+                                              ? 174
+                                              : 200,
+                                      child: PageView.builder(
+                                        itemCount: activeTickets.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          final activeTicket =
+                                              activeTickets[index];
+                                          return SizedBox(
+                                            width: 330,
+                                            child: activeTicket,
+                                          );
+                                        },
+                                        onPageChanged: (int index) {
+                                          dotController.updateIndex(index);
+                                        },
+                                      ),
                                     );
-                                  }
-                                  final QuerySnapshot<Map<String, dynamic>>
-                                      querySnapshot = snapshot.data!;
-                                  final List<
-                                          QueryDocumentSnapshot<
-                                              Map<String, dynamic>>> tickets =
-                                      querySnapshot.docs;
-                                  activeTickets = [];
-                                  for (var ticket in tickets) {
-                                    final destination =
-                                        ticket.data()['Destination'];
-                                    final expiryDate =
-                                        ticket.data()['ExpiryDate'];
-                                    final issueDate =
-                                        ticket.data()['ExpiryDate'];
-                                    final count = ticket.data()['ExpiryDate'];
-                                    final route = ticket.data()['ExpiryDate'];
-                                    final ticketType =
-                                        ticket.data()['ExpiryDate'];
-                                    final id = ticket.data()['ExpiryDate'];
-                                    final image = ticket.data()['ExpiryDate'];
-                                    final uid = ticket.data()['ExpiryDate'];
 
-                                    activeTickets.add(activeTicket(
-                                        ticketId: id,
-                                        route: route,
-                                        destination: destination,
-                                        issueDate: issueDate,
-                                        expiryDate: expiryDate,
-                                        ticketType: ticketType));
-                                    // print(destination);
-                                  }
-                                  return SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height < 700
-                                            ? 174
-                                            : 200,
-                                    child: PageView.builder(
-                                      itemCount: activeTickets.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        final activeTicket =
-                                            activeTickets[index];
-                                        return SizedBox(
-                                          width: 330,
-                                          child: activeTicket,
-                                        );
-                                      },
-                                      onPageChanged: (int index) {
-                                        dotController.updateIndex(index);
-                                      },
-                                    ),
-                                  );
-
-                                  // return your desired UI widget here
-                                },
+                                    // return your desired UI widget here
+                                  },
+                                ),
                               ),
                               const SizedBox(
                                 height: 20,

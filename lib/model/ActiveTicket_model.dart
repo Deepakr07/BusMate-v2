@@ -138,7 +138,7 @@ class activeTicket extends StatelessWidget {
               ),
             ),
             Text(
-              '#Ticket ID',
+              "ID#" + ticketId,
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
             ),
           ],
