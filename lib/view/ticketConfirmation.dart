@@ -50,7 +50,7 @@ class TicketConfirmation extends StatelessWidget {
                   route: 'Vytilla',
                   expiryDate: '19 Feb, 23',
                   issueDate: '19 Feb, 23',
-                  ticketId: 55544654654,
+                  ticketId: '55544654654',
                   ticketType: 'Daily',
                 ),
               ),

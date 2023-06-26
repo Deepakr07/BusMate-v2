@@ -4,7 +4,7 @@ import '../Constants/constants.dart';
 //this ticket model is displayed in the active tickets
 
 class activeTicket extends StatelessWidget {
-  late final int ticketId;
+  late final String ticketId;
   late final String route;
   //late final String status;  not displayed in active tickets
   String college = 'SOE';
