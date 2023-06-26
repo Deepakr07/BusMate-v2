@@ -301,10 +301,13 @@ class HomePage extends StatelessWidget {
                               const SizedBox(
                                 height: 20,
                               ),
-                              DotIndicator(
-                                itemCount: activeTickets.length,
-                                controller: dotController,
-                              ),
+                              // Container(
+                              //   height: 8,
+                              //   child: DotIndicator(
+                              //     itemCount: activeTickets.length,
+                              //     controller: dotController,
+                              //   ),
+                              // ),
                             ],
                           )))
                 ],
