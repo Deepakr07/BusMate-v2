@@ -9,8 +9,6 @@ import '../controller/profileController.dart';
 import '../controller/weatherController.dart';
 import '../controller/date_controller.dart';
 import '../model/ActiveTicket_List.dart';
-import '../model/widgets.dart';
-import '../controller/dotIndicator_Controller.dart';
 import 'package:busmate/model/Bottomnav_model4.dart';
 import 'package:busmate/model/userModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
