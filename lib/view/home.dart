@@ -2,6 +2,7 @@ import 'package:busmate/model/ActiveTicket_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../controller/profileController.dart';
@@ -18,8 +19,7 @@ class HomePage extends StatelessWidget {
   final dateController = Get.put(DateController());
   final _firestore = FirebaseFirestore.instance;
   final WeatherController weatherController = Get.put(WeatherController());
-  final DotIndicatorController dotController =
-      Get.put(DotIndicatorController());
+  final dotController = PageController();
 
   String? userUid;
   void getUserUid() {
@@ -278,6 +278,7 @@ class HomePage extends StatelessWidget {
                                               ? 174
                                               : 200,
                                       child: PageView.builder(
+                                        controller: dotController,
                                         itemCount: activeTickets.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
@@ -288,9 +289,9 @@ class HomePage extends StatelessWidget {
                                             child: activeTicket,
                                           );
                                         },
-                                        onPageChanged: (int index) {
-                                          dotController.updateIndex(index);
-                                        },
+                                        // onPageChanged: (int index) {
+                                        //   //dotController.updateIndex(index);
+                                        // },
                                       ),
                                     );
 
@@ -301,6 +302,14 @@ class HomePage extends StatelessWidget {
                               const SizedBox(
                                 height: 20,
                               ),
+                              SmoothPageIndicator(
+                                controller: dotController,
+                                count: activeTickets.length,
+                                effect: ExpandingDotsEffect(
+                                    dotHeight: 8,
+                                    dotWidth: 8,
+                                    activeDotColor: kGreenMainTheme),
+                              )
                               // Container(
                               //   height: 8,
                               //   child: DotIndicator(

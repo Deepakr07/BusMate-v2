@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
 import 'package:flutter/services.dart';
-import '../controller/dotIndicator_Controller.dart';
-import 'package:get/get.dart';
 
 //Container with green border (used in every inputFields)
 // class CommonInputFieldContainer extends StatelessWidget {
@@ -100,48 +98,10 @@ class HorizontalLineWithOr extends StatelessWidget {
 
 //Custom widget for home page dot indicator for the number of active tickets
 
-class DotIndicator extends StatelessWidget {
-  final int itemCount;
-  final DotIndicatorController controller;
-  final Color activeColor;
-  final Color inactiveColor;
-
-  const DotIndicator({
-    Key? key,
-    required this.itemCount,
-    required this.controller,
-    this.activeColor = kGreenMainTheme,
-    this.inactiveColor = Colors.grey,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(itemCount, (index) {
-          final color = index == controller.currentIndex.value
-              ? activeColor
-              : inactiveColor;
-          return Container(
-            margin: EdgeInsets.symmetric(horizontal: 4),
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: color,
-            ),
-          );
-        }),
-      ),
-    );
-  }
-}
-
 //border Button
 
 class borderbutton extends StatelessWidget {
-  String text;
+  final String text;
   final VoidCallback onTap;
   borderbutton({required this.text, required this.onTap});
   @override
@@ -175,7 +135,7 @@ class borderbutton extends StatelessWidget {
 
 //elevated green  button with increased shadow
 class ElevatedGreenButton extends StatelessWidget {
-  late String text;
+  late final String text;
   final VoidCallback onTap;
   ElevatedGreenButton({required this.text, required this.onTap});
 
