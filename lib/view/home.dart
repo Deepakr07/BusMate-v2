@@ -232,7 +232,7 @@ class HomePage extends StatelessWidget {
                                       .snapshots(),
                                   builder: (context, snapshot) {
                                     if (!snapshot.hasData) {
-                                      return Center(
+                                      return const Center(
                                         child: CircularProgressIndicator(
                                           backgroundColor: kGreenMainTheme,
                                         ),
