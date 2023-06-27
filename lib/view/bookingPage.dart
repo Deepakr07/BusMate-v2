@@ -118,7 +118,7 @@ class BookingPage extends GetView<BookingController> {
                             },
                             (onValidateVal) {
                               if (onValidateVal == null) {
-                                return "Please Select a Ticket";
+                                return "Please Select a Ticket Type";
                               }
                               return null;
                             },
