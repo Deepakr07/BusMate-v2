@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:busmate/view/ticketConfirmation.dart';
 
 class paymentController extends GetxController {
   var _razorpay = Razorpay();
@@ -13,6 +14,7 @@ class paymentController extends GetxController {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     print("Payment Successful");
+    Get.to(() => TicketConfirmation());
     // Do something when payment succeeds
   }
 
@@ -30,10 +32,11 @@ class paymentController extends GetxController {
       'key': 'rzp_test_g28COtTM5gAxmz',
       'amount': amount * 100, // Convert amount to paise
       'name': 'BusMate',
+      'timeout': 300,
       'description': 'Test payment',
       'prefill': {
-        'contact': 'YOUR_CONTACT_NUMBER',
-        'email': 'YOUR_EMAIL_ADDRESS',
+        'contact': '8888888888',
+        'email': 'areffects@gmail.com',
       },
     };
     _razorpay.open(options);
