@@ -3,8 +3,8 @@ import '../Constants/constants.dart';
 
 //this ticket model is shown in ticket history
 
-class Tickets extends StatelessWidget {
-  late final int ticketId;
+class allTickets extends StatelessWidget {
+  late final String ticketId;
   late final String route;
   late final String status;
   String college = 'SOE';
@@ -13,7 +13,7 @@ class Tickets extends StatelessWidget {
   //late final DateTime expiryDate; not shown in ticket history
   late final ImageProvider qrImage;
   late final String ticketType;
-  Tickets({
+  allTickets({
     required this.route,
     required this.issueDate,
     required this.destination,

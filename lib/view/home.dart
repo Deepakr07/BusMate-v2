@@ -19,11 +19,12 @@ class HomePage extends StatelessWidget {
   final WeatherController weatherController = Get.put(WeatherController());
   final dotController = PageController();
 
-  String? userUid;
+  late final String? userUid;
   void getUserUid() {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       userUid = user.uid;
+      print("UID : " + userUid!);
     } else {
       // Handle the case when the user is not logged in
       // You can set userUid to null or handle the situation accordingly
@@ -96,7 +97,9 @@ class HomePage extends StatelessWidget {
                                         }
                                       } else {
                                         return const Center(
-                                          child: CircularProgressIndicator(),
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                          ),
                                         );
                                       }
                                     }),
@@ -256,17 +259,17 @@ class HomePage extends StatelessWidget {
                                       final route = ticket.data()['Route'];
                                       final ticketType =
                                           ticket.data()['TicketType'];
-                                      final id = ticket.data()['id'];
+                                      final id = ticket.id;
                                       final image = ticket.data()['ImageUrl'];
                                       final uid = ticket.data()['Uid'];
 
                                       activeTickets.add(activeTicket(
-                                          ticketId: id,
-                                          route: route,
-                                          destination: destination,
-                                          issueDate: issueDate,
-                                          expiryDate: expiryDate,
-                                          ticketType: ticketType));
+                                        ticketId: id,
+                                        route: route,
+                                        destination: destination,
+                                        issueDate: issueDate,
+                                        expiryDate: expiryDate,
+                                      ));
                                       // print(destination);
                                     }
                                     return SizedBox(
@@ -275,22 +278,40 @@ class HomePage extends StatelessWidget {
                                                   700
                                               ? 174
                                               : 200,
-                                      child: PageView.builder(
-                                        controller: dotController,
-                                        itemCount: activeTickets.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          final activeTicket =
-                                              activeTickets[index];
-                                          return SizedBox(
-                                            width: 330,
-                                            child: activeTicket,
-                                          );
-                                        },
-                                        // onPageChanged: (int index) {
-                                        //   //dotController.updateIndex(index);
-                                        // },
-                                      ),
+                                      child: activeTickets.isEmpty
+                                          ? PageView.builder(
+                                              controller: dotController,
+                                              itemCount:
+                                                  emptyActiveTickets.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                final emptyActiveTicket =
+                                                    emptyActiveTickets[index];
+                                                return SizedBox(
+                                                  width: 330,
+                                                  child: emptyActiveTicket,
+                                                );
+                                              },
+                                            )
+                                          : PageView.builder(
+                                              controller: dotController,
+                                              itemCount: activeTickets.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                final activeTicket =
+                                                    activeTickets[index];
+                                                return SizedBox(
+                                                  width: 330,
+                                                  child: activeTicket,
+                                                );
+                                              },
+                                            ),
+
+                                      // onPageChanged: (int index) {
+                                      //   //dotController.updateIndex(index);
+                                      // },
                                     );
 
                                     // return your desired UI widget here

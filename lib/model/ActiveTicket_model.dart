@@ -14,13 +14,13 @@ class activeTicket extends StatelessWidget {
   late final ImageProvider qrImage;
   late final String ticketType;
 
-  activeTicket(
-      {required this.ticketId,
-      required this.route,
-      required this.destination,
-      required this.issueDate,
-      required this.expiryDate,
-      required this.ticketType});
+  activeTicket({
+    required this.ticketId,
+    required this.route,
+    required this.destination,
+    required this.issueDate,
+    required this.expiryDate,
+  });
 
   @override
   Widget build(BuildContext context) {
