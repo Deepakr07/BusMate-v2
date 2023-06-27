@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
+import 'package:intl/intl.dart';
 
 class History extends StatelessWidget {
   final _firestore = FirebaseFirestore.instance;
@@ -19,6 +20,16 @@ class History extends StatelessWidget {
       // You can set userUid to null or handle the situation accordingly
       userUid = null;
     }
+  }
+
+  bool isDateExpired(String dateString) {
+    final currentDate = DateTime.now();
+    final dateFormat = DateFormat('dd-MMM-yy');
+    final parsedDate = dateFormat.parse(dateString);
+    final dateToCompare =
+        DateTime(parsedDate.year, parsedDate.month, parsedDate.day);
+
+    return dateToCompare.isBefore(currentDate);
   }
 
   @override
@@ -60,10 +71,13 @@ class History extends StatelessWidget {
                       List<Widget> ticketWidgets = [];
                       getUserUid();
                       for (var ticket in tickets) {
+                        final expiryDate = ticket.data()['ExpiryDate'];
+                        bool status = isDateExpired(expiryDate);
+                        String ticketStatus = status ? "Expired" : "Active";
                         final uid = ticket.data()['Uid'];
+
                         if (uid == userUid) {
                           final destination = ticket.data()['Destination'];
-                          final expiryDate = ticket.data()['ExpiryDate'];
                           final issueDate = ticket.data()['IssueDate'];
                           final count = ticket.data()['count'];
                           final route = ticket.data()['Route'];
@@ -76,7 +90,7 @@ class History extends StatelessWidget {
                             route: route,
                             destination: destination,
                             issueDate: issueDate,
-                            status: 'Expired',
+                            status: ticketStatus,
                           ));
                         }
                       }
