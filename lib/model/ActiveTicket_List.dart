@@ -4,4 +4,11 @@ import '../model/ActiveTicket_model.dart';
 
 List<activeTicket> activeTickets = [];
 
-List<activeTicket> emptyActiveTickets = [];
+List<activeTicket> emptyActiveTickets = [
+  activeTicket(
+      ticketId: 'No active Tickets ',
+      route: 'NIL',
+      destination: 'NIL',
+      issueDate: 'NIL',
+      expiryDate: 'NIL')
+];

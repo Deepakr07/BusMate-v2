@@ -32,6 +32,15 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  List emptyActiveTickets = [
+    activeTicket(
+        ticketId: 'No active Tickets ',
+        route: 'NIL',
+        destination: 'NIL',
+        issueDate: 'NIL',
+        expiryDate: 'NIL')
+  ];
+
   Future<void> activeTicketStream() async {
     Stream<QuerySnapshot> snapshotStream =
         _firestore.collection('Tickets').snapshots();
@@ -278,7 +287,8 @@ class HomePage extends StatelessWidget {
                                                   700
                                               ? 174
                                               : 200,
-                                      child: activeTickets.isEmpty
+                                      child: activeTickets
+                                              .isEmpty //activeTickets.isEmpty
                                           ? PageView.builder(
                                               controller: dotController,
                                               itemCount:
