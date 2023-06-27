@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
   final WeatherController weatherController = Get.put(WeatherController());
   final dotController = PageController();
 
-  late final String? userUid;
+  late String? userUid;
   void getUserUid() {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
@@ -30,6 +30,16 @@ class HomePage extends StatelessWidget {
       // You can set userUid to null or handle the situation accordingly
       userUid = null;
     }
+  }
+
+  bool isDateExpired(String dateString) {
+    final currentDate = DateTime.now();
+    final dateFormat = DateFormat('dd-MMM-yy');
+    final parsedDate = dateFormat.parse(dateString);
+    final dateToCompare =
+        DateTime(parsedDate.year, parsedDate.month, parsedDate.day);
+
+    return dateToCompare.isBefore(currentDate);
   }
 
   List emptyActiveTickets = [
@@ -257,28 +267,35 @@ class HomePage extends StatelessWidget {
                                                 Map<String, dynamic>>> tickets =
                                         querySnapshot.docs;
                                     activeTickets = [];
+                                    getUserUid();
                                     for (var ticket in tickets) {
-                                      final destination =
-                                          ticket.data()['Destination'];
                                       final expiryDate =
                                           ticket.data()['ExpiryDate'];
-                                      final issueDate =
-                                          ticket.data()['IssueDate'];
-                                      final count = ticket.data()['count'];
-                                      final route = ticket.data()['Route'];
-                                      final ticketType =
-                                          ticket.data()['TicketType'];
-                                      final id = ticket.id;
-                                      final image = ticket.data()['ImageUrl'];
                                       final uid = ticket.data()['Uid'];
+                                      final isexpired =
+                                          isDateExpired(expiryDate);
+                                      if (userUid == uid && !isexpired) {
+                                        final destination =
+                                            ticket.data()['Destination'];
 
-                                      activeTickets.add(activeTicket(
-                                        ticketId: id,
-                                        route: route,
-                                        destination: destination,
-                                        issueDate: issueDate,
-                                        expiryDate: expiryDate,
-                                      ));
+                                        final issueDate =
+                                            ticket.data()['IssueDate'];
+                                        final count = ticket.data()['count'];
+                                        final route = ticket.data()['Route'];
+                                        final ticketType =
+                                            ticket.data()['TicketType'];
+                                        final id = ticket.id;
+                                        final image = ticket.data()['ImageUrl'];
+
+                                        activeTickets.add(activeTicket(
+                                          ticketId: id,
+                                          route: route,
+                                          destination: destination,
+                                          issueDate: issueDate,
+                                          expiryDate: expiryDate,
+                                        ));
+                                      }
+
                                       // print(destination);
                                     }
                                     return SizedBox(
