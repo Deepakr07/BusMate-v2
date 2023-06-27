@@ -348,14 +348,14 @@ class HomePage extends StatelessWidget {
                               const SizedBox(
                                 height: 20,
                               ),
-                              SmoothPageIndicator(
-                                controller: dotController,
-                                count: activeTickets.length,
-                                effect: ExpandingDotsEffect(
-                                    dotHeight: 8,
-                                    dotWidth: 8,
-                                    activeDotColor: kGreenMainTheme),
-                              )
+                              // SmoothPageIndicator(
+                              //   controller: dotController,
+                              //   count: activeTickets.length,
+                              //   effect: ExpandingDotsEffect(
+                              //       dotHeight: 8,
+                              //       dotWidth: 8,
+                              //       activeDotColor: kGreenMainTheme),
+                              // )
                               // Container(
                               //   height: 8,
                               //   child: DotIndicator(
