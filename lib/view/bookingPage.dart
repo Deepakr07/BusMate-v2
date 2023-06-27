@@ -140,12 +140,7 @@ class BookingPage extends GetView<BookingController> {
                         text: 'Continue',
                         onTap: () {
                           if (_BookingKey.currentState!.validate()) {
-                            Get.to(() => ConfirmSelection(
-                                  selectedRoute: controller.routeId.value ?? "",
-                                  selectedStop: controller.stopId.value ?? "",
-                                  selectedTicketType:
-                                      controller.typeId.value ?? "",
-                                ));
+                            Get.to(() => ConfirmSelection());
                           }
                         },
                       ),

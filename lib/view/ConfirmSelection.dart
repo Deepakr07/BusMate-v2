@@ -4,17 +4,10 @@ import 'package:busmate/Constants/constants.dart';
 import 'package:get/get.dart';
 import 'package:busmate/view/bookingPage.dart';
 import 'package:busmate/controller/dropDownController.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:busmate/controller/PaymentController.dart';
 
 class ConfirmSelection extends StatelessWidget {
-  final String selectedRoute;
-  final String selectedStop;
-  final String selectedTicketType;
-
-  ConfirmSelection({
-    required this.selectedRoute,
-    required this.selectedStop,
-    required this.selectedTicketType,
-  });
   var currentDate = DateTime.now();
   var issueDate;
   var ExpiryDate;
@@ -26,6 +19,7 @@ class ConfirmSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BookingController controller = Get.find<BookingController>();
+    final paymentController _paymentController = Get.put(paymentController());
 
     return SafeArea(
       child: Scaffold(
@@ -122,6 +116,7 @@ class ConfirmSelection extends StatelessWidget {
                               print(ExpiryDate);
                             }
                             print(Amount);
+                            _paymentController.startPayment(Amount);
                           },
                         ),
                       ),
