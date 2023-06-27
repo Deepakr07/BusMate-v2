@@ -7,7 +7,7 @@ class WeatherController extends GetxController {
   var currentWeatherDescription = ''.obs;
   var currentWeather = ''.obs;
   var weatherId = 100.obs;
-  Rx<AssetImage> weatherIcon = AssetImage('/assets/sun-icon.png').obs;
+  Rx<AssetImage> weatherIcon = AssetImage('./assets/sun-icon.png').obs;
   @override
   void onInit() {
     fetchWeather();
