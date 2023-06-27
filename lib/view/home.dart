@@ -1,25 +1,47 @@
+import 'package:busmate/model/ActiveTicket_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../controller/profileController.dart';
 import '../controller/weatherController.dart';
 import '../controller/date_controller.dart';
 import '../model/ActiveTicket_List.dart';
-import '../model/widgets.dart';
-import '../controller/dotIndicator_Controller.dart';
 import 'package:busmate/model/Bottomnav_model4.dart';
 import 'package:busmate/model/userModel.dart';
-
-void main() {
-  runApp(HomePage());
-}
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatelessWidget {
   final dateController = Get.put(DateController());
+  final _firestore = FirebaseFirestore.instance;
   final WeatherController weatherController = Get.put(WeatherController());
-  final DotIndicatorController dotController =
-      Get.put(DotIndicatorController());
+  final dotController = PageController();
+
+  String? userUid;
+  void getUserUid() {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      userUid = user.uid;
+    } else {
+      // Handle the case when the user is not logged in
+      // You can set userUid to null or handle the situation accordingly
+      userUid = null;
+    }
+  }
+
+  Future<void> activeTicketStream() async {
+    Stream<QuerySnapshot> snapshotStream =
+        _firestore.collection('Tickets').snapshots();
+
+    await for (var snapshot in snapshotStream) {
+      for (var ticket in snapshot.docs) {
+        Object? data = ticket.data();
+        print(data);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -203,32 +225,96 @@ class HomePage extends StatelessWidget {
                           width: double.infinity,
                           child: Column(
                             children: [
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height < 700
-                                    ? 174
-                                    : 200,
-                                child: PageView.builder(
-                                  itemCount: activeTickets.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    final activeTicket = activeTickets[index];
+                              Expanded(
+                                child: StreamBuilder(
+                                  stream: _firestore
+                                      .collection('Tickets')
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: CircularProgressIndicator(
+                                          backgroundColor: kGreenMainTheme,
+                                        ),
+                                      );
+                                    }
+                                    final QuerySnapshot<Map<String, dynamic>>
+                                        querySnapshot = snapshot.data!;
+                                    final List<
+                                            QueryDocumentSnapshot<
+                                                Map<String, dynamic>>> tickets =
+                                        querySnapshot.docs;
+                                    activeTickets = [];
+                                    for (var ticket in tickets) {
+                                      final destination =
+                                          ticket.data()['Destination'];
+                                      final expiryDate =
+                                          ticket.data()['ExpiryDate'];
+                                      final issueDate =
+                                          ticket.data()['IssueDate'];
+                                      final count = ticket.data()['count'];
+                                      final route = ticket.data()['Route'];
+                                      final ticketType =
+                                          ticket.data()['TicketType'];
+                                      final id = ticket.data()['id'];
+                                      final image = ticket.data()['ImageUrl'];
+                                      final uid = ticket.data()['Uid'];
+
+                                      activeTickets.add(activeTicket(
+                                          ticketId: id,
+                                          route: route,
+                                          destination: destination,
+                                          issueDate: issueDate,
+                                          expiryDate: expiryDate,
+                                          ticketType: ticketType));
+                                      // print(destination);
+                                    }
                                     return SizedBox(
-                                      width: 330,
-                                      child: activeTicket,
+                                      height:
+                                          MediaQuery.of(context).size.height <
+                                                  700
+                                              ? 174
+                                              : 200,
+                                      child: PageView.builder(
+                                        controller: dotController,
+                                        itemCount: activeTickets.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          final activeTicket =
+                                              activeTickets[index];
+                                          return SizedBox(
+                                            width: 330,
+                                            child: activeTicket,
+                                          );
+                                        },
+                                        // onPageChanged: (int index) {
+                                        //   //dotController.updateIndex(index);
+                                        // },
+                                      ),
                                     );
-                                  },
-                                  onPageChanged: (int index) {
-                                    dotController.updateIndex(index);
+
+                                    // return your desired UI widget here
                                   },
                                 ),
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
-                              DotIndicator(
-                                itemCount: activeTickets.length,
+                              SmoothPageIndicator(
                                 controller: dotController,
-                              ),
+                                count: activeTickets.length,
+                                effect: ExpandingDotsEffect(
+                                    dotHeight: 8,
+                                    dotWidth: 8,
+                                    activeDotColor: kGreenMainTheme),
+                              )
+                              // Container(
+                              //   height: 8,
+                              //   child: DotIndicator(
+                              //     itemCount: activeTickets.length,
+                              //     controller: dotController,
+                              //   ),
+                              // ),
                             ],
                           )))
                 ],

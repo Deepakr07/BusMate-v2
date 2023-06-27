@@ -26,5 +26,5 @@ BusMate is a convenient and user-friendly college bus ticket booking application
 
 **Backend :** Firebase Authentication,Cloud Firestore(db)
 
-**API Integration :** Qr code generation API
+**API Integration :** Qr code generation API, Weather API
 
