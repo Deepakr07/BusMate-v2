@@ -61,16 +61,24 @@ class BookingController extends GetxController {
   }
 
   String getSelectedStopName() {
-    if (stopId.value != null) {
+    if (stopId.value != null && routeId.value != null) {
       int? selectedStopId = int.tryParse(stopId.value!);
-      var selectedStop = stopMaster.firstWhere(
+      int? selectedRouteId = int.tryParse(routeId.value!);
+
+      var selectedStops = stopMaster.where((stop) {
+        return stop['ParentId'] == selectedRouteId;
+      }).toList();
+
+      var selectedStop = selectedStops.firstWhere(
         (stop) => stop['ID'] == selectedStopId,
         orElse: () => null,
       );
+
       if (selectedStop != null) {
         return selectedStop['Name'];
       }
     }
+
     return '';
   }
 }

@@ -246,126 +246,105 @@ class HomePage extends StatelessWidget {
                   Expanded(
                       flex: 4,
                       child: SizedBox(
-                          height: double.infinity,
-                          width: double.infinity,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height < 700
-                                    ? 174
-                                    : 180,
-                                child: StreamBuilder(
-                                  stream: _firestore
-                                      .collection('Tickets')
-                                      .snapshots(),
-                                  builder: (context, snapshot) {
-                                    if (!snapshot.hasData) {
-                                      return const Center(
-                                        child: CircularProgressIndicator(
-                                          backgroundColor: kGreenMainTheme,
-                                        ),
-                                      );
-                                    }
-                                    final QuerySnapshot<Map<String, dynamic>>
-                                        querySnapshot = snapshot.data!;
-                                    final List<
-                                            QueryDocumentSnapshot<
-                                                Map<String, dynamic>>> tickets =
-                                        querySnapshot.docs;
-                                    activeTickets = [];
-                                    getUserUid();
-                                    for (var ticket in tickets) {
-                                      final expiryDate =
-                                          ticket.data()['ExpiryDate'];
-                                      final uid = ticket.data()['Uid'];
-                                      final isexpired =
-                                          isDateExpired(expiryDate);
-                                      if (userUid == uid && !isexpired) {
-                                        final destination =
-                                            ticket.data()['Destination'];
-
-                                        final issueDate =
-                                            ticket.data()['IssueDate'];
-                                        final count = ticket.data()['count'];
-                                        final route = ticket.data()['Route'];
-                                        final ticketType =
-                                            ticket.data()['TicketType'];
-                                        final id = ticket.id;
-                                        final image = ticket.data()['ImageUrl'];
-
-                                        activeTickets.add(activeTicket(
-                                          ticketId: id,
-                                          route: route,
-                                          destination: destination,
-                                          issueDate: issueDate,
-                                          expiryDate: expiryDate,
-                                          qrImage: image,
-                                        ));
-                                      }
-
-                                      // print(destination);
-                                    }
-                                    return SizedBox(
-                                      height: 200, // Set the height to 200
-                                      child: activeTickets.isEmpty
-                                          ? PageView.builder(
-                                              controller: dotController,
-                                              itemCount:
-                                                  emptyActiveTickets.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                final emptyActiveTicket =
-                                                    emptyActiveTickets[index];
-                                                return SizedBox(
-                                                  width: 330,
-                                                  child: emptyActiveTicket,
-                                                );
-                                              },
-                                            )
-                                          : PageView.builder(
-                                              controller: dotController,
-                                              itemCount: activeTickets.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                final activeTicket =
-                                                    activeTickets[index];
-                                                return SizedBox(
-                                                  width: 330,
-                                                  child: activeTicket,
-                                                );
-                                              },
-                                            ),
-                                      // onPageChanged: (int index) {
-                                      //   //dotController.updateIndex(index);
-                                      // },
-                                    );
-
-                                    // return your desired UI widget here
-                                  },
+                        height: MediaQuery.of(context).size.height < 700
+                            ? 174
+                            : 180,
+                        child:
+                            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                          stream: _firestore.collection('Tickets').snapshots(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                  backgroundColor: kGreenMainTheme,
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              SmoothPageIndicator(
-                                controller: dotController,
-                                count: activeTickets.length,
-                                effect: ExpandingDotsEffect(
+                              );
+                            }
+                            final QuerySnapshot<Map<String, dynamic>>
+                                querySnapshot = snapshot.data!;
+                            final List<
+                                    QueryDocumentSnapshot<Map<String, dynamic>>>
+                                tickets = querySnapshot.docs;
+                            activeTickets = [];
+                            getUserUid();
+                            for (var ticket in tickets) {
+                              final expiryDate = ticket.data()['ExpiryDate'];
+                              final uid = ticket.data()['Uid'];
+                              final isexpired = isDateExpired(expiryDate);
+                              if (userUid == uid && !isexpired) {
+                                final destination =
+                                    ticket.data()['Destination'];
+                                final issueDate = ticket.data()['IssueDate'];
+                                final count = ticket.data()['count'];
+                                final route = ticket.data()['Route'];
+                                final ticketType = ticket.data()['TicketType'];
+                                final id = ticket.id;
+                                final image = ticket.data()['ImageUrl'];
+
+                                activeTickets.add(activeTicket(
+                                  ticketId: id,
+                                  route: route,
+                                  destination: destination,
+                                  issueDate: issueDate,
+                                  expiryDate: expiryDate,
+                                  qrImage: image,
+                                ));
+                              }
+                            }
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  height: 180,
+                                  child: activeTickets.isEmpty
+                                      ? PageView.builder(
+                                          controller: dotController,
+                                          itemCount: emptyActiveTickets.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            final emptyActiveTicket =
+                                                emptyActiveTickets[index];
+                                            return SizedBox(
+                                              width: 330,
+                                              child: emptyActiveTicket,
+                                            );
+                                          },
+                                        )
+                                      : PageView.builder(
+                                          controller: dotController,
+                                          itemCount: activeTickets.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            final activeTicket =
+                                                activeTickets[index];
+                                            return SizedBox(
+                                              width: 330,
+                                              child: activeTicket,
+                                            );
+                                          },
+                                        ),
+                                ),
+                                SmoothPageIndicator(
+                                  controller: dotController,
+                                  count: activeTickets.length,
+                                  effect: ExpandingDotsEffect(
                                     dotHeight: 8,
                                     dotWidth: 8,
-                                    activeDotColor: kGreenMainTheme),
-                              )
-                              // Container(
-                              //   height: 8,
-                              //   child: DotIndicator(
-                              //     itemCount: activeTickets.length,
-                              //     controller: dotController,
-                              //   ),
-                              // ),
-                            ],
-                          )))
+                                    activeDotColor: kGreenMainTheme,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                        // Container(
+                        //   height: 8,
+                        //   child: DotIndicator(
+                        //     itemCount: activeTickets.length,
+                        //     controller: dotController,
+                        //   ),
+                        // ),
+                      ))
                 ],
               ),
             ))
