@@ -11,16 +11,16 @@ class activeTicket extends StatelessWidget {
   late final String destination;
   late final String issueDate;
   late final String expiryDate;
-  late final ImageProvider qrImage;
+  late final String qrImage;
   late final String ticketType;
 
-  activeTicket({
-    required this.ticketId,
-    required this.route,
-    required this.destination,
-    required this.issueDate,
-    required this.expiryDate,
-  });
+  activeTicket(
+      {required this.ticketId,
+      required this.route,
+      required this.destination,
+      required this.issueDate,
+      required this.expiryDate,
+      required this.qrImage});
 
   @override
   Widget build(BuildContext context) {
@@ -129,9 +129,7 @@ class activeTicket extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Image(
-                        image: AssetImage('./assets/qrcode.png'),
-                      ),
+                      child: Image.network(qrImage),
                     ),
                   ],
                 ),

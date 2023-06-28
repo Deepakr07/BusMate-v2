@@ -91,6 +91,7 @@ class History extends StatelessWidget {
                             destination: destination,
                             issueDate: issueDate,
                             status: ticketStatus,
+                            qrImage: image,
                           ));
                         }
                       }
