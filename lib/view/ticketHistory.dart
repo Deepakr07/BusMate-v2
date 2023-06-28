@@ -100,7 +100,7 @@ class History extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           return SizedBox(
                             width: 300,
-                            height: 200,
+                            height: 180,
                             child: ticketWidgets[index],
                           );
                         },

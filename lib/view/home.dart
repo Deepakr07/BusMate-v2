@@ -250,7 +250,10 @@ class HomePage extends StatelessWidget {
                           width: double.infinity,
                           child: Column(
                             children: [
-                              Expanded(
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height < 700
+                                    ? 174
+                                    : 180,
                                 child: StreamBuilder(
                                   stream: _firestore
                                       .collection('Tickets')
@@ -303,13 +306,8 @@ class HomePage extends StatelessWidget {
                                       // print(destination);
                                     }
                                     return SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height <
-                                                  700
-                                              ? 174
-                                              : 200,
-                                      child: activeTickets
-                                              .isEmpty //activeTickets.isEmpty
+                                      height: 200, // Set the height to 200
+                                      child: activeTickets.isEmpty
                                           ? PageView.builder(
                                               controller: dotController,
                                               itemCount:
@@ -339,7 +337,6 @@ class HomePage extends StatelessWidget {
                                                 );
                                               },
                                             ),
-
                                       // onPageChanged: (int index) {
                                       //   //dotController.updateIndex(index);
                                       // },
