@@ -101,6 +101,14 @@ class allTickets extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
+                                        Text('Route', style: kSmallGrey),
+                                        Text(route, style: kLargeGrey),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
                                         Text('Status', style: kSmallGrey),
                                         Text(status,
                                             style: TextStyle(
@@ -109,20 +117,6 @@ class allTickets extends StatelessWidget {
                                                   ? Colors.green
                                                   : Colors.red,
                                             )),
-                                      ],
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text('Expiry date', style: kSmallGrey),
-                                        Text(
-                                          '9 Feb, 23',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: kGreyTextColor,
-                                          ),
-                                        ),
                                       ],
                                     ),
                                   ],
@@ -143,7 +137,7 @@ class allTickets extends StatelessWidget {
               ),
             ),
             Text(
-              '#Ticket ID',
+              "ID#: " + ticketId,
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
             ),
           ],
