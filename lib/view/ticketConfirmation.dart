@@ -16,7 +16,7 @@ class TicketConfirmation extends StatelessWidget {
 
   void navigateToHome() {
     _controller.changePage(0);
-    Get.off(() => HomePage());
+    Get.offAll(() => HomePage());
   }
 
   @override
