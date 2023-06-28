@@ -21,6 +21,13 @@ class TicketConfirmation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = Get.arguments as Map<String, dynamic>;
+    var stop = arguments['Destination'];
+    var route = arguments['Route'];
+    var expiryDate = arguments['ExpiryDate'];
+    var issueDate = arguments['IssueDate'];
+    var ticketID = arguments['TicketID'];
+    var imageUrl = arguments['Image'];
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(24),
@@ -46,12 +53,12 @@ class TicketConfirmation extends StatelessWidget {
               child: SizedBox(
                 height: 200,
                 child: activeTicket(
-                  destination: 'Pathadipalam',
-                  route: 'Vytilla',
-                  expiryDate: '19 Feb, 23',
-                  issueDate: '19 Feb, 23',
-                  ticketId: '55544654654',
-                  qrImage: '',
+                  destination: stop,
+                  route: route,
+                  expiryDate: expiryDate,
+                  issueDate: issueDate,
+                  ticketId: ticketID,
+                  qrImage: imageUrl,
                 ),
               ),
             ),
