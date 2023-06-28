@@ -51,7 +51,7 @@ class TicketConfirmation extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: SizedBox(
-                height: 200,
+                height: 180,
                 child: activeTicket(
                   destination: stop,
                   route: route,
