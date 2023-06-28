@@ -1,25 +1,70 @@
+import 'package:busmate/model/ActiveTicket_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:busmate/Constants/constants.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../controller/profileController.dart';
 import '../controller/weatherController.dart';
 import '../controller/date_controller.dart';
 import '../model/ActiveTicket_List.dart';
-import '../model/widgets.dart';
-import '../controller/dotIndicator_Controller.dart';
 import 'package:busmate/model/Bottomnav_model4.dart';
 import 'package:busmate/model/userModel.dart';
-
-void main() {
-  runApp(HomePage());
-}
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatelessWidget {
   final dateController = Get.put(DateController());
+  final _firestore = FirebaseFirestore.instance;
   final WeatherController weatherController = Get.put(WeatherController());
-  final DotIndicatorController dotController =
-      Get.put(DotIndicatorController());
+  final dotController = PageController();
+
+  late String? userUid;
+  void getUserUid() {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      userUid = user.uid;
+      print("UID : " + userUid!);
+    } else {
+      // Handle the case when the user is not logged in
+      // You can set userUid to null or handle the situation accordingly
+      userUid = null;
+    }
+  }
+
+  bool isDateExpired(String dateString) {
+    final currentDate = DateTime.now();
+    final dateFormat = DateFormat('dd-MMM-yy');
+    final parsedDate = dateFormat.parse(dateString);
+    final dateToCompare =
+        DateTime(parsedDate.year, parsedDate.month, parsedDate.day);
+
+    return dateToCompare.isBefore(currentDate);
+  }
+
+  List emptyActiveTickets = [
+    activeTicket(
+      ticketId: 'No active Tickets ',
+      route: 'NIL',
+      destination: 'NIL',
+      issueDate: 'NIL',
+      expiryDate: 'NIL',
+      qrImage:
+          'https://cutewallpaper.org/24/qr-code-png/qr-05bcf-code-6056e-png.png',
+    )
+  ];
+
+  Future<void> activeTicketStream() async {
+    Stream<QuerySnapshot> snapshotStream =
+        _firestore.collection('Tickets').snapshots();
+
+    await for (var snapshot in snapshotStream) {
+      for (var ticket in snapshot.docs) {
+        Object? data = ticket.data();
+        print(data);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +119,9 @@ class HomePage extends StatelessWidget {
                                         }
                                       } else {
                                         return const Center(
-                                          child: CircularProgressIndicator(),
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                          ),
                                         );
                                       }
                                     }),
@@ -93,21 +140,21 @@ class HomePage extends StatelessWidget {
                                     )),
                               ],
                             )),
-                        Expanded(
-                          child: Container(
-                            height: 55,
-                            padding: const EdgeInsets.only(
-                                left: 30, bottom: 5, top: 5),
-                            child: CircleAvatar(
-                              maxRadius: 50,
-                              minRadius: 30,
-                              backgroundColor: kGreenMainTheme,
-                              backgroundImage: Image.network(
-                                      'https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
-                                  .image,
-                            ),
-                          ),
-                        )
+                        // Expanded(
+                        //   child: Container(
+                        //     height: 55,
+                        //     padding: const EdgeInsets.only(
+                        //         left: 30, bottom: 5, top: 5),
+                        //     child: CircleAvatar(
+                        //       maxRadius: 50,
+                        //       minRadius: 30,
+                        //       backgroundColor: kGreenMainTheme,
+                        //       backgroundImage: Image.network(
+                        //               'https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
+                        //           .image,
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
@@ -206,29 +253,117 @@ class HomePage extends StatelessWidget {
                               SizedBox(
                                 height: MediaQuery.of(context).size.height < 700
                                     ? 174
-                                    : 200,
-                                child: PageView.builder(
-                                  itemCount: activeTickets.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    final activeTicket = activeTickets[index];
+                                    : 180,
+                                child: StreamBuilder(
+                                  stream: _firestore
+                                      .collection('Tickets')
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return const Center(
+                                        child: CircularProgressIndicator(
+                                          backgroundColor: kGreenMainTheme,
+                                        ),
+                                      );
+                                    }
+                                    final QuerySnapshot<Map<String, dynamic>>
+                                        querySnapshot = snapshot.data!;
+                                    final List<
+                                            QueryDocumentSnapshot<
+                                                Map<String, dynamic>>> tickets =
+                                        querySnapshot.docs;
+                                    activeTickets = [];
+                                    getUserUid();
+                                    for (var ticket in tickets) {
+                                      final expiryDate =
+                                          ticket.data()['ExpiryDate'];
+                                      final uid = ticket.data()['Uid'];
+                                      final isexpired =
+                                          isDateExpired(expiryDate);
+                                      if (userUid == uid && !isexpired) {
+                                        final destination =
+                                            ticket.data()['Destination'];
+
+                                        final issueDate =
+                                            ticket.data()['IssueDate'];
+                                        final count = ticket.data()['count'];
+                                        final route = ticket.data()['Route'];
+                                        final ticketType =
+                                            ticket.data()['TicketType'];
+                                        final id = ticket.id;
+                                        final image = ticket.data()['ImageUrl'];
+
+                                        activeTickets.add(activeTicket(
+                                          ticketId: id,
+                                          route: route,
+                                          destination: destination,
+                                          issueDate: issueDate,
+                                          expiryDate: expiryDate,
+                                          qrImage: image,
+                                        ));
+                                      }
+
+                                      // print(destination);
+                                    }
                                     return SizedBox(
-                                      width: 330,
-                                      child: activeTicket,
+                                      height: 200, // Set the height to 200
+                                      child: activeTickets.isEmpty
+                                          ? PageView.builder(
+                                              controller: dotController,
+                                              itemCount:
+                                                  emptyActiveTickets.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                final emptyActiveTicket =
+                                                    emptyActiveTickets[index];
+                                                return SizedBox(
+                                                  width: 330,
+                                                  child: emptyActiveTicket,
+                                                );
+                                              },
+                                            )
+                                          : PageView.builder(
+                                              controller: dotController,
+                                              itemCount: activeTickets.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                final activeTicket =
+                                                    activeTickets[index];
+                                                return SizedBox(
+                                                  width: 330,
+                                                  child: activeTicket,
+                                                );
+                                              },
+                                            ),
+                                      // onPageChanged: (int index) {
+                                      //   //dotController.updateIndex(index);
+                                      // },
                                     );
-                                  },
-                                  onPageChanged: (int index) {
-                                    dotController.updateIndex(index);
+
+                                    // return your desired UI widget here
                                   },
                                 ),
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
-                              DotIndicator(
-                                itemCount: activeTickets.length,
+                              SmoothPageIndicator(
                                 controller: dotController,
-                              ),
+                                count: activeTickets.length,
+                                effect: ExpandingDotsEffect(
+                                    dotHeight: 8,
+                                    dotWidth: 8,
+                                    activeDotColor: kGreenMainTheme),
+                              )
+                              // Container(
+                              //   height: 8,
+                              //   child: DotIndicator(
+                              //     itemCount: activeTickets.length,
+                              //     controller: dotController,
+                              //   ),
+                              // ),
                             ],
                           )))
                 ],

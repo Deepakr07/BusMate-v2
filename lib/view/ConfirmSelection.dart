@@ -4,21 +4,20 @@ import 'package:busmate/Constants/constants.dart';
 import 'package:get/get.dart';
 import 'package:busmate/view/bookingPage.dart';
 import 'package:busmate/controller/dropDownController.dart';
+import 'package:busmate/controller/PaymentController.dart';
+import 'package:intl/intl.dart';
 
 class ConfirmSelection extends StatelessWidget {
-  final String selectedRoute;
-  final String selectedStop;
-  final String selectedTicketType;
-
-  ConfirmSelection({
-    required this.selectedRoute,
-    required this.selectedStop,
-    required this.selectedTicketType,
-  });
   var currentDate = DateTime.now();
   var issueDate;
   var ExpiryDate;
   var Amount;
+  var stop;
+  var route;
+  var formattedExpiryDate;
+  var formattedIssueDate;
+  var ticketType;
+  int count = 0;
   void navigateToBooking() {
     Get.off(() => BookingPage());
   }
@@ -26,6 +25,7 @@ class ConfirmSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BookingController controller = Get.find<BookingController>();
+    final paymentController _paymentController = Get.put(paymentController());
 
     return SafeArea(
       child: Scaffold(
@@ -54,8 +54,7 @@ class ConfirmSelection extends StatelessWidget {
                     height: 10,
                   ),
                   ConfirmSelectionContainer(
-                    data: controller.getSelectedRouteName() ?? "NA",
-                  ),
+                      data: controller.getSelectedRouteName()),
                   const SizedBox(
                     height: 33,
                   ),
@@ -67,8 +66,7 @@ class ConfirmSelection extends StatelessWidget {
                     height: 10,
                   ),
                   ConfirmSelectionContainer(
-                    data: controller.getSelectedStopName() ?? "NA",
-                  ),
+                      data: controller.getSelectedStopName()),
                   const SizedBox(
                     height: 33,
                   ),
@@ -104,24 +102,47 @@ class ConfirmSelection extends StatelessWidget {
                           text: 'Confirm',
                           onTap: () {
                             issueDate = currentDate;
+                            formattedIssueDate =
+                                DateFormat('dd-MMM-yy').format(issueDate);
+                            stop = controller.getSelectedStopName();
+                            route = controller.getSelectedRouteName();
+                            ticketType = controller.getSelectedTicket();
                             print(issueDate);
                             if (controller.getSelectedTicket() ==
                                 "Weekly (₹30)") {
                               ExpiryDate = currentDate.add(Duration(days: 7));
+                              formattedExpiryDate =
+                                  DateFormat('dd-MMM-yy').format(ExpiryDate);
                               Amount = 30;
-                              print(ExpiryDate);
+                              count = 10;
+                              print(formattedExpiryDate);
                             } else if (controller.getSelectedTicket() ==
                                 "Monthly (₹80)") {
                               ExpiryDate = currentDate.add(Duration(days: 30));
+                              formattedExpiryDate =
+                                  DateFormat('dd-MMM-yy').format(ExpiryDate);
                               Amount = 80;
-                              print(ExpiryDate);
+                              count = 50;
+                              print(formattedExpiryDate);
                             } else if (controller.getSelectedTicket() ==
                                 "Daily (₹10)") {
                               ExpiryDate = currentDate.add(Duration(days: 1));
+                              formattedExpiryDate =
+                                  DateFormat('dd-MMM-yy').format(ExpiryDate);
                               Amount = 10;
-                              print(ExpiryDate);
+                              count = 2;
+                              print(formattedExpiryDate);
                             }
                             print(Amount);
+                            _paymentController.computeTicketDetails(
+                                stop,
+                                route,
+                                ticketType,
+                                Amount,
+                                formattedIssueDate,
+                                formattedExpiryDate,
+                                count);
+                            _paymentController.startPayment(Amount);
                           },
                         ),
                       ),

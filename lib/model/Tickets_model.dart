@@ -3,23 +3,23 @@ import '../Constants/constants.dart';
 
 //this ticket model is shown in ticket history
 
-class Tickets extends StatelessWidget {
-  late final int ticketId;
+class allTickets extends StatelessWidget {
+  late final String ticketId;
   late final String route;
   late final String status;
   String college = 'SOE';
   late final String destination;
   late final issueDate;
   //late final DateTime expiryDate; not shown in ticket history
-  late final ImageProvider qrImage;
+  late final String qrImage;
   late final String ticketType;
-  Tickets({
-    required this.route,
-    required this.issueDate,
-    required this.destination,
-    required this.ticketId,
-    required this.status,
-  });
+  allTickets(
+      {required this.route,
+      required this.issueDate,
+      required this.destination,
+      required this.ticketId,
+      required this.status,
+      required this.qrImage});
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +101,14 @@ class Tickets extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
+                                        Text('Route', style: kSmallGrey),
+                                        Text(route, style: kLargeGrey),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
                                         Text('Status', style: kSmallGrey),
                                         Text(status,
                                             style: TextStyle(
@@ -111,20 +119,6 @@ class Tickets extends StatelessWidget {
                                             )),
                                       ],
                                     ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text('Expiry date', style: kSmallGrey),
-                                        Text(
-                                          '9 Feb, 23',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: kGreyTextColor,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
                                   ],
                                 ),
                               ),
@@ -133,17 +127,13 @@ class Tickets extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Image(
-                        image: AssetImage('./assets/qrcode.png'),
-                      ),
-                    ),
+                    Expanded(child: Image.network(qrImage)),
                   ],
                 ),
               ),
             ),
             Text(
-              '#Ticket ID',
+              "ID#: " + ticketId,
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
             ),
           ],

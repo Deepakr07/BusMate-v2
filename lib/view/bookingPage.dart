@@ -58,7 +58,7 @@ class BookingPage extends GetView<BookingController> {
                             },
                             (onValidateVal) {
                               if (onValidateVal == null) {
-                                return "Please Select a Ticket";
+                                return "Please Select a Route";
                               }
                               return null;
                             },
@@ -88,7 +88,7 @@ class BookingPage extends GetView<BookingController> {
                             },
                             (onValidateVal) {
                               if (onValidateVal == null) {
-                                return "Please Select a Ticket";
+                                return "Please Select a Stop";
                               }
                               return null;
                             },
@@ -118,7 +118,7 @@ class BookingPage extends GetView<BookingController> {
                             },
                             (onValidateVal) {
                               if (onValidateVal == null) {
-                                return "Please Select a Ticket";
+                                return "Please Select a Ticket Type";
                               }
                               return null;
                             },
@@ -140,12 +140,7 @@ class BookingPage extends GetView<BookingController> {
                         text: 'Continue',
                         onTap: () {
                           if (_BookingKey.currentState!.validate()) {
-                            Get.to(() => ConfirmSelection(
-                                  selectedRoute: controller.routeId.value ?? "",
-                                  selectedStop: controller.stopId.value ?? "",
-                                  selectedTicketType:
-                                      controller.typeId.value ?? "",
-                                ));
+                            Get.to(() => ConfirmSelection());
                           }
                         },
                       ),

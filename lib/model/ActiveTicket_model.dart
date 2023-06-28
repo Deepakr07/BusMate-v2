@@ -4,14 +4,14 @@ import '../Constants/constants.dart';
 //this ticket model is displayed in the active tickets
 
 class activeTicket extends StatelessWidget {
-  late final int ticketId;
+  late final String ticketId;
   late final String route;
   //late final String status;  not displayed in active tickets
   String college = 'SOE';
   late final String destination;
   late final String issueDate;
   late final String expiryDate;
-  late final ImageProvider qrImage;
+  late final String qrImage;
   late final String ticketType;
 
   activeTicket(
@@ -20,7 +20,7 @@ class activeTicket extends StatelessWidget {
       required this.destination,
       required this.issueDate,
       required this.expiryDate,
-      required this.ticketType});
+      required this.qrImage});
 
   @override
   Widget build(BuildContext context) {
@@ -129,16 +129,14 @@ class activeTicket extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Image(
-                        image: AssetImage('./assets/qrcode.png'),
-                      ),
+                      child: Image.network(qrImage),
                     ),
                   ],
                 ),
               ),
             ),
             Text(
-              '#Ticket ID',
+              "ID#: " + ticketId,
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
             ),
           ],
