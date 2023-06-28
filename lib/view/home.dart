@@ -140,21 +140,21 @@ class HomePage extends StatelessWidget {
                                     )),
                               ],
                             )),
-                        Expanded(
-                          child: Container(
-                            height: 55,
-                            padding: const EdgeInsets.only(
-                                left: 30, bottom: 5, top: 5),
-                            child: CircleAvatar(
-                              maxRadius: 50,
-                              minRadius: 30,
-                              backgroundColor: kGreenMainTheme,
-                              backgroundImage: Image.network(
-                                      'https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
-                                  .image,
-                            ),
-                          ),
-                        )
+                        // Expanded(
+                        //   child: Container(
+                        //     height: 55,
+                        //     padding: const EdgeInsets.only(
+                        //         left: 30, bottom: 5, top: 5),
+                        //     child: CircleAvatar(
+                        //       maxRadius: 50,
+                        //       minRadius: 30,
+                        //       backgroundColor: kGreenMainTheme,
+                        //       backgroundImage: Image.network(
+                        //               'https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
+                        //           .image,
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
