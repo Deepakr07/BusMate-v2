@@ -51,6 +51,7 @@ class TicketConfirmation extends StatelessWidget {
                   expiryDate: '19 Feb, 23',
                   issueDate: '19 Feb, 23',
                   ticketId: '55544654654',
+                  qrImage: '',
                 ),
               ),
             ),
