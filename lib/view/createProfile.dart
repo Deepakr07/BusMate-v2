@@ -50,7 +50,7 @@ class CreateProfile extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 25,
-                      ),
+                      ), //
                       Row(
                         children: [
                           CircleAvatar(
