@@ -62,10 +62,11 @@ class EditProfile extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           CircleAvatar(
-                                            backgroundImage: Image.network(
-                                                    "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")
+                                            backgroundColor: Colors.white,
+                                            backgroundImage: Image.asset(
+                                                    './assets/profile-icon.png')
                                                 .image,
-                                            radius: 40,
+                                            radius: 20,
                                           ),
                                           SizedBox(
                                             width: 8,

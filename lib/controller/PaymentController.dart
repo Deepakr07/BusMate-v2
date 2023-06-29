@@ -63,6 +63,14 @@ class paymentController extends GetxController {
           .doc(DocId)
           .update({'ImageUrl': imageUrlZ});
 
+      Get.offAll(() => TicketConfirmation(), arguments: {
+        'Destination': StopZ,
+        'TicketID': DocId,
+        'Image': imageUrlZ,
+        'Route': RouteZ,
+        'ExpiryDate': expiryDateZ,
+        'IssueDate': issueDateZ
+      });
       // Display success message or perform any other actions
       print('Image stored and URL updated successfully');
     } else {
@@ -107,7 +115,6 @@ class paymentController extends GetxController {
         userUid: userUid);
     CreateTicket(ticket);
 
-    //Get.to(() => TicketConfirmation());
     // Do something when payment succeeds
   }
 

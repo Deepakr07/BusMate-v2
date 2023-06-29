@@ -50,14 +50,14 @@ class CreateProfile extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 25,
-                      ),
+                      ), //
                       Row(
                         children: [
                           CircleAvatar(
-                            backgroundImage: Image.network(
-                              "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                            ).image,
-                            radius: 40,
+                            backgroundColor: Colors.white,
+                            backgroundImage:
+                                Image.asset('./assets/profile-icon.png').image,
+                            radius: 20,
                           ),
                           SizedBox(
                             width: 8,
