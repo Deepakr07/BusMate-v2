@@ -6,6 +6,9 @@ import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:busmate/view/home.dart';
 import 'package:busmate/controller/bottomNavBarController.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 
 void main() {
   runApp(TicketConfirmation());
@@ -13,6 +16,19 @@ void main() {
 
 class TicketConfirmation extends StatelessWidget {
   final BottomNavBarController _controller = Get.find();
+
+  Future<void> getPdfTicket() async {
+    final pdf = pw.Document();
+
+    pdf.addPage(pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return pw.Center(
+            child: pw.Text("Hello World"),
+          ); // Center
+        }));
+    await Printing.layoutPdf(onLayout: (PdfPageFormat) async => pdf.save());
+  }
 
   void navigateToHome() {
     _controller.changePage(0);
@@ -86,7 +102,7 @@ class TicketConfirmation extends StatelessWidget {
                 Expanded(
                   child: ElevatedGreenButton(
                     text: 'Download',
-                    onTap: () => {},
+                    onTap: () => {getPdfTicket()},
                   ),
                 ),
               ],
