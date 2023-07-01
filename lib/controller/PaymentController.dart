@@ -69,7 +69,8 @@ class paymentController extends GetxController {
         'Image': imageUrlZ,
         'Route': RouteZ,
         'ExpiryDate': expiryDateZ,
-        'IssueDate': issueDateZ
+        'IssueDate': issueDateZ,
+        'Rides': countZ
       });
       // Display success message or perform any other actions
       print('Image stored and URL updated successfully');

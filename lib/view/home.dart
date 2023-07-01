@@ -51,6 +51,7 @@ class HomePage extends StatelessWidget {
       expiryDate: 'NIL',
       qrImage:
           'https://cutewallpaper.org/24/qr-code-png/qr-05bcf-code-6056e-png.png',
+      rides: 0,
     )
   ];
 
@@ -274,6 +275,7 @@ class HomePage extends StatelessWidget {
                                   issueDate: issueDate,
                                   expiryDate: expiryDate,
                                   qrImage: image,
+                                  rides: count,
                                 ));
                               }
                             }

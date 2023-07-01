@@ -57,6 +57,7 @@ class TicketConfirmation extends StatelessWidget {
     var issueDate = arguments['IssueDate'];
     var ticketID = arguments['TicketID'];
     var imageUrl = arguments['Image'];
+    var Ride = arguments['Rides'];
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(24),
@@ -90,6 +91,7 @@ class TicketConfirmation extends StatelessWidget {
                     issueDate: issueDate,
                     ticketId: ticketID,
                     qrImage: imageUrl,
+                    rides: Ride,
                   ),
                 ),
               ),

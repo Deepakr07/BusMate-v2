@@ -13,6 +13,7 @@ class activeTicket extends StatelessWidget {
   late final String expiryDate;
   late final String qrImage;
   late final String ticketType;
+  late int rides = 0;
 
   activeTicket(
       {required this.ticketId,
@@ -20,7 +21,8 @@ class activeTicket extends StatelessWidget {
       required this.destination,
       required this.issueDate,
       required this.expiryDate,
-      required this.qrImage});
+      required this.qrImage,
+      required this.rides});
 
   @override
   Widget build(BuildContext context) {
@@ -135,9 +137,21 @@ class activeTicket extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              "ID#: " + ticketId,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "ID#: " + ticketId,
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+                  ),
+                  Text(
+                    "Rides: $rides",
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+                  )
+                ],
+              ),
             ),
           ],
         ),

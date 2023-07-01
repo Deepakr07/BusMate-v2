@@ -13,5 +13,6 @@ List<activeTicket> emptyActiveTickets = [
     expiryDate: 'NIL',
     qrImage:
         'https://cutewallpaper.org/24/qr-code-png/qr-05bcf-code-6056e-png.png',
+    rides: 0,
   )
 ];
