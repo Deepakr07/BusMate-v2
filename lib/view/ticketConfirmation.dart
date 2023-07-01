@@ -1,14 +1,16 @@
+import 'dart:typed_data';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:busmate/model/widgets.dart';
 import 'package:busmate/model/ActiveTicket_model.dart';
 import 'package:busmate/Constants/constants.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:busmate/view/home.dart';
 import 'package:busmate/controller/bottomNavBarController.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(TicketConfirmation());
@@ -16,18 +18,29 @@ void main() {
 
 class TicketConfirmation extends StatelessWidget {
   final BottomNavBarController _controller = Get.find();
+  final GlobalKey<State<StatefulWidget>> screenshotKey =
+      GlobalKey<State<StatefulWidget>>();
 
-  Future<void> getPdfTicket() async {
-    final pdf = pw.Document();
+  Future<String> saveImageToGallery(Uint8List bytes) async {
+    await [Permission.storage].request();
+    final time = DateTime.now()
+        .toIso8601String()
+        .replaceAll('.', '-')
+        .replaceAll(':', '-');
+    final name = 'screenshot_$time';
+    final result = await ImageGallerySaver.saveImage(bytes, name: name);
+    return result['filePath'];
+  }
 
-    pdf.addPage(pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Center(
-            child: pw.Text("Hello World"),
-          ); // Center
-        }));
-    await Printing.layoutPdf(onLayout: (PdfPageFormat) async => pdf.save());
+  Future<Uint8List?> captureScreenshot() async {
+    RenderRepaintBoundary? boundary = screenshotKey.currentContext
+        ?.findRenderObject() as RenderRepaintBoundary?;
+    if (boundary != null) {
+      final image = await boundary.toImage(pixelRatio: 3.0);
+      final byteData = await image.toByteData(format: ImageByteFormat.png);
+      return byteData?.buffer.asUint8List();
+    }
+    return null;
   }
 
   void navigateToHome() {
@@ -66,15 +79,18 @@ class TicketConfirmation extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: SizedBox(
-                height: 180,
-                child: activeTicket(
-                  destination: stop,
-                  route: route,
-                  expiryDate: expiryDate,
-                  issueDate: issueDate,
-                  ticketId: ticketID,
-                  qrImage: imageUrl,
+              child: RepaintBoundary(
+                key: screenshotKey,
+                child: SizedBox(
+                  height: 180,
+                  child: activeTicket(
+                    destination: stop,
+                    route: route,
+                    expiryDate: expiryDate,
+                    issueDate: issueDate,
+                    ticketId: ticketID,
+                    qrImage: imageUrl,
+                  ),
                 ),
               ),
             ),
@@ -102,7 +118,18 @@ class TicketConfirmation extends StatelessWidget {
                 Expanded(
                   child: ElevatedGreenButton(
                     text: 'Download',
-                    onTap: () => {getPdfTicket()},
+                    onTap: () async {
+                      final Uint8List? imageBytes = await captureScreenshot();
+                      if (imageBytes != null) {
+                        final filePath = await saveImageToGallery(imageBytes);
+                        Get.snackbar(
+                          'Success',
+                          'Your Ticket Has been saved successfully',
+                          snackPosition: SnackPosition.BOTTOM,
+                          duration: Duration(seconds: 3),
+                        );
+                      }
+                    },
                   ),
                 ),
               ],
