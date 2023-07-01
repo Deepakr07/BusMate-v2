@@ -27,7 +27,7 @@ class TicketConfirmation extends StatelessWidget {
         .toIso8601String()
         .replaceAll('.', '-')
         .replaceAll(':', '-');
-    final name = 'screenshot_$time';
+    final name = 'Ticket_generated at $time';
     final result = await ImageGallerySaver.saveImage(bytes, name: name);
     return result['filePath'];
   }
