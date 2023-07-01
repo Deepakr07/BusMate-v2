@@ -10,6 +10,7 @@ class History extends StatelessWidget {
   final _firestore = FirebaseFirestore.instance;
 
   String? userUid;
+  late String ticketStatus;
   void getUserUid() {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
@@ -73,7 +74,6 @@ class History extends StatelessWidget {
                       for (var ticket in tickets) {
                         final expiryDate = ticket.data()['ExpiryDate'];
                         bool status = isDateExpired(expiryDate);
-                        String ticketStatus = status ? "Expired" : "Active";
                         final uid = ticket.data()['Uid'];
 
                         if (uid == userUid) {
@@ -84,6 +84,13 @@ class History extends StatelessWidget {
                           final ticketType = ticket.data()['TicketType'];
                           final id = ticket.id;
                           final image = ticket.data()['ImageUrl'];
+                          if (status) {
+                            ticketStatus = "Expired";
+                          } else if (count < 0) {
+                            ticketStatus = "Limit Reached";
+                          } else {
+                            ticketStatus = "Active";
+                          }
 
                           ticketWidgets.add(allTickets(
                             ticketId: id,

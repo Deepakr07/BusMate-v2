@@ -140,21 +140,6 @@ class HomePage extends StatelessWidget {
                                     )),
                               ],
                             )),
-                        // Expanded(
-                        //   child: Container(
-                        //     height: 55,
-                        //     padding: const EdgeInsets.only(
-                        //         left: 30, bottom: 5, top: 5),
-                        //     child: CircleAvatar(
-                        //       maxRadius: 50,
-                        //       minRadius: 30,
-                        //       backgroundColor: kGreenMainTheme,
-                        //       backgroundImage: Image.network(
-                        //               'https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
-                        //           .image,
-                        //     ),
-                        //   ),
-                        // )
                       ],
                     ),
                   ),
@@ -271,11 +256,12 @@ class HomePage extends StatelessWidget {
                               final expiryDate = ticket.data()['ExpiryDate'];
                               final uid = ticket.data()['Uid'];
                               final isexpired = isDateExpired(expiryDate);
-                              if (userUid == uid && !isexpired) {
+                              final count = ticket.data()['count'];
+                              if (userUid == uid && !isexpired && count > 0) {
                                 final destination =
                                     ticket.data()['Destination'];
                                 final issueDate = ticket.data()['IssueDate'];
-                                final count = ticket.data()['count'];
+
                                 final route = ticket.data()['Route'];
                                 final ticketType = ticket.data()['TicketType'];
                                 final id = ticket.id;
