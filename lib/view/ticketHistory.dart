@@ -85,7 +85,7 @@ class History extends StatelessWidget {
                         final image = ticket.data()['ImageUrl'];
                         if (status) {
                           ticketStatus = "Expired";
-                        } else if (count < 0) {
+                        } else if (count <= 0) {
                           ticketStatus = "Limit Reached";
                         } else {
                           ticketStatus = "Active";
