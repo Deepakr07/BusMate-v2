@@ -10,7 +10,10 @@ import 'package:busmate/view/ticketConfirmation.dart';
 import 'package:busmate/controller/storeTicketController.dart';
 import 'package:busmate/model/StoringTicketModel.dart';
 
+import 'confirmSelectionController.dart';
+
 final TicketRepo = Get.put(storeTicketController());
+final confirmController = Get.put(ConfirmSelectionController());
 
 Future<void> CreateTicket(TicketStoreModel Ticket) async {
   await TicketRepo.createTicket(Ticket);
@@ -85,6 +88,7 @@ class paymentController extends GetxController {
           'image': imageData,
           'ticketId': docId,
         });
+        confirmController.toggleLoading(false);
       } else {
         // Handle document not found
         print('Document does not exist');
@@ -123,6 +127,7 @@ class paymentController extends GetxController {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    confirmController.toggleLoading(true);
     print("Payment Successful");
     final ticket = TicketStoreModel(
         Stop: StopZ,
