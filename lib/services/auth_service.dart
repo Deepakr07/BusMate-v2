@@ -8,7 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:busmate/view/home.dart';
 import 'package:busmate/view/getstarted.dart';
 import 'package:get/get.dart';
-import 'package:busmate/view/login.dart';
 import '../controller/bottomNavBarController.dart';
 
 class AuthService {

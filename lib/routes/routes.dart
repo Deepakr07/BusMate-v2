@@ -5,7 +5,6 @@ import 'package:busmate/view/createProfile.dart';
 import 'package:busmate/view/ConfirmSelection.dart';
 import 'package:busmate/view/editProfile.dart';
 import 'package:busmate/view/ErrorPage.dart';
-import 'package:busmate/view/login.dart';
 import 'package:busmate/view/signUp.dart';
 import 'package:busmate/view/ticketConfirmation.dart';
 import 'package:busmate/view/ticketHistory.dart';

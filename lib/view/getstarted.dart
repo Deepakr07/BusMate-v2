@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:busmate/view/signUp.dart';
 
-void main() {
-  runApp(GetStarted());
-}
-
 class GetStarted extends StatelessWidget {
   const GetStarted({Key? key}) : super(key: key);
 

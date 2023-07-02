@@ -35,88 +35,86 @@ class History extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          bottomNavigationBar: BottomNavBar(),
-          backgroundColor: Colors.white,
-          body: Container(
-            padding: EdgeInsets.all(24),
-            child: Column(
-              children: [
-                const SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    'History',
-                    style: kBlackHeadingSize,
-                  ),
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: BottomNavBar(),
+        backgroundColor: Colors.white,
+        body: Container(
+          padding: EdgeInsets.all(24),
+          child: Column(
+            children: [
+              const SizedBox(
+                width: double.infinity,
+                child: Text(
+                  'History',
+                  style: kBlackHeadingSize,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Expanded(
-                  child: StreamBuilder(
-                    stream: _firestore.collection('Tickets').snapshots(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return const Center(
-                          child: CircularProgressIndicator(
-                            backgroundColor: kGreenMainTheme,
-                          ),
-                        );
-                      }
-                      final QuerySnapshot<Map<String, dynamic>> querySnapshot =
-                          snapshot.data!;
-                      List<QueryDocumentSnapshot<Map<String, dynamic>>>
-                          tickets = querySnapshot.docs;
-                      List<Widget> ticketWidgets = [];
-                      getUserUid();
-                      for (var ticket in tickets) {
-                        final expiryDate = ticket.data()['ExpiryDate'];
-                        bool status = isDateExpired(expiryDate);
-                        final uid = ticket.data()['Uid'];
-
-                        if (uid == userUid) {
-                          final destination = ticket.data()['Destination'];
-                          final issueDate = ticket.data()['IssueDate'];
-                          final count = ticket.data()['count'];
-                          final route = ticket.data()['Route'];
-                          final ticketType = ticket.data()['TicketType'];
-                          final id = ticket.id;
-                          final image = ticket.data()['ImageUrl'];
-                          if (status) {
-                            ticketStatus = "Expired";
-                          } else if (count < 0) {
-                            ticketStatus = "Limit Reached";
-                          } else {
-                            ticketStatus = "Active";
-                          }
-
-                          ticketWidgets.add(allTickets(
-                            ticketId: id,
-                            route: route,
-                            destination: destination,
-                            issueDate: issueDate,
-                            status: ticketStatus,
-                            qrImage: image,
-                          ));
-                        }
-                      }
-                      return ListView.builder(
-                        itemCount: ticketWidgets.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return SizedBox(
-                            width: 300,
-                            height: 180,
-                            child: ticketWidgets[index],
-                          );
-                        },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: StreamBuilder(
+                  stream: _firestore.collection('Tickets').snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: kGreenMainTheme,
+                        ),
                       );
-                    },
-                  ),
-                )
-              ],
-            ),
+                    }
+                    final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+                        snapshot.data!;
+                    List<QueryDocumentSnapshot<Map<String, dynamic>>> tickets =
+                        querySnapshot.docs;
+                    List<Widget> ticketWidgets = [];
+                    getUserUid();
+                    for (var ticket in tickets) {
+                      final expiryDate = ticket.data()['ExpiryDate'];
+                      bool status = isDateExpired(expiryDate);
+                      final uid = ticket.data()['Uid'];
+
+                      if (uid == userUid) {
+                        final destination = ticket.data()['Destination'];
+                        final issueDate = ticket.data()['IssueDate'];
+                        final count = ticket.data()['count'];
+                        final route = ticket.data()['Route'];
+                        final ticketType = ticket.data()['TicketType'];
+                        final id = ticket.id;
+                        final image = ticket.data()['ImageUrl'];
+                        if (status) {
+                          ticketStatus = "Expired";
+                        } else if (count < 0) {
+                          ticketStatus = "Limit Reached";
+                        } else {
+                          ticketStatus = "Active";
+                        }
+
+                        ticketWidgets.add(allTickets(
+                          ticketId: id,
+                          route: route,
+                          destination: destination,
+                          issueDate: issueDate,
+                          status: ticketStatus,
+                          qrImage: image,
+                        ));
+                      }
+                    }
+                    return ListView.builder(
+                      itemCount: ticketWidgets.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          width: 300,
+                          height: 180,
+                          child: ticketWidgets[index],
+                        );
+                      },
+                    );
+                  },
+                ),
+              )
+            ],
           ),
         ),
       ),
