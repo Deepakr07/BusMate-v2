@@ -13,7 +13,7 @@ import 'package:busmate/model/StoringTicketModel.dart';
 import 'confirmSelectionController.dart';
 
 final TicketRepo = Get.put(storeTicketController());
-final confirmController = Get.put(ConfirmSelectionController());
+final confirmController = Get.find<ConfirmSelectionController>();
 
 Future<void> CreateTicket(TicketStoreModel Ticket) async {
   await TicketRepo.createTicket(Ticket);
@@ -41,6 +41,7 @@ class paymentController extends GetxController {
   }
 
   Future<void> getImageFromAPI(String docId) async {
+    confirmController.toggleLoading(true);
     var response = await client.get(
       Uri.parse(
           'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=$docId'),
@@ -79,6 +80,7 @@ class paymentController extends GetxController {
         final String expiryDate = data['ExpiryDate'];
         final String issueDate = data['IssueDate'];
         final String imageData = imageUrl;
+        confirmController.toggleLoading(false);
         Get.to(() => TicketConfirmation(), arguments: {
           'destination': destination,
           'route': route,
@@ -88,7 +90,6 @@ class paymentController extends GetxController {
           'image': imageData,
           'ticketId': docId,
         });
-        confirmController.toggleLoading(false);
       } else {
         // Handle document not found
         print('Document does not exist');
@@ -127,7 +128,6 @@ class paymentController extends GetxController {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    confirmController.toggleLoading(true);
     print("Payment Successful");
     final ticket = TicketStoreModel(
         Stop: StopZ,

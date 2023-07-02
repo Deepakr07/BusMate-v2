@@ -7,3 +7,10 @@ class ConfirmSelectionController extends GetxController {
     isLoading.value = value;
   }
 }
+
+class InitialBindings implements Bindings {
+  @override
+  void dependencies() {
+    Get.put(ConfirmSelectionController());
+  }
+}

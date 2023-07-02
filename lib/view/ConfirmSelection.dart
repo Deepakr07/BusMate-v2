@@ -36,7 +36,9 @@ class ConfirmSelection extends StatelessWidget {
         body: Obx(() {
           return confirmController.isLoading.value
               ? Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: kGreenMainTheme,
+                  ),
                 )
               : Container(
                   padding: const EdgeInsets.all(24),
