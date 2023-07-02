@@ -5,6 +5,7 @@ import 'package:busmate/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:busmate/services/auth_service.dart';
 import 'package:busmate/controller/bottomNavBarController.dart';
+import 'package:busmate/controller/confirmSelectionController.dart';
 //imports
 
 Future main() async {
@@ -25,6 +26,7 @@ class BusMate extends StatelessWidget {
       initialRoute: AppRoutes.home, // Set the initial route
       getPages: AppRoutes.routes,
       home: AuthService().HandleAuthState(),
+      initialBinding: InitialBindings(),
     );
   }
 }
