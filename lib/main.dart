@@ -10,7 +10,7 @@ import 'package:busmate/controller/bottomNavBarController.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await Future.delayed(const Duration(seconds: 2));
+  await Future.delayed(const Duration(seconds: 1));
   FlutterNativeSplash.remove();
   runApp(BusMate());
 }
