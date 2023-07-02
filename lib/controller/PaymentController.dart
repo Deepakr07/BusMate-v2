@@ -37,43 +37,61 @@ class paymentController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getImageFromAPI(String DocId) async {
+  Future<void> getImageFromAPI(String docId) async {
     var response = await client.get(
       Uri.parse(
-          'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${DocId}'),
+          'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=$docId'),
     );
-    // Replace 'API_URL' with the actual API endpoint
+
     if (response.statusCode == 200) {
-      // Format the current date and time
       final String currentTime =
           DateFormat('yyyyMMddHHmmss').format(DateTime.now());
       final String imageName = 'image_$currentTime.jpg';
-
-      // Save the image to Cloud Storage with the formatted name
       final Reference storageRef =
           FirebaseStorage.instance.ref().child('QRimages/$imageName');
+
+      // Save the image to Cloud Storage with the formatted name
       await storageRef.putData(response.bodyBytes);
 
       // Get the URL of the stored image
-      imageUrlZ = await storageRef.getDownloadURL();
+      final imageUrl = await storageRef.getDownloadURL();
 
       // Update the URL in Firebase Firestore
       await FirebaseFirestore.instance
           .collection('Tickets')
-          .doc(DocId)
-          .update({'ImageUrl': imageUrlZ});
+          .doc(docId)
+          .update({'ImageUrl': imageUrl});
 
-      Get.offAll(() => TicketConfirmation(), arguments: {
-        'Destination': StopZ,
-        'TicketID': DocId,
-        'Image': imageUrlZ,
-        'Route': RouteZ,
-        'ExpiryDate': expiryDateZ,
-        'IssueDate': issueDateZ,
-        'Rides': countZ
-      });
+      // Retrieve the stored data from the Firestore document
+      final DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('Tickets')
+          .doc(docId)
+          .get();
+      if (snapshot.exists) {
+        final data = snapshot.data() as Map<String, dynamic>;
+        // Access and use the retrieved data as per your requirement
+        final String destination = data['Destination'];
+        final String route = data['Route'];
+        final int count = data['count'];
+        final String expiryDate = data['ExpiryDate'];
+        final String issueDate = data['IssueDate'];
+        final String imageData = imageUrl;
+        Get.to(() => TicketConfirmation(), arguments: {
+          'destination': destination,
+          'route': route,
+          'count': count,
+          'expiryDate': expiryDate,
+          'issueDate': issueDate,
+          'image': imageData,
+          'ticketId': docId,
+        });
+      } else {
+        // Handle document not found
+        print('Document does not exist');
+      }
+
       // Display success message or perform any other actions
-      print('Image stored and URL updated successfully');
+      print('Image stored, URL updated, and data retrieved successfully');
     } else {
       // Handle API error
       print('Failed to retrieve the image from the API');
