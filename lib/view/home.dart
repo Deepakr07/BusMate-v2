@@ -191,13 +191,28 @@ class HomePage extends StatelessWidget {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Text(
-                                weatherController
-                                    .currentWeatherDescription.value,
-                                style: const TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFFE4E4E4)),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '${weatherController.temperature.value.toStringAsFixed(0)}°C ,',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFFE4E4E4)),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    weatherController
+                                        .currentWeatherDescription.value,
+                                    style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFFE4E4E4)),
+                                  ),
+                                ],
                               )
                             ],
                           );

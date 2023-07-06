@@ -15,7 +15,16 @@ class CreateProfile extends StatelessWidget {
   final UserRepo = Get.put(UserProfileController());
   final _createProfileKey = GlobalKey<FormState>();
   var Name, Department, StudentID, MobileNo, Email, Uid;
-
+  var selectedDepartment;
+  List<String> departmentOptions = [
+    "Information Technology",
+    "Computer Science",
+    "Safety And Fire",
+    "Mechanical",
+    "Electronics And Communicaion",
+    "Electrical And Electronics",
+    "Civil",
+  ];
   Future<void> CreateUser(UserModel user) async {
     await UserRepo.createUser(user);
     Get.off(HomePage());
@@ -105,21 +114,26 @@ class CreateProfile extends StatelessWidget {
                     SizedBox(
                       height: 14,
                     ),
-                    TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
-                          return "Enter Correct Department";
-                        } else {
+                    DropdownButtonFormField<String>(
+                        value: selectedDepartment,
+                        items: departmentOptions.map((String department) {
+                          return DropdownMenuItem<String>(
+                            value: department,
+                            child: Text(department),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          Department = value;
+                          selectedDepartment = value;
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select a department';
+                          }
+
                           return null;
-                        }
-                      },
-                      cursorColor: Colors.black,
-                      onChanged: (value) {
-                        Department = value;
-                      },
-                      decoration: kTextFieldDecoration,
-                    ),
+                        },
+                        decoration: kTextFieldDecoration),
                     SizedBox(
                       height: 23,
                     ),

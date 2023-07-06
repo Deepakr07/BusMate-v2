@@ -6,6 +6,7 @@ class WeatherController extends GetxController {
   var isloading = true.obs;
   var currentWeatherDescription = ''.obs;
   var currentWeather = ''.obs;
+  var temperature = 0.00.obs;
   var weatherId = 100.obs;
   Rx<AssetImage> weatherIcon = const AssetImage('./assets/error.png').obs;
   @override
@@ -24,6 +25,7 @@ class WeatherController extends GetxController {
         currentWeather.value = weather.weather[0].main;
         weatherId.value = weather.weather[0].id;
         weatherIcon.value = getWeatherIcon();
+        temperature.value = weather.main.temp - 273.15;
       }
     } finally {
       isloading(false);
